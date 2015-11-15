@@ -24,13 +24,13 @@ bot.on("message", (msg) => {
 		
 	if(msg.content[0] === '!') {
 		console.log(msg.content);
-		if( msg.content.getsubstring(0,3) === "!ip" || msg.content === "!address"){
+		if( msg.content.indexOf("ip") === 1 || msg.content.indexOf("address") === 1){
 			//display server ip.
 			bot.reply( '@' + msg.aunthor.username, ", http://pvpcraft.ca" );
 		}
 	
-		if(msg.content[0] === '!invite' &&
-			msg.content[1].indexOf('discord.gg') > -1 &&
+		if(msg.content.indexOf("invite") === 1 &&
+			msg.content.indexOf('discord.gg') > -1 &&
 			msg.channel instanceof Discord.PMChannel) {
 			client.joinServer(msg.content[1], function(err, server) {
 				if(err) {
