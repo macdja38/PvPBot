@@ -20,12 +20,11 @@ bot.on("disconnected", () => {
 });
 
 bot.on("message", (msg) => {
-	console.log('U: ' + msg.author.username + ' S: ' + msg.content + ' P0 ' + msg.content[0] + ' P1 ' + msg.content[1]);
-	console.log(msg.content.split(" ")[2]);
+	console.log('U: ' + msg.author.username + ' S: ' + msg.content);
 	if(msg.content[0] === '!') {
-		console.log(msg.content + " index of ip " + msg.content.indexOf('ip'));
-		if( msg.content.indexOf('ip') == 1 || msg.content.indexOf("address") == 1){
-			//display server ip.
+		var arguements = msg.content.split(" ");
+		if( arguements[0] == '!ip' || arguements[0] == '!address'){
+			//display server ip!
 			bot.reply(msg, 'http://pvpcraft.ca');
 		}
 		
