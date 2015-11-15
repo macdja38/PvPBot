@@ -26,7 +26,7 @@ bot.on("message", (msg) => {
 		console.log(msg.content + " index of ip " + msg.content.indexOf('ip'));
 		if( msg.content.indexOf('ip') == 1 || msg.content.indexOf("address") == 1){
 			//display server ip.
-			bot.reply( '@' + msg.author.username + ", http://pvpcraft.ca" );
+			bot.reply(msg, 'http://pvpcraft.ca');
 		}
 	
 		if(msg.content.indexOf("invite") === 1 &&
