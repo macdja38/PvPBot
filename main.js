@@ -21,7 +21,7 @@ bot.on("disconnected", () => {
 
 bot.on("message", (msg) => {
 	console.log(msg.content);
-	if( msg.content[0] === "!ip" || msg.content[0] === "!address"){
+	if( msg.content.substring(0,3) === "!ip" || msg.content.substring(0,6) === "!address"){
 		//display server ip.
 		bot.reply( msg, "http://pvpcraft.ca" );
 	}
