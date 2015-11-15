@@ -21,12 +21,12 @@ bot.on("disconnected", () => {
 
 bot.on("message", (msg) => {
 	console.log(msg.content);
-	if( msg.content.substring(0,3) === "!ip" || msg.content.substring(0,6) === "!address"){
+	if( msg.content.substring(0,3) === "!ip" || msg.content.substring(0,7) === "!address"){
 		//display server ip.
 		bot.reply( msg, "http://pvpcraft.ca" );
 	}
 	
-	if(msg.content[0] === '!invite' &&
+	if(msg.content.substring(0,7) === '!invite' &&
 		msg.content[1].indexOf('discord.gg') > -1 &&
 		msg.channel instanceof Discord.PMChannel) {
 		client.joinServer(msg.content[1], function(err, server) {
