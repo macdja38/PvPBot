@@ -38,7 +38,7 @@ bot.on("message", (msg) => {
 						} else {
 							bot.reply(msg, 'Successfully joined ' + server);
 						}
-					});/*
+					});*/
 				}
 				else {
 					bot.reply(msg, 'Please *PM* me the invite');
