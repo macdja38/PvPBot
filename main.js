@@ -31,9 +31,9 @@ bot.on("message", (msg) => {
 		msg.channel instanceof Discord.PMChannel) {
 		client.joinServer(msg.content[1], function(err, server) {
 			if(err) {
-				client.sendMessage(msg.channel, 'Something went wrong, please contact admins');
+				bot.reply(msg, 'Something went wrong, please contact admins');
 			} else {
-				client.sendMessage(message.channel, 'Successfully joined ' + msg.server.name);
+				bot.reply(msg, 'Successfully joined ' + msg.server.name);
 			}
 		});
 	}
