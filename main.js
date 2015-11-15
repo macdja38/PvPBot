@@ -29,16 +29,20 @@ bot.on("message", (msg) => {
 		}
 		
 		if(arguements[0] == '!invite') {
-			if(msg.content.indexOf('discord.gg') > -1 &&
-			msg.channel instanceof Discord.PMChannel) {
-				bot.joinServer(msg.content.split(" ")[1], function(err, server) {
-					if(err) {
-						bot.reply(msg, 'Something went wrong, please contact admins');
-					} else {
-						bot.reply(msg, 'Successfully joined ' + msg.server.name);
-					}
-				});
-			} 
+			if(msg.content.indexOf('discord.gg') > -1) {
+				if(msg.channel instanceof Discord.PMChannel) {
+					bot.joinServer(msg.content.split(" ")[1], function(err, server) {
+						if(err) {
+							bot.reply(msg, 'Something went wrong, please contact admins');
+						} else {
+							bot.reply(msg, 'Successfully joined ' + server);
+						}
+					});
+				}
+				else {
+					bot.reply(msg, 'Please *PM* me the invite');
+				}
+			}
 			else {
 				bot.reply(msg, 'Please provide an invite link');
 			}
