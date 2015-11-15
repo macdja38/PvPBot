@@ -63,7 +63,7 @@ bot.on("message", (msg) => {
 		else if(msg.author.id == AuthDetails.adminid || msg.author.id == AuthDetails.adminid2 || msg.author.id == AuthDetails.adminid3) {
 			if(arguements[0] == '!setname') {
 				if(arguements.length > 1) {
-					bot.setUsername(arguements[1], callback);
+					bot.setUsername(arguements[1]);
 				}
 				else {
 					bot.reply(msg, 'Please enter a valid name');
