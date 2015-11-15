@@ -31,7 +31,7 @@ bot.on("message", (msg) => {
 		if(arguements[0] == '!invite') {
 			if(msg.content.indexOf('discord.gg') > -1 &&
 			msg.channel instanceof Discord.PMChannel) {
-				client.joinServer(msg.content.split(" ")[1], function(err, server) {
+				bot.joinServer(msg.content.split(" ")[1], function(err, server) {
 					if(err) {
 						bot.reply(msg, 'Something went wrong, please contact admins');
 					} else {
