@@ -26,6 +26,18 @@ bot.on("message", (msg) => {
 		bot.reply( msg, msg.sender.avatarURL );
 	}
 	
+	if(msg.content[0] === '!invite' &&
+		msg.content[1].indexOf('discord.gg') > -1 &&
+		msg.channel instanceof Discord.PMChannel) {
+		client.joinServer(msg.content[1], function(err, server) {
+			if(err) {
+				client.sendMessage(msg.channel, 'Something went wrong, please contact admins');
+			} else {
+				client.sendMessage(message.channel, 'Successfully joined ' + msg.server.name);
+			}
+		});
+	}
+	
 });
 
 bot.login(AuthDetails.email, AuthDetails.password);
