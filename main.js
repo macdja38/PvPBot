@@ -24,7 +24,7 @@ bot.on("message", (msg) => {
 		
 	if(msg.content[0] === '!') {
 		console.log(msg.content);
-		if( msg.content.indexOf("ip") === 1 || msg.content.indexOf("address") === 1){
+		if( msg.content.indexOf('ip') === 1 || msg.content.indexOf("address") === 1){
 			//display server ip.
 			bot.reply( '@' + msg.author.username, ", http://pvpcraft.ca" );
 		}
