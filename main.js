@@ -1,5 +1,5 @@
 /*
-	this bot is an avatar bot, and will give a user their avatar's URL
+	PvPCraft Friendly helper bot.
 */
 
 var Discord = require("/Discord-Api/discord.js");
@@ -28,7 +28,7 @@ bot.on("message", (msg) => {
 			bot.reply(msg, 'http://pvpcraft.ca');
 		}
 		
-		if(arguements[0] == '!invite') {
+		else if(arguements[0] == '!invite') {
 			if(msg.content.indexOf('discord.gg') > -1) {
 				if(msg.channel instanceof Discord.PMChannel) {
 					bot.joinServer(msg.content.split(" ")[1], function(err, server) {
@@ -46,6 +46,29 @@ bot.on("message", (msg) => {
 			else {
 				bot.reply(msg, 'Please provide an invite link');
 			}
+		}
+		
+		else if(arguements[0] == '!myid') {
+			if(msg.channel instanceof Discord.PMChannel) {
+				bot.reply(msg, 'Please PM this command');
+			}
+			else {
+				bot.reply(msg, 'Your Discord ID is ' + msg.author.id);
+			}
+		}
+		
+		/*
+			locked commands past this point
+		*/
+		else if(msg.author.id == AuthDetails.adminid || msg.author.id == AuthDetails.adminid2 || msg.author.id == AuthDetails.adminid3) {
+			else if(arguements[0] == '!setname') {
+				if(arguements.length > 1) {
+					bot.setUsername(arguements[1], callback);
+				}
+				else {
+					bot.reply(msg, 'Please enter a valid name');
+				}
+			}		
 		}
 	}
 });
