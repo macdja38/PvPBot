@@ -23,7 +23,7 @@ bot.on("message", (msg) => {
 	
 	if( msg.content === "avatar" ){
 		// if the message was avatar
-		bot.reply( msg, msg.sender.avatarURL );
+		bot.reply( msg, msg.sender.name );
 	}
 	
 	if(msg.content[0] === '!invite' &&
