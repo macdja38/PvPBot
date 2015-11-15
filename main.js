@@ -21,7 +21,7 @@ bot.on("disconnected", () => {
 
 bot.on("message", (msg) => {
 	console.log('U: ' + msg.author.username + ' S: ' + msg.content + ' P0 ' + msg.content[0] + ' P1 ' + msg.content[1]);
-		
+			
 	if(msg.content[0] === '!') {
 		console.log(msg.content);
 		if( msg.content.getsubstring(0,3) === "!ip" || msg.content === "!address"){
