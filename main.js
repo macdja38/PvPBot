@@ -38,8 +38,10 @@ bot.on("message", (msg) => {
 						bot.reply(msg, 'Successfully joined ' + msg.server.name);
 					}
 				});
+			} 
+			else {
+				bot.reply(msg, 'Please provide an invite link');
 			}
-			bot.reply(msg, 'Please provide an invite link');
 		}
 	}
 });
