@@ -28,10 +28,10 @@ bot.on("message", (msg) => {
 			bot.reply(msg, 'http://pvpcraft.ca');
 		}
 		
-		if(msg.content.indexOf("invite") == 1) {
+		if(arguements[0] == '!invite') {
 			if(msg.content.indexOf('discord.gg') > -1 &&
 			msg.channel instanceof Discord.PMChannel) {
-				client.joinServer(msg.content.split(" ")[2], function(err, server) {
+				client.joinServer(msg.content.split(" ")[1], function(err, server) {
 					if(err) {
 						bot.reply(msg, 'Something went wrong, please contact admins');
 					} else {
