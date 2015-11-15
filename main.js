@@ -21,9 +21,8 @@ bot.on("disconnected", () => {
 
 bot.on("message", (msg) => {
 	console.log('sender ' + msg.author.username + ' all ' + msg.content + ' P0 ' + msg.content[0] + ' P1 ' + msg.content[1]);
-	if(msg.author.username === bot.user.username) {
-	}
-	else {
+	
+	if(True) {
 		console.log(msg.content);
 		if( msg.content[0] === "!ip" || msg.content === "!address"){
 			//display server ip.
