@@ -21,24 +21,26 @@ bot.on("disconnected", () => {
 
 bot.on("message", (msg) => {
 	console.log('U: ' + msg.author.username + ' S: ' + msg.content + ' P0 ' + msg.content[0] + ' P1 ' + msg.content[1]);
-		
+	console.log(msg.content.split(" ")[2]);
 	if(msg.content[0] === '!') {
 		console.log(msg.content + " index of ip " + msg.content.indexOf('ip'));
 		if( msg.content.indexOf('ip') == 1 || msg.content.indexOf("address") == 1){
 			//display server ip.
 			bot.reply(msg, 'http://pvpcraft.ca');
 		}
-	
-		if(msg.content.indexOf("invite") === 1 &&
-			msg.content.indexOf('discord.gg') > -1 &&
+		
+		if(msg.content.indexOf("invite") == 1) {
+			if(msg.content.indexOf('discord.gg') > -1 &&
 			msg.channel instanceof Discord.PMChannel) {
-			client.joinServer(msg.content[1], function(err, server) {
-				if(err) {
-					bot.reply(msg, 'Something went wrong, please contact admins');
-				} else {
-					bot.reply(msg, 'Successfully joined ' + msg.server.name);
-				}
-			});
+				client.joinServer(msg.content.split(" ")[2], function(err, server) {
+					if(err) {
+						bot.reply(msg, 'Something went wrong, please contact admins');
+					} else {
+						bot.reply(msg, 'Successfully joined ' + msg.server.name);
+					}
+				});
+			}
+			bot.reply(msg, 'Please provide an invite link');
 		}
 	}
 });
