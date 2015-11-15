@@ -61,7 +61,7 @@ bot.on("message", (msg) => {
 			locked commands past this point
 		*/
 		else if(msg.author.id == AuthDetails.adminid || msg.author.id == AuthDetails.adminid2 || msg.author.id == AuthDetails.adminid3) {
-			else if(arguements[0] == '!setname') {
+			if(arguements[0] == '!setname') {
 				if(arguements.length > 1) {
 					bot.setUsername(arguements[1], callback);
 				}
