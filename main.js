@@ -26,7 +26,7 @@ bot.on("message", (msg) => {
 		console.log(msg.content);
 		if( msg.content.getsubstring(0,3) === "!ip" || msg.content === "!address"){
 			//display server ip.
-			bot.reply( msg, "http://pvpcraft.ca" );
+			bot.reply( '@' + msg.aunthor.username, ", http://pvpcraft.ca" );
 		}
 	
 		if(msg.content[0] === '!invite' &&
