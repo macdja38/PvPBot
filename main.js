@@ -54,6 +54,13 @@ bot.on("message", (msg) => {
 				bot.reply(msg, 'My creator is Macdja38');	
 			}
 			
+			if( arguements[0] == '!totheforums' || arguements[0] == '!forums'){
+				//link to the forums!
+				bot.reply(msg, 'The forums are probably a better place for this!\n' +
+						'http://pvpcraft.ca/forums'	
+				);	
+			}
+			
 			if( arguements[0] == '!tardistutorial' || arguements[0] == '!tardistut'){
 				//display link to tardis site!
 				bot.reply(msg, 'http://eccentricdevotion.github.io/TARDIS/creating-a-tardis.html');
