@@ -37,7 +37,7 @@ bot.on("message", (msg) => {
 			bot.reply(msg, 'http\://eccentricdevotion.github.io/TARDIS/creating-a-tardis.html');
 		}
 		
-		if(msg.content.toLowerCase().indexOf("hey pvp") > -1 && msg.content[0] !== '!') {
+		if(msg.content.toLowerCase().indexOf("@" + bot.user.username) > -1 && msg.content[0] !== '!') {
 			console.log('Clever activating.');
 			Cleverbot.prepare(function(){
 				cleverbot.write(msg.content.substr(msg.content.indexOf(' ')+1), function (response) {
