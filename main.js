@@ -22,11 +22,11 @@ bot.on("disconnected", () => {
 	
 });
 
-bot.on("serverNewMember", user, server) => {
+bot.on("serverNewMember", (user, server) => {
 	bot.sendMessage(server.defaultChannel, "Please welcome " + user.username);
 });
 
-bot.on("userUpdate", newUser, OldUser) => {
+bot.on("userUpdate", (newUser, OldUser) => {
 	bot.sendMessage(server.defaultChannel, oldUser.username + " Just changed their name to " + newUser.username);
 });
 
