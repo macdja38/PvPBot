@@ -6,7 +6,7 @@ var Discord = require("/Discord-Api/discord.js");
 
 var AuthDetails = require("/auth.json");
 
-var Ping = require("/ping.js");
+var Ping = require("ping.js");
 
 var bot = new Discord.Client();
 
