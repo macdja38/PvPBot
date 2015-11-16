@@ -26,11 +26,22 @@ bot.on("serverNewMember", (user, server) => {
 	bot.sendMessage(server.defaultChannel, "Please welcome " + user.username);
 });
 
-bot.on("userUpdate", (newUser, OldUser) => {
+/*bot.on("userUpdate", (newUser, OldUser) => {
 	for (server in bot.servers) {
 		if(server.getMember("id", newUser.id) !== undefined){
 			bot.sendMessage(server.defaultChannel, oldUser.username + 
 				" Just changed their name to " + newUser.username);
+		}
+	}
+});*/
+
+bot.on("userUpdate", (newUser, OldUser) => {
+	for (server in bot.servers) {
+		for (member in server.members)
+			if(newUser.equals(member)){
+				bot.sendMessage(server.defaultChannel, oldUser.username + 
+					" Just changed their name to " + newUser.username);
+			}
 		}
 	}
 });
