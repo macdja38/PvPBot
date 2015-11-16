@@ -104,6 +104,7 @@ bot.on("message", (msg) => {
 				}
 			}
 			
+			/*
 			//!ping
 			else if(arguements[0] == '!ping') {
 				if(msg.content.indexOf('.') > -1) {
@@ -113,6 +114,7 @@ bot.on("message", (msg) => {
 					bot.reply(msg, 'Please provide a valid url');
 				}
 			}
+			*/
 			
 			//get users id
 			else if(arguements[0] == '!myid') {
