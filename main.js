@@ -41,7 +41,7 @@ bot.on("message", (msg) => {
 			console.log('Clever activating.');
 			Cleverbot.prepare(function(){
 				cleverbot.write(msg.content.substr(msg.content.indexOf(' ')+1), function (response) {
-					bot.reply(msg, response);
+					bot.reply(msg, response.message);
 				});
 			});
 		}
