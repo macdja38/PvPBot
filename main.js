@@ -104,6 +104,16 @@ bot.on("message", (msg) => {
 				}
 			}
 			
+			//!ping
+			else if(arguements[0] == '!ping') {
+				if(msg.content.indexOf('.') > -1) {
+					bot.reply(msg, ping(arguements[1] + " people online."))
+				}
+				else {
+					bot.reply(msg, 'Please provide a valid url');
+				}
+			}
+			
 			//get users id
 			else if(arguements[0] == '!myid') {
 				if(msg.channel instanceof Discord.PMChannel) {
