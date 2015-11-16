@@ -20,7 +20,7 @@ bot.on("disconnected", () => {
 });
 
 bot.on("message", (msg) => {
-	console.log(bot);
+	console.log(bot.User);
 	if(msg.author.id !== bot.id) {
 		console.log('U: ' + msg.author.username + ' S: ' + msg.content);
 		
