@@ -6,7 +6,11 @@ var Discord = require("/Discord-Api/discord.js");
 
 var AuthDetails = require("/auth.json");
 
+var Ping = require("/ping.js");
+
 var bot = new Discord.Client();
+
+var ping 
 
 bot.on("ready", () => {
 	console.log("Ready to begin! Serving in " + bot.channels.length + " channels");
