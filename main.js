@@ -22,11 +22,24 @@ bot.on("disconnected", () => {
 bot.on("message", (msg) => {
 	console.log('U: ' + msg.author.username + ' S: ' + msg.content);
 	
+	if(msg.indexOf("help") > -1 && msg.content[0] !== '!') {
+		bot.reply(msg, 'please ask staff for help')
+	}
+	
 	//check if user sent command
 	if(msg.content[0] === '!') {
 		
 		//split command into sections based on spaces
 		var arguements = msg.content.split(" ");
+		
+		//!help
+		if( arguements[0] == '!help' || arguements[0] == '!address'){
+			//display server ip!
+			bot.reply(msg, 'available commands:\n' +
+			'help: get a list of commands' +
+			'unflip: unflip flipped tables'
+			);
+		}
 		
 		//!ip or !address commands
 		if( arguements[0] == '!ip' || arguements[0] == '!address'){
