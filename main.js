@@ -45,7 +45,8 @@ bot.on("message", (msg) => {
 				bot.reply(msg, 'available commands:\n' +
 				'help: get a list of commands\n' +
 				'unflip: unflip flipped tables\n' +
-				'tardistutorial: get a link to the tardis tutorial'
+				'tardistutorial: get a link to the tardis tutorial\n' +
+				'totheforums: link to the forums'
 				);
 			}
 					
