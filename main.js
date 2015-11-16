@@ -28,6 +28,11 @@ bot.on("message", (msg) => {
 			bot.reply(msg, 'http://pvpcraft.ca');
 		}
 		
+		if( arguements[0] == '!unflip') {
+	        	client.sendMessage(msg.channel, '\┬\─\┬ \ノ\( \^\_\^\ノ\)');
+		}
+		
+		
 		else if(arguements[0] == '!invite') {
 			if(msg.content.indexOf('discord.gg') > -1) {
 				if(msg.channel instanceof Discord.PMChannel) {
@@ -69,7 +74,16 @@ bot.on("message", (msg) => {
 				else {
 					bot.reply(msg, 'Please enter a valid name');
 				}
-			}		
+			}
+			
+			if(arguements[0] == '!setname') {
+				if(arguements.length > 1) {
+					bot.setUsername(arguements[1]);
+				}
+				else {
+					bot.reply(msg, 'Please enter a valid name');
+				}
+			}
 		}
 	}
 });
