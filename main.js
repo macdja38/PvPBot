@@ -37,6 +37,14 @@ bot.on("message", (msg) => {
 			bot.reply(msg, 'http\://eccentricdevotion.github.io/TARDIS/creating-a-tardis.html');
 		}
 		
+		if(msg.content.toLowerCase().indexOf("hey PvP") > -1 && msg.content[0] !== '!') {
+			Cleverbot.prepare(function(){
+				cleverbot.write(msg.content.substr(msg.content.indexOf(' ')+1), function (response) {
+					bot.reply(msg, response)
+				});
+			});
+		}
+		
 		//check if user sent command
 		if(msg.content[0] === '!') {
 			
