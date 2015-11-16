@@ -39,6 +39,7 @@ bot.on("userUpdate", (newUser, oldUser) => {
 	console.log("oldUser" + oldUser.username + " ID " + oldUser.id);
 	console.log("newUser" + newUser.username + " ID " + newUser.id);
 	for (server in bot.servers) {
+		console.log("Servers:" + server.id);
 		for (member in server.members) {
 			console.log("Member:" + member.id);
 			if(oldUser.equals(member)){
