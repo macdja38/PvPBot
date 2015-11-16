@@ -32,12 +32,12 @@ bot.on("message", (msg) => {
 				' needs help.\n' + 'type !help for a list of commands');
 		}
 		
-		if(msg.content.toLowerCase().indexOf("how do i build a tardis") > -1 && msg.content[0] !== '!'){
+		else if(msg.content.toLowerCase().indexOf("how do i build a tardis") > -1 && msg.content[0] !== '!'){
 			//display link to tardis site!
 			bot.reply(msg, 'http\://eccentricdevotion.github.io/TARDIS/creating-a-tardis.html');
 		}
 		
-		if(msg.content.toLowerCase().indexOf("@" + bot.user.username) > -1 && msg.content[0] !== '!') {
+		else if(msg.isMentioned(bot.user) > -1 && msg.content[0] !== '!') {
 			console.log('Clever activating.');
 			Cleverbot.prepare(function(){
 				cleverbot.write(msg.content.substr(msg.content.indexOf(' ')+1), function (response) {
