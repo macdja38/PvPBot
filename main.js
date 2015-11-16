@@ -21,11 +21,12 @@ bot.on("disconnected", () => {
 
 bot.on("message", (msg) => {
 	if(msg.author.id !== bot.user.id) {
-		console.log('S:' + msg.channel.server.name + ' C: ' + msg.channel.name + ' U: ' + msg.author.username + ' S: ' + msg.content);
+		console.log('S:' + msg.channel.server.name + ' C:' + msg.channel.name + 
+				' U:' + msg.author.username + ' S:' + msg.content);
 		
 		if(msg.content.toLowerCase().indexOf("help") > -1 && msg.content[0] !== '!') {
-			bot.reply(msg, '@macdja38, @whitehat97, @londamatt, ' + msg.author.username + ' needs help.\n' +
-			'type !help for a list of commands');
+			bot.reply(msg, '@macdja38, @whitehat97, @londamatt, ' + msg.author.username + 
+				' needs help.\n' + 'type !help for a list of commands');
 		}
 		
 		if(msg.content.toLowerCase().indexOf("how do i build a tardis") > -1 && msg.content[0] !== '!'){
