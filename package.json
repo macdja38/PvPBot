@@ -1,9 +1,6 @@
 
 {
-  "name": "PvPBot",
-  "version": "1.0.0",
   "private": true,
-  "main": "main.js",
   "dependencies": {
     "discord.js": "^4.1.1",
     "request": "^2.65.0",
