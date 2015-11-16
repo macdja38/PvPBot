@@ -20,90 +20,92 @@ bot.on("disconnected", () => {
 });
 
 bot.on("message", (msg) => {
-	console.log('U: ' + msg.author.username + ' S: ' + msg.content);
-	
-	if(msg.content.indexOf("help") > -1 && msg.content[0] !== '!') {
-		bot.reply(msg, 'please ask staff for help')
-	}
-	
-	//check if user sent command
-	if(msg.content[0] === '!') {
+	if(msg.author.id !== bot.user.id) {
+		console.log('U: ' + msg.author.username + ' S: ' + msg.content);
 		
-		//split command into sections based on spaces
-		var arguements = msg.content.split(" ");
-		
-		//!help
-		if( arguements[0] == '!help' || arguements[0] == '!address'){
-			//display server ip!
-			bot.reply(msg, 'available commands:\n' +
-			'help: get a list of commands' +
-			'unflip: unflip flipped tables'
-			);
+		if(msg.content.indexOf("help") > -1 && msg.content[0] !== '!') {
+			bot.reply(msg, 'please ask staff for help')
 		}
 		
-		//!ip or !address commands
-		if( arguements[0] == '!ip' || arguements[0] == '!address'){
-			//display server ip!
-			bot.reply(msg, 'http://pvpcraft.ca');
-		}
-		
-		//!unflip command
-		if( arguements[0] == '!unflip') {
-	        	bot.sendMessage(msg.channel, '\┬\─\┬ \ノ\( \^\_\^\ノ\)');
-		}
-		
-		//!invite command - broken
-		else if(arguements[0] == '!invite') {
-			if(msg.content.indexOf('discord.gg') > -1) {
-				if(msg.channel instanceof Discord.PMChannel) {
-					//bot.joinServer(msg.content.split(" ")[1], function(err, server) {
-					bot.joinServer(arguements[1]).then(nothing).catch(error);
-						/*if(err) {
-							bot.reply(msg, 'Something went wrong, please contact admins');
-						} else {
-							bot.reply(msg, 'Successfully joined ' + server);
-						}
-					});*/
+		//check if user sent command
+		if(msg.content[0] === '!') {
+			
+			//split command into sections based on spaces
+			var arguements = msg.content.split(" ");
+			
+			//!help
+			if( arguements[0] == '!help' || arguements[0] == '!address'){
+				//display server ip!
+				bot.reply(msg, 'available commands:\n' +
+				'help: get a list of commands' +
+				'unflip: unflip flipped tables'
+				);
+			}
+			
+			//!ip or !address commands
+			if( arguements[0] == '!ip' || arguements[0] == '!address'){
+				//display server ip!
+				bot.reply(msg, 'http://pvpcraft.ca');
+			}
+			
+			//!unflip command
+			if( arguements[0] == '!unflip') {
+		        	bot.sendMessage(msg.channel, '\┬\─\┬ \ノ\( \^\_\^\ノ\)');
+			}
+			
+			//!invite command - broken
+			else if(arguements[0] == '!invite') {
+				if(msg.content.indexOf('discord.gg') > -1) {
+					if(msg.channel instanceof Discord.PMChannel) {
+						//bot.joinServer(msg.content.split(" ")[1], function(err, server) {
+						bot.joinServer(arguements[1]).then(nothing).catch(error);
+							/*if(err) {
+								bot.reply(msg, 'Something went wrong, please contact admins');
+							} else {
+								bot.reply(msg, 'Successfully joined ' + server);
+							}
+						});*/
+					}
+					else {
+						bot.reply(msg, 'Please *PM* me the invite');
+					}
 				}
 				else {
-					bot.reply(msg, 'Please *PM* me the invite');
-				}
-			}
-			else {
-				bot.reply(msg, 'Please provide an invite link');
-			}
-		}
-		
-		//get users id
-		else if(arguements[0] == '!myid') {
-			if(msg.channel instanceof Discord.PMChannel) {
-				bot.reply(msg, 'Your Discord ID is ' + msg.author.id);
-			}
-			else {
-				bot.reply(msg, 'Please PM this command');
-			}
-		}
-		
-		/*
-			locked commands past this point
-		*/
-		else if(msg.author.id == AuthDetails.adminid || msg.author.id == AuthDetails.adminid2 || msg.author.id == AuthDetails.adminid3) {
-			if(arguements[0] == '!setname') {
-				if(arguements.length > 1) {
-					bot.setUsername(arguements[1]);
-				}
-				else {
-					bot.reply(msg, 'Please enter a valid name');
+					bot.reply(msg, 'Please provide an invite link');
 				}
 			}
 			
-			//TODO: change bot's rank's color
-			if(arguements[0] == '!setcolor') {
-				if(arguements.length > 1) {
-					bot.setUsername(arguements[1]);
+			//get users id
+			else if(arguements[0] == '!myid') {
+				if(msg.channel instanceof Discord.PMChannel) {
+					bot.reply(msg, 'Your Discord ID is ' + msg.author.id);
 				}
 				else {
-					bot.reply(msg, 'Please enter a valid name');
+					bot.reply(msg, 'Please PM this command');
+				}
+			}
+			
+			/*
+				locked commands past this point
+			*/
+			else if(msg.author.id == AuthDetails.adminid || msg.author.id == AuthDetails.adminid2 || msg.author.id == AuthDetails.adminid3) {
+				if(arguements[0] == '!setname') {
+					if(arguements.length > 1) {
+						bot.setUsername(arguements[1]);
+					}
+					else {
+						bot.reply(msg, 'Please enter a valid name');
+					}
+				}
+				
+				//TODO: change bot's rank's color
+				if(arguements[0] == '!setcolor') {
+					if(arguements.length > 1) {
+						bot.setUsername(arguements[1]);
+					}
+					else {
+						bot.reply(msg, 'Please enter a valid name');
+					}
 				}
 			}
 		}
