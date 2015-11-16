@@ -27,7 +27,12 @@ bot.on("serverNewMember", (user, server) => {
 });
 
 bot.on("userUpdate", (newUser, OldUser) => {
-	bot.sendMessage(server.defaultChannel, oldUser.username + " Just changed their name to " + newUser.username);
+	for (server in bot.servers) {
+		if(server.getMember("id", newUser.id)){
+			bot.sendMessage(server.defaultChannel, oldUser.username + 
+				" Just changed their name to " + newUser.username);
+		}
+	}
 });
 
 bot.on("message", (msg) => {
