@@ -162,7 +162,7 @@ function nothing() {
 	console.log("nothing");
 }
 
-function ping(link) {
+/*function ping(link) {
     $.getJSON(link, function(json){
         if(json.Players !== undefined) {
             return json.Players;
@@ -170,6 +170,6 @@ function ping(link) {
             return 0;
         }
     });
-}
+}*/
 
 bot.login(AuthDetails.email, AuthDetails.password);
