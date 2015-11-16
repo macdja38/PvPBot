@@ -55,7 +55,7 @@ bot.on("message", (msg) => {
 			
 			if( arguements[0] == '!tardistutorial' || arguements[0] == '!tardistut'){
 				//display link to tardis site!
-				bot.reply(msg, 'http://eccentricdevotion.github.io/TARDIS/creating-a-tardis.html');				);
+				bot.reply(msg, 'http://eccentricdevotion.github.io/TARDIS/creating-a-tardis.html');
 			}
 			
 			//!ip or !address commands
