@@ -8,7 +8,7 @@ var AuthDetails = require("/auth.json");
 
 var bot = new Discord.Client();
 
-var Cleverbot = require('libs/cleverbot.js');
+var Cleverbot = require('lib/cleverbot');
     cleverbot = new Cleverbot;
 
 bot.on("ready", () => {
