@@ -51,7 +51,7 @@ bot.on("message", (msg) => {
 			} else {
 				Cleverbot.prepare(function(){
 					cleverbot.write(msg.content.substr(msg.content.indexOf(' ')+1), function (response) {
-						bot.reply(msg, response.message);
+						bot.reply(msg, response.message.replace("Cleverbot", bot.user.username));
 					});
 				});
 			}
