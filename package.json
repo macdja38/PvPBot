@@ -5,7 +5,9 @@
     "discord.js": "^4.1.1",
     "request": "^2.65.0",
     "twitter": "^1.2.5",
-    "underscore": "^1.8.3"
+    "underscore": "^1.8.3",
+    "http": "*",
+    "crypto": "*"
   },
   "devDependencies": {
     "grunt": "^0.4.5",
