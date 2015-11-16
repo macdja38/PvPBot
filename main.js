@@ -25,7 +25,7 @@ bot.on("message", (msg) => {
 		
 		if(msg.content.indexOf("help") > -1 && msg.content[0] !== '!') {
 			bot.reply(msg, '@macdja38, @whitehat97, @londamatt, ' + msg.author.username + ' needs help.\n' +
-			type !help for a list of commands');
+			'type !help for a list of commands');
 		}
 		
 		//check if user sent command
