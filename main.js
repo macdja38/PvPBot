@@ -44,7 +44,8 @@ bot.on("message", (msg) => {
 				//display server ip!
 				bot.reply(msg, 'available commands:\n' +
 				'help: get a list of commands\n' +
-				'unflip: unflip flipped tables'
+				'unflip: unflip flipped tables\n' +
+				'tardistutorial: get a link to the tardis tutorial'
 				);
 			}
 					
