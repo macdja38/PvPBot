@@ -45,11 +45,16 @@ bot.on("message", (msg) => {
 		
 		else if(msg.isMentioned(bot.user) > -1 && msg.content[0] !== '!') {
 			console.log('Clever activating.');
-			Cleverbot.prepare(function(){
-				cleverbot.write(msg.content.substr(msg.content.indexOf(' ')+1), function (response) {
-					bot.reply(msg, response.message);
+			if(msg.content.toLowerCase().indexOf("best")>-1 &&
+				msg.content.toLowerCase().indexOf("server")>-1) {
+				bot.reply(msg, "Probably http://pvpcraft.ca.");
+			} else {
+				Cleverbot.prepare(function(){
+					cleverbot.write(msg.content.substr(msg.content.indexOf(' ')+1), function (response) {
+						bot.reply(msg, response.message);
+					});
 				});
-			});
+			}
 		}
 		
 		//check if user sent command
