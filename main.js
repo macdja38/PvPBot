@@ -55,6 +55,10 @@ bot.on("message", (msg) => {
 				bot.reply(msg, 'My creator is Macdja38');	
 			}
 			
+			if( arguements[0].toLowerCase() ==  '!youtube') {
+				bot.reply(msg, 'https://www.youtube.com/user/macdja38');
+			}
+			
 			if( arguements[0] == '!totheforums' || arguements[0] == '!forums'){
 				//link to the forums!
 				bot.reply(msg, 'The forums are probably a better place for this!\n' +
