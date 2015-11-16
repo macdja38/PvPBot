@@ -177,9 +177,9 @@ bot.on("message", (msg) => {
 				}
 				
 				//TODO: change bot's rank's color
-				if(arguements[0] == '!setcolor') {
+				if(arguements[0] == '!setgame') {
 					if(arguements.length > 1) {
-						bot.setUsername(arguements[1]);
+						bot.setPlayingGame(arguements[1]);
 					}
 					else {
 						bot.reply(msg, 'Please enter a valid name');
