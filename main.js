@@ -93,6 +93,7 @@ bot.on("message", (msg) => {
 				if(arguements[0] == '!setname') {
 					if(arguements.length > 1) {
 						bot.setUsername(arguements[1]);
+						bot.reply(msg, 'Name set to ' + arguements[1]);
 					}
 					else {
 						bot.reply(msg, 'Please enter a valid name');
