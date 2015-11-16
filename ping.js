@@ -7,3 +7,7 @@ function ping(link) {
         }
     });
 }
+
+module.exports = {
+    ping: ping
+};
