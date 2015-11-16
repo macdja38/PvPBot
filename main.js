@@ -21,18 +21,25 @@ bot.on("disconnected", () => {
 
 bot.on("message", (msg) => {
 	console.log('U: ' + msg.author.username + ' S: ' + msg.content);
+	
+	//check if user sent command
 	if(msg.content[0] === '!') {
+		
+		//split command into sections based on spaces
 		var arguements = msg.content.split(" ");
+		
+		//!ip or !address commands
 		if( arguements[0] == '!ip' || arguements[0] == '!address'){
 			//display server ip!
 			bot.reply(msg, 'http://pvpcraft.ca');
 		}
 		
+		//!unflip command
 		if( arguements[0] == '!unflip') {
 	        	client.sendMessage(msg.channel, '\┬\─\┬ \ノ\( \^\_\^\ノ\)');
 		}
 		
-		
+		//!invite command - broken
 		else if(arguements[0] == '!invite') {
 			if(msg.content.indexOf('discord.gg') > -1) {
 				if(msg.channel instanceof Discord.PMChannel) {
@@ -54,12 +61,13 @@ bot.on("message", (msg) => {
 			}
 		}
 		
+		//get users id
 		else if(arguements[0] == '!myid') {
 			if(msg.channel instanceof Discord.PMChannel) {
-				bot.reply(msg, 'Please PM this command');
+				bot.reply(msg, 'Your Discord ID is ' + msg.author.id);
 			}
 			else {
-				bot.reply(msg, 'Your Discord ID is ' + msg.author.id);
+				bot.reply(msg, 'Please PM this command');
 			}
 		}
 		
@@ -76,7 +84,8 @@ bot.on("message", (msg) => {
 				}
 			}
 			
-			if(arguements[0] == '!setname') {
+			//TODO: change bot's rank's color
+			if(arguements[0] == '!setcolor') {
 				if(arguements.length > 1) {
 					bot.setUsername(arguements[1]);
 				}
