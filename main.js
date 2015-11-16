@@ -36,7 +36,7 @@ bot.on("message", (msg) => {
 		
 		//!unflip command
 		if( arguements[0] == '!unflip') {
-	        	client.sendMessage(msg.channel, '\┬\─\┬ \ノ\( \^\_\^\ノ\)');
+	        	bot.sendMessage(msg.channel, '\┬\─\┬ \ノ\( \^\_\^\ノ\)');
 		}
 		
 		//!invite command - broken
