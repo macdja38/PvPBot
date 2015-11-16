@@ -23,7 +23,7 @@ bot.on("disconnected", () => {
 });
 
 bot.on("serverNewMember", (user, server) => {
-	bot.sendMessage(server.defaultChannel, "Please welcome " + user.username);
+	bot.sendMessage(server.defaultChannel, "Please welcome **" + user.username + "**");
 });
 
 /*bot.on("userUpdate", (newUser, OldUser) => {
