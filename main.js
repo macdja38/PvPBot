@@ -28,6 +28,11 @@ bot.on("message", (msg) => {
 			'type !help for a list of commands');
 		}
 		
+		if(msg.content.toLowerCase.indexOf("how do i build a tardis") > -1 && msg.content[0] !== '!'){
+			//display link to tardis site!
+			bot.reply(msg, 'http://eccentricdevotion.github.io/TARDIS/creating-a-tardis.html');				);
+		}
+		
 		//check if user sent command
 		if(msg.content[0] === '!') {
 			
@@ -41,6 +46,11 @@ bot.on("message", (msg) => {
 				'help: get a list of commands\n' +
 				'unflip: unflip flipped tables'
 				);
+			}
+			
+			if( arguements[0] == '!tardistutorial' || arguements[0] == '!tardistut'){
+				//display link to tardis site!
+				bot.reply(msg, 'http://eccentricdevotion.github.io/TARDIS/creating-a-tardis.html');				);
 			}
 			
 			//!ip or !address commands
