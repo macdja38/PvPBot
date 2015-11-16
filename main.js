@@ -38,7 +38,7 @@ bot.on("message", (msg) => {
 		}
 		
 		if(msg.content.toLowerCase().indexOf("hey PvP") > -1 && msg.content[0] !== '!') {
-			console.log('Clever activating.')
+			console.log('Clever activating.');
 			Cleverbot.prepare(function(){
 				cleverbot.write(msg.content.substr(msg.content.indexOf(' ')+1), function (response) {
 					bot.reply(msg, response);
