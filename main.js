@@ -43,7 +43,7 @@ bot.on("message", (msg) => {
 			bot.reply(msg, 'http\://eccentricdevotion.github.io/TARDIS/creating-a-tardis.html');
 		}
 		
-		else if(msg.isMentioned(bot.user) > -1 && msg.content[0] !== '!') {
+		else if(msg.isMentioned(bot.user) && msg.content[0] !== '!') {
 			console.log('Clever activating.');
 			if(msg.content.toLowerCase().indexOf("best")>-1 &&
 				msg.content.toLowerCase().indexOf("server")>-1) {
