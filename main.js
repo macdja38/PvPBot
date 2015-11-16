@@ -6,11 +6,7 @@ var Discord = require("/Discord-Api/discord.js");
 
 var AuthDetails = require("/auth.json");
 
-var Ping = require("ping");
-
 var bot = new Discord.Client();
-
-var ping 
 
 bot.on("ready", () => {
 	console.log("Ready to begin! Serving in " + bot.channels.length + " channels");
@@ -154,6 +150,16 @@ function error(e) {
 
 function nothing() {
 	console.log("nothing");
+}
+
+function ping(link) {
+    $.getJSON(link, function(json){
+        if(json.Players !== undefined) {
+            return json.Players;
+        } else {
+            return 0;
+        }
+    });
 }
 
 bot.login(AuthDetails.email, AuthDetails.password);
