@@ -23,7 +23,7 @@ bot.on("message", (msg) => {
 	if(msg.author.id !== bot.user.id) {
 		console.log('U: ' + msg.author.username + ' S: ' + msg.content);
 		
-		if(msg.content.indexOf("help") > -1 && msg.content[0] !== '!') {
+		if(msg.content.toLowerCase().indexOf("help") > -1 && msg.content[0] !== '!') {
 			bot.reply(msg, '@macdja38, @whitehat97, @londamatt, ' + msg.author.username + ' needs help.\n' +
 			'type !help for a list of commands');
 		}
