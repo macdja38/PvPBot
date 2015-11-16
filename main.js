@@ -22,7 +22,7 @@ bot.on("disconnected", () => {
 bot.on("message", (msg) => {
 	console.log('U: ' + msg.author.username + ' S: ' + msg.content);
 	
-	if(msg.indexOf("help") > -1 && msg.content[0] !== '!') {
+	if(msg.content.indexOf("help") > -1 && msg.content[0] !== '!') {
 		bot.reply(msg, 'please ask staff for help')
 	}
 	
