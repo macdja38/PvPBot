@@ -47,6 +47,11 @@ bot.on("message", (msg) => {
 				'unflip: unflip flipped tables'
 				);
 			}
+					
+			if( arguements[0] == '!whosyourdaddy' || arguements[0] == '!creator'){
+				//display author's name!
+				bot.reply(msg, 'My creator is Macdja38');	
+			}
 			
 			if( arguements[0] == '!tardistutorial' || arguements[0] == '!tardistut'){
 				//display link to tardis site!
