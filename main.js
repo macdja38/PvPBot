@@ -35,10 +35,10 @@ bot.on("serverNewMember", (user, server) => {
 	}
 });*/
 
-bot.on("userUpdate", (newUser, OldUser) => {
+bot.on("userUpdate", (newUser, oldUser) => {
 	for (server in bot.servers) {
 		for (member in server.members) {
-			if(newUser.equals(member)){
+			if(oldUser.equals(member)){
 				bot.sendMessage(server.defaultChannel, oldUser.username + 
 					" Just changed their name to " + newUser.username);
 			}
