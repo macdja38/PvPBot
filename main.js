@@ -24,8 +24,14 @@ bot.on("disconnected", () => {
 
 bot.on("message", (msg) => {
 	if(msg.author.id !== bot.user.id) {
-		console.log('S:' + msg.channel.server.name + ' C:' + msg.channel.name + 
-				' U:' + msg.author.username + ' S:' + msg.content);
+		if(msg.channel instanceof Discord.PMChannel) {
+			console.log('PM:' + msg.author.username + ' S:' + msg.content);
+		}
+		else
+		{
+			console.log('S:' + msg.channel.server.name + ' C:' + msg.channel.name + 
+					' U:' + msg.author.username + ' S:' + msg.content);
+		}
 		
 		if(msg.content.toLowerCase().indexOf("help") > -1 && msg.content[0] == '@') {
 			bot.reply(msg, '@macdja38, @whitehat97, @londamatt, ' + msg.author.username + 
