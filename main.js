@@ -70,7 +70,7 @@ bot.on("message", (msg) => {
 		}
 		
 		if(msg.content.indexOf("Rick Astley - Never Gonna Give You Up") > -1) {
-			bot.sendMessage(msg.channel, "@QmusicBot n")
+			bot.sendMessage(msg.channel, "@QmusicBot n");
 		}
 		
 		if(msg.content.indexOf(":p") > -1) {
