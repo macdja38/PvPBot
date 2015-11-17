@@ -41,8 +41,7 @@ bot.on("userUpdate", (newUser, oldUser) => {
 	for (server in bot.servers) {
 		console.log("Servers:" + bot.servers[server]);
 		for (member in bot.servers[server].members) {
-			console.log("Member:" + bot.servers[server].members[member].id);
-			if(oldUser.equals(bot.servers[server].members[member].id)){
+			if(oldUser.id == bot.servers[server].members[member].id){
 				bot.sendMessage(bot.servers[server].defaultChannel, oldUser.username + 
 					" Just changed their name to " + newUser.username);
 			}
