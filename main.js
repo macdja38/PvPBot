@@ -69,6 +69,10 @@ bot.on("message", (msg) => {
 				' needs help.\n' + 'type !help for a list of commands');
 		}
 		
+		if(msg.content.toLowerCase().indexOf(":p") > -1) {
+			bot.reply(msg, ':smile_cat:');
+		}
+		
 		else if(msg.content.toLowerCase().indexOf("how do i build a tardis") > -1 && msg.content[0] !== '!'){
 			//display link to tardis site!
 			bot.reply(msg, 'http\://eccentricdevotion.github.io/TARDIS/creating-a-tardis.html');
