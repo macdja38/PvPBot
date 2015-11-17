@@ -111,7 +111,7 @@ bot.on("message", (msg) => {
 				'creator: who made me?\n' +
 				'unflip: unflip flipped tables\n' +
 				'tardistutorial: get a link to the tardis tutorial\n' +
-				'youtube: get my master's youtube\n' +
+				'youtube: get my master\'s youtube\n' +
 				'totheforums: link to the forums```'
 				);
 			}
