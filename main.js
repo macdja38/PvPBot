@@ -69,8 +69,8 @@ bot.on("message", (msg) => {
 				' needs help.\n' + 'type !help for a list of commands');
 		}
 		
-		if(msg.content.toLowerCase().indexOf(":p") > -1) {
-			bot.reply(msg, ':smile_cat:');
+		if(msg.content.indexOf(":p") > -1) {
+			bot.reply(msg, ':P');
 		}
 		
 		else if(msg.content.toLowerCase().indexOf("how do i build a tardis") > -1 && msg.content[0] !== '!'){
