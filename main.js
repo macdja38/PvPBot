@@ -103,10 +103,12 @@ bot.on("message", (msg) => {
 			if( arguements[0].toLowerCase() == '!!help' || arguements[0].toLowerCase() == '!!address'){
 				//display server ip!
 				bot.reply(msg, 'available commands:\n' +
-				'help: get a list of commands\n' +
+				'```help: get a list of commands\n' +
+				'creator: who made me?\n' +
 				'unflip: unflip flipped tables\n' +
 				'tardistutorial: get a link to the tardis tutorial\n' +
-				'totheforums: link to the forums'
+				'youtube: get my master's youtube\n' +
+				'totheforums: link to the forums```'
 				);
 			}
 					
@@ -177,12 +179,7 @@ bot.on("message", (msg) => {
 			
 			//get users id
 			else if(arguements[0].toLowerCase() == '!!myid') {
-				if(msg.channel instanceof Discord.PMChannel) {
-					bot.reply(msg, 'Your Discord ID is ' + msg.author.id);
-				}
-				else {
-					bot.reply(msg, 'Please PM this command');
-				}
+					bot.reply(msg, 'Your Discord ID is ```' + msg.author.id + '```');
 			}
 			
 			/*
