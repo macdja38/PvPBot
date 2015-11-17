@@ -38,14 +38,16 @@ bot.on("serverNewMember", (user, server) => {
 });*/
 
 bot.on("userUpdate", (newUser, oldUser) => {
-	console.log("oldUser" + oldUser.username + " ID " + oldUser.id);
-	console.log("newUser" + newUser.username + " ID " + newUser.id);
-	for (server in bot.servers) {
-		console.log("Servers:" + bot.servers[server]);
-		for (member in bot.servers[server].members) {
-			if(oldUser.id == bot.servers[server].members[member].id){
-				bot.sendMessage(bot.servers[server].defaultChannel, newUser.username + 
-					" Just changed their name to " + oldUser.username);
+	if(!server.id.equals("110373943822540800")) {
+		console.log("oldUser" + oldUser.username + " ID " + oldUser.id);
+		console.log("newUser" + newUser.username + " ID " + newUser.id);
+		for (server in bot.servers) {
+			console.log("Servers:" + bot.servers[server]);
+			for (member in bot.servers[server].members) {
+				if(oldUser.id == bot.servers[server].members[member].id){
+					bot.sendMessage(bot.servers[server].defaultChannel, newUser.username + 
+						" Just changed their name to " + oldUser.username);
+				}
 			}
 		}
 	}
