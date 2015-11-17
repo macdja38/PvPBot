@@ -89,13 +89,13 @@ bot.on("message", (msg) => {
 		}
 		
 		//check if user sent command
-		if(msg.content[0] === '!') {
+		if(msg.content.indexOf('!!') > -1 && msg.content.indexOf('!!') < 2) {
 			
 			//split command into sections based on spaces
 			var arguements = msg.content.split(" ");
 			
 			//!help
-			if( arguements[0].toLowerCase() == '!help' || arguements[0].toLowerCase() == '!address'){
+			if( arguements[0].toLowerCase() == '!!help' || arguements[0].toLowerCase() == '!!address'){
 				//display server ip!
 				bot.reply(msg, 'available commands:\n' +
 				'help: get a list of commands\n' +
@@ -105,40 +105,40 @@ bot.on("message", (msg) => {
 				);
 			}
 					
-			if( arguements[0].toLowerCase() == '!creator'){
+			if( arguements[0].toLowerCase() == '!!creator'){
 				//display author's name!
 				bot.reply(msg, 'My creator is Macdja38');	
 			}
 			
-			if( arguements[0].toLowerCase() ==  '!youtube') {
+			if( arguements[0].toLowerCase() ==  '!!youtube') {
 				bot.reply(msg, 'https://www.youtube.com/user/macdja38');
 			}
 			
-			if( arguements[0].toLowerCase() == '!totheforums' || arguements[0].toLowerCase() == '!forums'){
+			if( arguements[0].toLowerCase() == '!!totheforums' || arguements[0].toLowerCase() == '!!forums'){
 				//link to the forums!
 				bot.reply(msg, 'The forums are probably a better place for this!\n' +
 						'http://pvpcraft.ca/forums'	
 				);	
 			}
 			
-			if( arguements[0] == '!tardistutorial'.toLowerCase() || arguements[0].toLowerCase() == '!tardistut'){
+			if( arguements[0] == '!!tardistutorial'.toLowerCase() || arguements[0].toLowerCase() == '!!tardistut'){
 				//display link to tardis site!
 				bot.reply(msg, 'http://eccentricdevotion.github.io/TARDIS/creating-a-tardis.html');
 			}
 			
 			//!ip or !address commands
-			if( arguements[0].toLowerCase() == '!ip' || arguements[0].toLowerCase() == '!address'){
+			if( arguements[0].toLowerCase() == '!!ip' || arguements[0].toLowerCase() == '!!address'){
 				//display server ip!
 				bot.reply(msg, 'http://pvpcraft.ca');
 			}
 			
 			//!unflip command
-			if( arguements[0].toLowerCase() == '!unflip') {
+			if( arguements[0].toLowerCase() == '!!unflip') {
 		        	bot.sendMessage(msg.channel, '\┬\─\┬ \ノ\( \^\_\^\ノ\)');
 			}
 			
 			//!invite command - broken
-			else if(arguements[0].toLowerCase() == '!invite') {
+			else if(arguements[0].toLowerCase() == '!!invite') {
 				if(msg.content.indexOf('discord.gg') > -1) {
 					if(msg.channel instanceof Discord.PMChannel) {
 						bot.joinServer(arguements[1], function(err, server) {
@@ -171,7 +171,7 @@ bot.on("message", (msg) => {
 			*/
 			
 			//get users id
-			else if(arguements[0].toLowerCase() == '!myid') {
+			else if(arguements[0].toLowerCase() == '!!myid') {
 				if(msg.channel instanceof Discord.PMChannel) {
 					bot.reply(msg, 'Your Discord ID is ' + msg.author.id);
 				}
@@ -184,7 +184,7 @@ bot.on("message", (msg) => {
 				locked commands past this point
 			*/
 			else if(msg.author.id == AuthDetails.adminid || msg.author.id == AuthDetails.adminid2 || msg.author.id == AuthDetails.adminid3) {
-				if(arguements[0].toLowerCase() == '!setname') {
+				if(arguements[0].toLowerCase() == '!!setname') {
 					if(arguements.length > 1) {
 						bot.setUsername(arguements[1]);
 						bot.reply(msg, 'Name set to ' + arguements[1]);
@@ -195,7 +195,7 @@ bot.on("message", (msg) => {
 				}
 				
 				//TODO: change bot's rank's color
-				if(arguements[0].toLowerCase() == '!setgame') {
+				if(arguements[0].toLowerCase() == '!!setgame') {
 					if(arguements.length > 1) {
 						bot.setPlayingGame(arguements[1]);
 					}
