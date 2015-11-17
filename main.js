@@ -23,7 +23,9 @@ bot.on("disconnected", () => {
 });
 
 bot.on("serverNewMember", (user, server) => {
-	bot.sendMessage(server.defaultChannel, "Please welcome **" + user.username + "**");
+	if(!server.id.equals("110373943822540800")) {
+		bot.sendMessage(server.defaultChannel, "Please welcome **" + user.username + "**");
+	}
 });
 
 /*bot.on("userUpdate", (newUser, OldUser) => {
