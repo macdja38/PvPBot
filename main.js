@@ -85,6 +85,7 @@ bot.on("message", (msg) => {
 				bot.reply(msg, "Probably http://pvpcraft.ca.");
 			} else {
 				Cleverbot.prepare(function(){
+					console.log('Sent to Clever:' + msg.content.substr(msg.content.indexOf(' ')+1));
 					cleverbot.write(msg.content.substr(msg.content.indexOf(' ')+1), function (response) {
 						bot.reply(msg, response.message.replace("Cleverbot", bot.user.username));
 					});
