@@ -200,10 +200,19 @@ bot.on("message", (msg) => {
 					}
 				}
 				
-				//TODO: change bot's rank's color
+				//change the bot's current game
 				if(arguements[0].toLowerCase() == '!!setgame') {
 					if(arguements.length > 1) {
 						bot.setPlayingGame(arguements[1]);
+					}
+					else {
+						bot.reply(msg, 'Please enter a valid name');
+					}
+				}
+				
+				if(arguements[0].toLowerCase() == '!!newpromotedcall') {
+					if(arguements.length > 1) {
+						bot.createServer(String.fromCharCode(0007) + arguements[1], "us-east");
 					}
 					else {
 						bot.reply(msg, 'Please enter a valid name');
