@@ -98,9 +98,9 @@ bot.on("message", (msg) => {
 				msg.content.toLowerCase().indexOf("server")>-1) {
 				bot.reply(msg, "Probably http://pvpcraft.ca.");
 			} else {
-				Cleverbot.prepare(function(){
+				cleverLs.prepare(function(){
 					console.log('Sent to Clever:' + msg.content.substr(msg.content.indexOf(' ')+1));
-					cleverbot[cleverIndex].write(msg.content.substr(msg.content.indexOf(' ')+1), function (response) {
+					cleverLs[cleverIndex].write(msg.content.substr(msg.content.indexOf(' ')+1), function (response) {
 						bot.reply(msg, response.message.replace("Cleverbot", bot.user.username));
 					});
 				});
