@@ -100,8 +100,8 @@ bot.on("message", (msg) => {
 				bot.reply(msg, "Probably http://pvpcraft.ca.");
 			} else {
 				console.log("CI:" + cleverIndex);
-				console.log(serverLs);
-				console.log(cleverLs);
+				console.log(serverLs[cleverIndex]);
+				console.log(cleverLs[cleverIndex]);
 				cleverLs[cleverIndex].prepare(function(){
 					console.log('Sent to Clever:' + msg.content.substr(msg.content.indexOf(' ')+1));
 					cleverLs[cleverIndex].write(msg.content.substr(msg.content.indexOf(' ')+1), function (response) {
