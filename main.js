@@ -11,6 +11,7 @@ var bot = new Discord.Client();
 var Cleverbot = require('/Discord-Bot/PvPBot-master/lib/cleverbot');
 
 var serverLs = new Array();
+    CleverLs = new Array();
     cleverLs = new Array();
 var cleverIndex = 0;
     cleverbot = new Cleverbot;
@@ -92,8 +93,9 @@ bot.on("message", (msg) => {
 			if(cleverIndex < 0) {
 				console.log("adding server to list")
 				serverLs.push(msg.channel.server.id);
-				cleverLs.push(new Cleverbot());
+				CleverLs.push(require('/Discord-Bot/PvPBot-master/lib/cleverbot'));
 				cleverIndex = serverLs.indexOf(msg.channel.server.id);
+				cleverLs.push(new CleverLs[cleverIndex]);
 			}
 			if(msg.content.toLowerCase().indexOf("best")>-1 &&
 				msg.content.toLowerCase().indexOf("server")>-1) {
@@ -103,7 +105,7 @@ bot.on("message", (msg) => {
 				console.log(serverLs[cleverIndex]);
 				console.log(cleverLs[cleverIndex]);
 				console.log(cleverbot);
-				Cleverbot.prepare(function(){
+				CleverLs[cleverIndex].prepare(function(){
 					console.log('Sent to Clever:' + msg.content.substr(msg.content.indexOf(' ')+1));
 					cleverLs[cleverIndex].write(msg.content.substr(msg.content.indexOf(' ')+1), function (response) {
 						bot.reply(msg, response.message.replace("Cleverbot", bot.user.username));
