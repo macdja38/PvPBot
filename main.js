@@ -8,11 +8,11 @@ var AuthDetails = require("/auth.json");
 
 var bot = new Discord.Client();
 
-var serverLs = new Array();
-var cleverLs = new Array();
-var cleverIndex = 0;
-
 var Cleverbot = require('/Discord-Bot/PvPBot-master/lib/cleverbot');
+
+var serverLs = new Array();
+    cleverLs = new Array();
+var cleverIndex = 0;
     cleverbot = new Cleverbot;
 
 bot.on("ready", () => {
@@ -102,6 +102,7 @@ bot.on("message", (msg) => {
 				console.log("CI:" + cleverIndex);
 				console.log(serverLs[cleverIndex]);
 				console.log(cleverLs[cleverIndex]);
+				console.log(cleverbot);
 				cleverLs[cleverIndex].prepare(function(){
 					console.log('Sent to Clever:' + msg.content.substr(msg.content.indexOf(' ')+1));
 					cleverLs[cleverIndex].write(msg.content.substr(msg.content.indexOf(' ')+1), function (response) {
