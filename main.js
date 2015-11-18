@@ -88,11 +88,11 @@ bot.on("message", (msg) => {
 		
 		else if(msg.isMentioned(bot.user) && msg.content[0] !== '!') {
 			console.log('Clever activating.');
-			cleverIndex = serverLs.indexOf(msg.server.id);
+			cleverIndex = serverLs.indexOf(msg.channel.server.id);
 			if(cleverIndex < 0) {
 				serverLs.push(msg.server.id);
 				cleverLs.push(new Cleverbot);
-				cleverIndex = serverLs.indexOf(msg.server.id);
+				cleverIndex = serverLs.indexOf(msg.channel.server.id);
 			}
 			if(msg.content.toLowerCase().indexOf("best")>-1 &&
 				msg.content.toLowerCase().indexOf("server")>-1) {
