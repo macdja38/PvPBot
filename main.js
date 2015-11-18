@@ -8,6 +8,10 @@ var AuthDetails = require("/auth.json");
 
 var bot = new Discord.Client();
 
+var serverLs = new Array();
+var cleverLs = new Array();
+var cleverIndex = 0;
+
 var Cleverbot = require('/Discord-Bot/PvPBot-master/lib/cleverbot');
     cleverbot = new Cleverbot;
 
@@ -84,13 +88,19 @@ bot.on("message", (msg) => {
 		
 		else if(msg.isMentioned(bot.user) && msg.content[0] !== '!') {
 			console.log('Clever activating.');
+			cleverIndex = serverLs.indexOf(msg.server.id);
+			if(cleverIndex < 0) {
+				serverLs.push(msg.server.id);
+				cleverLs.push(new Cleverbot);
+				cleverIndex = serverLs.indexOf(msg.server.id);
+			}
 			if(msg.content.toLowerCase().indexOf("best")>-1 &&
 				msg.content.toLowerCase().indexOf("server")>-1) {
 				bot.reply(msg, "Probably http://pvpcraft.ca.");
 			} else {
 				Cleverbot.prepare(function(){
 					console.log('Sent to Clever:' + msg.content.substr(msg.content.indexOf(' ')+1));
-					cleverbot.write(msg.content.substr(msg.content.indexOf(' ')+1), function (response) {
+					cleverbot[cleverIndex].write(msg.content.substr(msg.content.indexOf(' ')+1), function (response) {
 						bot.reply(msg, response.message.replace("Cleverbot", bot.user.username));
 					});
 				});
