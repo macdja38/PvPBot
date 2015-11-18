@@ -90,6 +90,7 @@ bot.on("message", (msg) => {
 			console.log('Clever activating.');
 			cleverIndex = serverLs.indexOf(msg.channel.server.id);
 			if(cleverIndex < 0) {
+				console.log("adding server to list")
 				serverLs.push(msg.channel.server.id);
 				cleverLs.push(new Cleverbot());
 				cleverIndex = serverLs.indexOf(msg.channel.server.id);
@@ -98,6 +99,9 @@ bot.on("message", (msg) => {
 				msg.content.toLowerCase().indexOf("server")>-1) {
 				bot.reply(msg, "Probably http://pvpcraft.ca.");
 			} else {
+				console.log("CI:" + cleverIndex);
+				console.log(serverLs);
+				console.log(cleverLs);
 				cleverLs[cleverIndex].prepare(function(){
 					console.log('Sent to Clever:' + msg.content.substr(msg.content.indexOf(' ')+1));
 					cleverLs[cleverIndex].write(msg.content.substr(msg.content.indexOf(' ')+1), function (response) {
