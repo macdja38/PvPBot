@@ -27,7 +27,7 @@ bot.on("disconnected", () => {
 	
 });
 
-bot.on("serverNewMember", (user, server) => {
+bot.on("serverNewMember", (server, user) => {
 	if(server.id !== "110373943822540800") {
 		bot.sendMessage(server.defaultChannel, "Please welcome **" + user.username + "**");
 	}
