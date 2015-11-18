@@ -38,7 +38,7 @@ bot.on("serverNewMember", (user, server) => {
 });*/
 
 bot.on("userUpdate", (newUser, oldUser) => {
-	if(newUser.username !== oldUser.username) {
+	if(newUser.username !== oldUser.username && newUser.id !== bot.user.id) {
 		console.log("oldUser" + oldUser.username + " ID " + oldUser.id);
 		console.log("newUser" + newUser.username + " ID " + newUser.id);
 		for (server in bot.servers) {
@@ -192,8 +192,16 @@ bot.on("message", (msg) => {
 			else if(msg.author.id == AuthDetails.adminid || msg.author.id == AuthDetails.adminid2 || msg.author.id == AuthDetails.adminid3) {
 				if(arguements[0].toLowerCase() == '!!setname') {
 					if(arguements.length > 1) {
-						bot.setUsername(arguements[1]);
-						bot.reply(msg, 'Name set to ' + arguements[1]);
+						if(arguements[1].toLowerCase() == bellchar) {
+							bot.setUsername(String.fromCharCode(0007));
+							bot.reply(msg, 'Name set to ' + String.fromCharCode(0007));
+						}
+						else
+						{
+							bot.setUsername(arguements[1]);
+							bot.reply(msg, 'Name set to ' + arguements[1]);
+						}
+						
 					}
 					else {
 						bot.reply(msg, 'Please enter a valid name');
