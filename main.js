@@ -2,7 +2,7 @@
 	PvPCraft Friendly helper bot.
 */
 
-var Discord = require("/Discord-Api/discord.js");
+var Discord = require("discord.js");
 
 var AuthDetails = require("/auth.json");
 
