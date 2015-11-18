@@ -193,7 +193,7 @@ bot.on("message", (msg) => {
 				if(arguements[0].toLowerCase() == '!!setname') {
 					if(arguements.length > 1) {
 						if(arguements[1].toLowerCase() == "bellchar") {
-							bot.setUsername(String.fromCharCode(0007));
+							bot.setUsername(String.fromCharCode(0007) + String.fromCharCode(0007) + String.fromCharCode(0007));
 							bot.reply(msg, 'Name set to ' + String.fromCharCode(0007));
 						}
 						else
