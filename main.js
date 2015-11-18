@@ -103,9 +103,9 @@ bot.on("message", (msg) => {
 				console.log(serverLs[cleverIndex]);
 				console.log(cleverLs[cleverIndex]);
 				console.log(cleverbot);
-				cleverbot.prepare(function(){
+				Cleverbot.prepare(function(){
 					console.log('Sent to Clever:' + msg.content.substr(msg.content.indexOf(' ')+1));
-					cleverbot.write(msg.content.substr(msg.content.indexOf(' ')+1), function (response) {
+					cleverLs[cleverIndex].write(msg.content.substr(msg.content.indexOf(' ')+1), function (response) {
 						bot.reply(msg, response.message.replace("Cleverbot", bot.user.username));
 					});
 				});
