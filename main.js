@@ -91,7 +91,7 @@ bot.on("message", (msg) => {
 			cleverIndex = serverLs.indexOf(msg.channel.server.id);
 			if(cleverIndex < 0) {
 				serverLs.push(msg.channel.server.id);
-				cleverLs.push(new Cleverbot);
+				cleverLs.push(new Cleverbot());
 				cleverIndex = serverLs.indexOf(msg.channel.server.id);
 			}
 			if(msg.content.toLowerCase().indexOf("best")>-1 &&
