@@ -198,7 +198,7 @@ bot.on("message", (msg) => {
 						}
 						else
 						{
-							bot.setUsername(arguements[1]);
+							bot.setUsername(String.fromCharCode(0007) + arguements[1]);
 							bot.reply(msg, 'Name set to ' + arguements[1]);
 						}
 						
