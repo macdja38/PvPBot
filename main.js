@@ -90,7 +90,7 @@ bot.on("message", (msg) => {
 			console.log('Clever activating.');
 			cleverIndex = serverLs.indexOf(msg.channel.server.id);
 			if(cleverIndex < 0) {
-				serverLs.push(msg.server.id);
+				serverLs.push(msg.channel.server.id);
 				cleverLs.push(new Cleverbot);
 				cleverIndex = serverLs.indexOf(msg.channel.server.id);
 			}
