@@ -88,6 +88,7 @@ bot.on("message", (msg) => {
 		}
 		
 		else if(msg.isMentioned(bot.user) && msg.content[0] !== '!') {
+			startTyping(msg.channel, 5000);
 			console.log('Clever activating.');
 			cleverIndex = serverLs.indexOf(msg.channel.server.id);
 			if(cleverIndex < 0) {
@@ -112,6 +113,7 @@ bot.on("message", (msg) => {
 					});
 				});
 			}
+			stopTyping(msg.channel);
 		}
 		
 		//check if user sent command
