@@ -137,7 +137,7 @@ bot.on("message", (msg) => {
 			if(arguements[0].toLowerCase() == "!!anu") {
 				comaUserName = '';
 				for (x in msg.author.username) {
-					comaUserName += username[x] + ',';
+					comaUserName += msg.author.username[x] + ',';
 				}
 				msg.reply(msg, comaUserName)
 			}
