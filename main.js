@@ -138,8 +138,9 @@ bot.on("message", (msg) => {
 				comaUserName = '';
 				for (x in msg.author.username) {
 					comaUserName += msg.author.username[x] + ',';
+					console.log('x: ' + x + ' Char:' + msg.author.username[x]);
 				}
-				msg.reply(msg, comaUserName)
+				msg.reply(msg, comaUserName);
 			}
 					
 			if( arguements[0].toLowerCase() == '!!creator'){
