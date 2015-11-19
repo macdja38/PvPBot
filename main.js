@@ -73,11 +73,11 @@ bot.on("message", (msg) => {
 			bot.reply(msg, '@macdja38, @whitehat97, @londamatt, ' + msg.author.username + 
 				' needs help.\n' + 'type !help for a list of commands');
 		}
-		
+		/*
 		if(msg.content.indexOf("Rick Astley - Never Gonna Give You Up") > -1) {
 			bot.sendMessage(msg.channel, "@QmusicBot n");
 		}
-		
+		*/
 		if(msg.content.indexOf(":p") > -1) {
 			bot.reply(msg, ':P');
 		}
@@ -88,7 +88,7 @@ bot.on("message", (msg) => {
 		}
 		
 		else if(msg.isMentioned(bot.user) && msg.content[0] !== '!') {
-			bot.startTyping(msg.channel, 5000);
+			//bot.sendTyping(msg.channel);
 			console.log('Clever activating.');
 			cleverIndex = serverLs.indexOf(msg.channel.server.id);
 			if(cleverIndex < 0) {
@@ -113,7 +113,6 @@ bot.on("message", (msg) => {
 					});
 				});
 			}
-			bot.stopTyping(msg.channel);
 		}
 		
 		//check if user sent command
