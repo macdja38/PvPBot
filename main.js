@@ -69,14 +69,6 @@ bot.on("message", (msg) => {
 					' U:' + msg.author.username + ' S:' + msg.content);
 		}
 		
-		if(msg.content.toLowerCase().indexOf("anu")) {
-			comaUserName = '';
-			for (x in msg.user.username) {
-				comaUserName += username[x] + ',';
-			}
-			msg.reply(msg, comaUserName)
-		}
-		
 		if(msg.content.toLowerCase().indexOf("help") > -1 && msg.content[0] == '@') {
 			bot.reply(msg, '@macdja38, @whitehat97, @londamatt, ' + msg.author.username + 
 				' needs help.\n' + 'type !help for a list of commands');
@@ -140,6 +132,14 @@ bot.on("message", (msg) => {
 				'anu: prints comma seporated list of username chars\n' +
 				'totheforums: link to the forums```'
 				);
+			}
+			
+			if(arguements[0].toLowerCase() == "anu") {
+				comaUserName = '';
+				for (x in msg.author.username) {
+					comaUserName += username[x] + ',';
+				}
+				msg.reply(msg, comaUserName)
 			}
 					
 			if( arguements[0].toLowerCase() == '!!creator'){
