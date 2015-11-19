@@ -88,7 +88,7 @@ bot.on("message", (msg) => {
 		}
 		
 		else if(msg.isMentioned(bot.user) && msg.content[0] !== '!') {
-			startTyping(msg.channel, 5000);
+			bot.startTyping(msg.channel, 5000);
 			console.log('Clever activating.');
 			cleverIndex = serverLs.indexOf(msg.channel.server.id);
 			if(cleverIndex < 0) {
@@ -113,7 +113,7 @@ bot.on("message", (msg) => {
 					});
 				});
 			}
-			stopTyping(msg.channel);
+			bot.stopTyping(msg.channel);
 		}
 		
 		//check if user sent command
@@ -147,7 +147,9 @@ bot.on("message", (msg) => {
 					
 			if( arguements[0].toLowerCase() == '!!creator'){
 				//display author's name!
-				bot.reply(msg, 'My creator is Macdja38');	
+				bot.reply(msg, '```My creator is Macdja38\n' + 
+						'with warframe integration by tcooc\n' +
+						'using Discord.py by hydrabolt```');	
 			}
 			
 			if( arguements[0].toLowerCase() ==  '!!youtube') {
