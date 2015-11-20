@@ -223,12 +223,12 @@ bot.on("message", (msg) => {
 				if(arguements[0].toLowerCase() == '!!setname') {
 					if(arguements.length > 1) {
 						if(arguements[1].toLowerCase() == "bellchar") {
-							bot.setUsername(String.fromCharCode(0001) + String.fromCharCode(0001) + String.fromCharCode(0001));
-							bot.reply(msg, 'Name set to ' + String.fromCharCode(0007));
+							bot.setUsername(String.fromCharCode(0000) + String.fromCharCode(0000) + String.fromCharCode(0000));
+							bot.reply(msg, 'Name set to ' + String.fromCharCode(0000));
 						}
 						else
 						{
-							bot.setUsername(String.fromCharCode(0000) + arguements[1]);
+							bot.setUsername(repeatChar(32-arguements[1].length,String.fromCharCode(0000)) + arguements[1]);
 							bot.reply(msg, 'Name set to ' + arguements[1]);
 						}
 						
@@ -282,3 +282,11 @@ function nothing() {
 }*/
 
 bot.login(AuthDetails.email, AuthDetails.password);
+
+function repeatChar(count, ch) {
+    var txt = "";
+    for (var i = 0; i < count; i++) {
+        txt += ch;
+    }
+    return txt;
+}
