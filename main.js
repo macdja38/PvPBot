@@ -228,7 +228,7 @@ bot.on("message", (msg) => {
 						}
 						else
 						{
-							bot.setUsername(repeatChar(32-arguements[1].length-4,String.fromCharCode(0000)) + arguements[1]);
+							bot.setUsername(repeatChar(32-arguements[1].length,String.fromCharCode(0000)) + arguements[1]);
 							bot.reply(msg, 'Name set to ' + arguements[1]);
 						}
 						
