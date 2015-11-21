@@ -28,7 +28,7 @@ bot.on("disconnected", () => {
 });
 
 bot.on("serverNewMember", (server, user) => {
-	if(server.id !== "110373943822540800" || server.id !== "88402934194257920") {
+	if(server.id !== "110373943822540800" && server.id !== "88402934194257920") {
 		bot.sendMessage(server.defaultChannel, "Please welcome **" + user.username + "**");
 	}
 });
@@ -49,7 +49,7 @@ bot.on("userUpdate", (newUser, oldUser) => {
 		for (server in bot.servers) {
 			for (member in bot.servers[server].members) {
 				if(oldUser.id == bot.servers[server].members[member].id &&
-					bot.servers[server].id !== "110373943822540800" || 
+					bot.servers[server].id !== "110373943822540800" && 
 					bot.servers[server].id !== "88402934194257920"){
 					bot.sendMessage(bot.servers[server].defaultChannel, newUser.username + 
 						" Just changed their name to " + oldUser.username);
