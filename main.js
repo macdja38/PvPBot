@@ -28,7 +28,7 @@ bot.on("disconnected", () => {
 });
 
 bot.on("serverNewMember", (server, user) => {
-	if(server.id !== "110373943822540800") {
+	if(server.id !== "110373943822540800" || server.id !== "88402934194257920") {
 		bot.sendMessage(server.defaultChannel, "Please welcome **" + user.username + "**");
 	}
 });
@@ -49,7 +49,8 @@ bot.on("userUpdate", (newUser, oldUser) => {
 		for (server in bot.servers) {
 			for (member in bot.servers[server].members) {
 				if(oldUser.id == bot.servers[server].members[member].id &&
-					bot.servers[server].id !== "110373943822540800"){
+					bot.servers[server].id !== "110373943822540800" || 
+					bot.servers[server].id !== "88402934194257920"){
 					bot.sendMessage(bot.servers[server].defaultChannel, newUser.username + 
 						" Just changed their name to " + oldUser.username);
 				}
@@ -79,7 +80,9 @@ bot.on("message", (msg) => {
 		}
 		*/
 		if(msg.content.indexOf(":p") > -1) {
-			bot.reply(msg, ':P');
+			if(msg.channel.id !== "110373943822540800") {
+				bot.reply(msg, ':P');
+			}
 		}
 		
 		else if(msg.content.toLowerCase().indexOf("how do i build a tardis") > -1 && msg.content[0] !== '!'){
