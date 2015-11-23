@@ -253,7 +253,9 @@ bot.on("message", (msg) => {
 				//change the bot's current game
 				if(arguements[0].toLowerCase() == '!!setgame') {
 					if(arguements.length > 1) {
-						bot.setStatus("online", arguements[1]);
+						bot.setStatus("online", arguements[1], function(error){
+							console.log(error);
+						});
 					}
 					else {
 						bot.reply(msg, 'Please enter a valid name');
