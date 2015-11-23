@@ -128,13 +128,14 @@ bot.on("message", (msg) => {
 			if( arguements[0].toLowerCase() == '!!help' || arguements[0].toLowerCase() == '!!address'){
 				//display server ip!
 				bot.reply(msg, 'available commands:\n' +
-				'```help: get a list of commands\n' +
-				'creator: who made me?\n' +
-				'unflip: unflip flipped tables\n' +
-				'tardistutorial: get a link to the tardis tutorial\n' +
-				'youtube: get my master\'s youtube\n' +
-				'anu: prints comma seporated list of username chars\n' +
-				'totheforums: link to the forums```'
+				'```!!help: get a list of commands\n' +
+				'!!creator: who made me?\n' +
+				'!!unflip: unflip flipped tables\n' +
+				'!!tardistutorial: get a link to the tardis tutorial\n' +
+				'!!youtube: get my master\'s youtube\n' +
+				'!!anu: prints comma seporated list of username chars\n' +
+				'!!flarebuilds: links to flare_eyes warframe builds.\n' +
+				'!!totheforums: link to the forums```'
 				);
 			}
 			
