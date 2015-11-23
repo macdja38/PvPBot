@@ -15,6 +15,9 @@ var serverLs = new Array();
     cleverLs = new Array();
 var cleverIndex = 0;
     cleverbot = new Cleverbot;
+    
+var comaUserName = '';
+var comaUserNameCodes = '';
 
 bot.on("ready", () => {
 	console.log("Ready to begin! Serving in " + bot.channels.length + " channels");
@@ -143,6 +146,7 @@ bot.on("message", (msg) => {
 				comaUserName = '';
 				for (x in msg.mentions[0].username) {
 					comaUserName += msg.mentions[0].username[x] + ',';
+					comaUserNameCodes += msg.mentions[0].username.charCodeAt(x) + ',';
 					console.log('x: ' + x + 'ID:' + msg.mentions[0].username.charCodeAt(x) + ' Char:' + msg.mentions[0].username[x]);
 				}
 				msg.reply(msg, comaUserName);
@@ -249,7 +253,7 @@ bot.on("message", (msg) => {
 				//change the bot's current game
 				if(arguements[0].toLowerCase() == '!!setgame') {
 					if(arguements.length > 1) {
-						bot.setPlayingGame(arguements[1]);
+						bot.setStatus("online", arguements[1]);
 					}
 					else {
 						bot.reply(msg, 'Please enter a valid name');
