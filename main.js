@@ -151,11 +151,15 @@ bot.on("message", (msg) => {
 				//display author's name!
 				bot.reply(msg, '```My creator is Macdja38\n' + 
 						'with warframe integration by tcooc\n' +
-						'using Discord.py by hydrabolt```');	
+						'using Discord.js by hydrabolt```');	
 			}
 			
 			if( arguements[0].toLowerCase() ==  '!!youtube') {
 				bot.reply(msg, 'https://www.youtube.com/user/macdja38');
+			}
+			
+			if( arguements[0].toLowerCase() ==  '!!flarebuilds') {
+				bot.reply(msg, 'https://flareeyes.imgur.com/');
 			}
 			
 			if( arguements[0].toLowerCase() == '!!totheforums' || arguements[0].toLowerCase() == '!!forums'){
