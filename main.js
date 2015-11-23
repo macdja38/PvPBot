@@ -254,7 +254,11 @@ bot.on("message", (msg) => {
 				if(arguements[0].toLowerCase() == '!!setgame') {
 					if(arguements.length > 1) {
 						bot.setStatus("online", arguements[1], function(error){
-							console.log(error);
+							if(error) {
+								console.log(error);
+							} else {
+								console.log("Game set to " + arguements[1])
+							}
 						});
 					}
 					else {
