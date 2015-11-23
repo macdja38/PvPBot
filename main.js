@@ -159,7 +159,7 @@ bot.on("message", (msg) => {
 			}
 			
 			if( arguements[0].toLowerCase() ==  '!!flarebuilds') {
-				bot.reply(msg, 'https://flareeyes.imgur.com/');
+				bot.reply(msg, '<https://flareeyes.imgur.com/>');
 			}
 			
 			if( arguements[0].toLowerCase() == '!!totheforums' || arguements[0].toLowerCase() == '!!forums'){
