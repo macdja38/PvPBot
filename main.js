@@ -253,9 +253,10 @@ bot.on("message", (msg) => {
 				//change the bot's current game
 				if(arguements[0].toLowerCase() == '!!setgame') {
 					if(arguements.length > 1) {
-						bot.setStatus("online", arguements[1], function(error){
-							if(error) {
-								console.log(error);
+						bot.setStatus("online", arguements[1], function(err){
+							if(err) {
+								console.log('error setting game to ' + arguements[1])
+								console.log(err);
 							} else {
 								console.log("Game set to " + arguements[1])
 							}
