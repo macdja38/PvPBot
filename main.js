@@ -167,6 +167,10 @@ bot.on("message", (msg) => {
 				bot.reply(msg, '<https://flareeyes.imgur.com/>');
 			}
 			
+			if( arguements[0].toLowerCase() ==  '!!status') {
+				bot.reply(msg, '<https://deathsnacks.com/wf/status.html/>');
+			}
+			
 			if( arguements[0].toLowerCase() == '!!totheforums' || arguements[0].toLowerCase() == '!!forums'){
 				//link to the forums!
 				bot.reply(msg, 'The forums are probably a better place for this!\n' +
