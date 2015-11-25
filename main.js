@@ -144,7 +144,13 @@ bot.on("message", (msg) => {
 			
 			if( arguements[0].toLowerCase() == '!!kappa'){
 				//display server ip!
-				bot.sendFile(msg.channel, "../KappaRoss.jpg")
+				if (Math.random*() > 0.5) {
+					bot.sendFile(msg.channel, "../KappaRoss.jpg")
+				}
+				else 
+				{
+					bot.sendFile(msg.channel, "../Kappa.png")
+				}
 			}
 			
 			if(arguements[0].toLowerCase() == "!!anu") {
