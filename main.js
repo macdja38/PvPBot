@@ -144,7 +144,7 @@ bot.on("message", (msg) => {
 			
 			if( arguements[0].toLowerCase() == '!!kappa'){
 				//display server ip!
-				if (Math.random*() > 0.5) {
+				if (Math.random() > 0.5) {
 					bot.sendFile(msg.channel, "../KappaRoss.jpg")
 				}
 				else 
