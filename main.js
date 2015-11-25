@@ -142,6 +142,11 @@ bot.on("message", (msg) => {
 				);
 			}
 			
+			if( arguements[0].toLowerCase() == '!!kappa'){
+				//display server ip!
+				bot.sendFile(msg.channel, "../KappaRoss.jpg")
+			}
+			
 			if(arguements[0].toLowerCase() == "!!anu") {
 				comaUserName = '';
 				for (x in msg.mentions[0].username) {
