@@ -252,15 +252,8 @@ bot.on("message", (msg) => {
 			else if(msg.author.id == AuthDetails.adminid || msg.author.id == AuthDetails.adminid2 || msg.author.id == AuthDetails.adminid3) {
 				if(arguements[0].toLowerCase() == '!!setname') {
 					if(arguements.length > 1) {
-						if(arguements[1].toLowerCase() == "bellchar") {
-							bot.setUsername(String.fromCharCode(0000) + String.fromCharCode(0000) + String.fromCharCode(0000));
-							bot.reply(msg, 'Name set to ' + String.fromCharCode(0000));
-						}
-						else
-						{
-							bot.setUsername(repeatChar(32-arguements[1].length,String.fromCharCode(0000)) + arguements[1]);
-							bot.reply(msg, 'Name set to ' + arguements[1]);
-						}
+						bot.setUsername(arguements[1]);
+						bot.reply(msg, 'Name set to ' + arguements[1]);
 						
 					}
 					else {
