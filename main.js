@@ -73,9 +73,10 @@ bot.on("message", (msg) => {
 					' U:' + msg.author.username + ' S:' + msg.content);
 		}
 		
-		if(msg.content.toLowerCase().indexOf("help") > -1 && msg.content[0] == '@') {
-			bot.reply(msg, '@macdja38, @whitehat97, @londamatt, ' + msg.author.username + 
-				' needs help.\n' + 'type !help for a list of commands');
+		if(msg.isMentioned(bot.user) && msg.content.toLowerCase().indexOf("help") > -1) {
+			bot.reply(msg, '<@85257659694993408>, @whitehat97, ' + msg.author.username + 
+				' needs help.\n'
+				+ 'type !!help for a list of commands');
 		}
 		/*
 		if(msg.content.indexOf("Rick Astley - Never Gonna Give You Up") > -1) {
