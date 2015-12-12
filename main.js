@@ -155,12 +155,14 @@ bot.on("message", (msg) => {
 			
 			if(arguements[0].toLowerCase() == "!!anu") {
 				comaUserName = '';
+				comaUserNameCodes = '';
 				for (x in msg.mentions[0].username) {
 					comaUserName += msg.mentions[0].username[x] + ',';
 					comaUserNameCodes += msg.mentions[0].username.charCodeAt(x) + ',';
 					console.log('x: ' + x + 'ID:' + msg.mentions[0].username.charCodeAt(x) + ' Char:' + msg.mentions[0].username[x]);
 				}
-				msg.reply(msg, comaUserName);
+				bot.reply(msg, comaUserName);
+				bot.reply(msg, comaUserNameCodes);
 			}
 					
 			if( arguements[0].toLowerCase() == '!!creator'){
