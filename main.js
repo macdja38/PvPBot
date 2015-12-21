@@ -98,7 +98,7 @@ bot.on("message", (msg) => {
 			} else {
 				cleverBot.prepare(function(){
 					console.log('Sent to Clever:' + msg.content.substr(msg.content.indexOf(' ')+1));
-					cleverbot].write(msg.content.substr(msg.content.indexOf(' ')+1), function (response) {
+					cleverbot.write(msg.content.substr(msg.content.indexOf(' ')+1), function (response) {
 						bot.reply(msg, response.message.replace("Cleverbot", bot.user.username));
 					});
 				});
