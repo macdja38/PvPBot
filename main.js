@@ -9,11 +9,6 @@ var AuthDetails = require("../auth.json");
 var bot = new Discord.Client();
 
 var Cleverbot = require('./lib/cleverbot');
-
-var serverLs = new Array();
-    CleverLs = new Array();
-    cleverLs = new Array();
-var cleverIndex = 0;
     cleverbot = new Cleverbot;
     
 var comaUserName = '';
@@ -97,25 +92,13 @@ bot.on("message", (msg) => {
 		else if(msg.isMentioned(bot.user) && msg.content[0] !== '!') {
 			//bot.sendTyping(msg.channel);
 			console.log('Clever activating.');
-			cleverIndex = serverLs.indexOf(msg.channel.server.id);
-			if(cleverIndex < 0) {
-				console.log("adding server to list")
-				serverLs.push(msg.channel.server.id);
-				CleverLs.push(require('/Discord-Bot/PvPBot-master/lib/cleverbot'));
-				cleverIndex = serverLs.indexOf(msg.channel.server.id);
-				cleverLs.push(new CleverLs[cleverIndex]);
-			}
 			if(msg.content.toLowerCase().indexOf("best")>-1 &&
 				msg.content.toLowerCase().indexOf("server")>-1) {
 				bot.reply(msg, "Probably http://pvpcraft.ca.");
 			} else {
-				console.log("CI:" + cleverIndex);
-				console.log(serverLs[cleverIndex]);
-				console.log(cleverLs[cleverIndex]);
-				console.log(cleverbot);
-				CleverLs[cleverIndex].prepare(function(){
+				cleverBot.prepare(function(){
 					console.log('Sent to Clever:' + msg.content.substr(msg.content.indexOf(' ')+1));
-					cleverLs[cleverIndex].write(msg.content.substr(msg.content.indexOf(' ')+1), function (response) {
+					cleverbot].write(msg.content.substr(msg.content.indexOf(' ')+1), function (response) {
 						bot.reply(msg, response.message.replace("Cleverbot", bot.user.username));
 					});
 				});
