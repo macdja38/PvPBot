@@ -8,7 +8,7 @@ var AuthDetails = require("../auth.json");
 
 var bot = new Discord.Client();
 
-var Cleverbot = require('/Discord-Bot/PvPBot-master/lib/cleverbot');
+var Cleverbot = require('./lib/cleverbot');
 
 var serverLs = new Array();
     CleverLs = new Array();
