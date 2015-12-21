@@ -2,7 +2,7 @@
 {
   "private": true,
   "dependencies": {
-    "discord.js": "hydrabolt/discord.js#master",
+    "discord.js": "hydrabolt/discord.js#indev",
     "request": "^2.65.0",
     "twitter": "^1.2.5",
     "underscore": "^1.8.3",
