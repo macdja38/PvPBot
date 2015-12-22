@@ -232,7 +232,7 @@ bot.on("message", (msg) => {
 			/*
 				locked commands past this point
 			*/
-			else if(msg.author.id == AuthDetails.adminid || msg.author.id == AuthDetails.adminid2 || msg.author.id == AuthDetails.adminid3) {
+			else if(AuthDetails.admins.indexOf(msg.author.id)>-1) {
 				if(arguements[0].toLowerCase() == '!!setname') {
 					if(arguements.length > 1) {
 						bot.setUsername(arguements[1]);
