@@ -28,7 +28,7 @@ bot.on("disconnected", () => {
 bot.on("serverNewMember", (server, user) => {
 	if(server.id == 77176186148499456) {
 		bot.sendMessage(server.members.get("id", "117326514726371335"), "Hop to it, " + user.username + " Just joined " + server.name);
-		setInterval(function(){bot.sendMessage(server.defaultChannel, "Please welcome **" + user.username + "**")},10000);
+		setTimeout(function(){bot.sendMessage(server.defaultChannel, "Please welcome **" + user.username + "**")},10000);
 	}
 	else if(server.id !== "110373943822540800" && server.id !== "88402934194257920") {
 		bot.sendMessage(server.defaultChannel, "Please welcome **" + user.username + "**");
