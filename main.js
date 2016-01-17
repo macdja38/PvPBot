@@ -235,11 +235,13 @@ bot.on("message", (msg) => {
 					bot.reply(msg, 'Your Discord ID is ```' + msg.author.id + '```');
 			}
 			
+			//get users roll
 			else if(arguements[0].toLowerCase() == '!!roles') {
-				for user in msg.mentions {
+				for i in msg.mentions {
+					user = msg.mentions[i];
 					roles = '';
-					for role in server.rolesOf(user) {
-						roles += role.id + ',';
+					for j in server.rolesOf(user) {
+						roles += server.rolesOf(user)[j].id + ',';
 					}
 					bot.reply(msg, '```' + user + 'has' + roles + '```');
 				}
