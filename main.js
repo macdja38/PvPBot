@@ -27,6 +27,7 @@ bot.on("disconnected", () => {
 
 bot.on("serverNewMember", (server, user) => {
 	if(server.id == 77176186148499456) {
+		for 
 		bot.sendMessage(server.members.get("id", "117326514726371335"), "Hop to it, " + user.username + " Just joined " + server.name);
 		bot.sendMessage(server.members.get("id", "117326514726371335"), "```Welcome **" + user.username + "**!```");
 		setTimeout(function(){bot.sendMessage(server.defaultChannel, "Please welcome **" + user.username + "**")},10000);
@@ -232,6 +233,16 @@ bot.on("message", (msg) => {
 			//get users id
 			else if(arguements[0].toLowerCase() == '!!myid') {
 					bot.reply(msg, 'Your Discord ID is ```' + msg.author.id + '```');
+			}
+			
+			else if(arguements[0].toLowerCase() == '!!roles') {
+				for user in msg.mentions {
+					roles = '';
+					for role in server.rolesOf(user) {
+						roles += role.id + ',';
+					}
+					bot.reply(msg, '```' user + 'has' + roles + '```');
+				}
 			}
 			
 			/*
