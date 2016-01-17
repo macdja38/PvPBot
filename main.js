@@ -241,7 +241,7 @@ bot.on("message", (msg) => {
 					for role in server.rolesOf(user) {
 						roles += role.id + ',';
 					}
-					bot.reply(msg, '```' user + 'has' + roles + '```');
+					bot.reply(msg, '```' + user + 'has' + roles + '```');
 				}
 			}
 			
