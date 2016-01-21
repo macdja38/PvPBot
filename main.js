@@ -246,10 +246,10 @@ bot.on("message", (msg) => {
 						continue;
 						
 					}
-					let user = msg.mentions[i],
+					var user = msg.mentions[i],
 					roles = '',
 					userRoles = msg.channel.server.rolesOf(user);
-					for (let j in userRoles) {
+					for (var j in userRoles) {
 						if (!userRoles.hasOwnProperty(j)) {
 							continue;
 							
