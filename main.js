@@ -236,15 +236,29 @@ bot.on("message", (msg) => {
 			
 			//get users roll
 			else if(arguements[0].toLowerCase() == '!!roles') {
-				var i = 0;
-				var j = 0;
-				for (i in msg.mentions) {
-					var user = msg.mentions[i];
-					var roles = '';
-					for (j in msg.channel.server.rolesOf(user)) {
-						roles += msg.channel.server.rolesOf(user)[j].id + ',';
+				if (msg.channel.server === undefined) {
+					return;
+					
+				}
+				
+				for (let i in msg.mentions) {
+					if (!msg.mentions.hasOwnProperty(i)) {
+						continue;
+						
 					}
-					bot.reply(msg, '```' + user + ' has ' + roles + '```');
+					let user = msg.mentions[i],
+					roles = '',
+					userRoles = msg.channel.server.rolesOf(user);
+					for (let j in userRoles) {
+						if (!userRoles.hasOwnProperty(j)) {
+							continue;
+							
+						}
+						roles += userRoles[j].id + ',';
+						
+					}
+					bot.reply(msg, 'cobelcock' + user + ' has ' + roles + 'endcodeblock');
+					}
 				}
 			}
 			
