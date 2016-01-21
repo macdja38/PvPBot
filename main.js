@@ -240,6 +240,7 @@ bot.on("message", (msg) => {
 				var j;
 				//for (i in msg.mentions) {
 					var user = msg.mentions[0];
+					console.log(user);
 					var roles = '';
 					for (j in msg.server.rolesOf(user)) {
 						roles += msg.server.rolesOf(user)[j].id + ',';
