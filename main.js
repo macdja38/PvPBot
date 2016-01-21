@@ -241,7 +241,7 @@ bot.on("message", (msg) => {
 					
 				}
 				
-				for (let i in msg.mentions) {
+				for (var i in msg.mentions) {
 					if (!msg.mentions.hasOwnProperty(i)) {
 						continue;
 						
