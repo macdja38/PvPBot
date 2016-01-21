@@ -239,7 +239,7 @@ bot.on("message", (msg) => {
 				var i;
 				var j;
 				for (i in msg.mentions) {
-					var user = msg.mentions[0];
+					var user = msg.mentions[i];
 					var roles = '';
 					for (j in msg.channel.server.rolesOf(user)) {
 						roles += msg.channel.server.rolesOf(user)[j].id + ',';
