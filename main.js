@@ -236,8 +236,8 @@ bot.on("message", (msg) => {
 			
 			//get users roll
 			else if(arguements[0].toLowerCase() == '!!roles') {
-				var i;
-				var j;
+				var i = 0;
+				var j = 0;
 				for (i in msg.mentions) {
 					var user = msg.mentions[i];
 					var roles = '';
