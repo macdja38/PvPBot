@@ -257,8 +257,7 @@ bot.on("message", (msg) => {
 						roles += userRoles[j].id + ',';
 						
 					}
-					bot.reply(msg, 'cobelcock' + user + ' has ' + roles + 'endcodeblock');
-					}
+					bot.reply(msg, '```' + user + ' has ' + roles + '```');
 				}
 			}
 			
