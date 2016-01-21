@@ -27,8 +27,14 @@ bot.on("disconnected", () => {
 
 bot.on("serverNewMember", (server, user) => {
 	if(server.id == 77176186148499456) {
-		bot.sendMessage(server.members.get("id", "117326514726371335"), "Hop to it, " + user.username + " Just joined " + server.name);
-		bot.sendMessage(server.members.get("id", "117326514726371335"), "```Welcome **" + user.username + "**!```");
+		for(i in server.members) {
+			if("131303825448370177" in server.rolesOf(server.members[i]) {
+				bot.sendMessage(server.members[i], "Hop to it, " + user.username + " Just joined " + server.name);
+				bot.sendMessage(server.members[i], "```Welcome **" + user.username + "**!```");
+			}
+			
+		}
+		
 		setTimeout(function(){bot.sendMessage(server.defaultChannel, "Please welcome **" + user.username + "**")},10000);
 	}
 	else if(server.id !== "110373943822540800" && server.id !== "88402934194257920") {
