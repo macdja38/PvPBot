@@ -238,14 +238,14 @@ bot.on("message", (msg) => {
 			else if(arguements[0].toLowerCase() == '!!roles') {
 				var i;
 				var j;
-				for (i in msg.mentions) {
-					var user = msg.mentions[i];
+				//for (i in msg.mentions) {
+					var user = msg.mentions[0];
 					var roles = '';
 					for (j in msg.server.rolesOf(user)) {
 						roles += msg.server.rolesOf(user)[j].id + ',';
 					}
 					bot.reply(msg, '```' + user + 'has' + roles + '```');
-				}
+				//}
 			}
 			
 			/*
