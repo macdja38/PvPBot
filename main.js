@@ -242,8 +242,8 @@ bot.on("message", (msg) => {
 					var user = msg.mentions[0];
 					console.log(user);
 					var roles = '';
-					for (j in msg.server.rolesOf(user)) {
-						roles += msg.server.rolesOf(user)[j].id + ',';
+					for (j in msg.channel.server.rolesOf(user)) {
+						roles += msg.channel.server.rolesOf(user)[j].id + ',';
 					}
 					bot.reply(msg, '```' + user + 'has' + roles + '```');
 				//}
