@@ -29,7 +29,9 @@ bot.on("serverNewMember", (server, user) => {
 	if(server.id == 77176186148499456) {
 		for(i in server.members) {
 			if(server.rolesOf(server.members[i]) != null) {
+				console.log(server.members[i] + " has a roll")
 				if("131303825448370177" in server.rolesOf(server.members[i])) {
+					console.log("We told " + server.members[i] + "to hop to it.")
 					bot.sendMessage(server.members[i], "Hop to it, " + user.username + " Just joined " + server.name);
 					bot.sendMessage(server.members[i], "```Welcome **" + user.username + "**!```");
 				}
