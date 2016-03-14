@@ -8,9 +8,15 @@ var AuthDetails = require("../auth.json");
 
 var bot = new Discord.Client();
 
+var Config = require("./lib/config");
+var config = new Config("config");
+
 var Cleverbot = require('./lib/cleverbot');
     cleverbot = new Cleverbot;
-    
+
+StateGrabber = require("./lib/worldState.js");
+worldState = new StateGrabber;
+
 var comaUserName = '';
 var comaUserNameCodes = '';
 
@@ -19,18 +25,18 @@ bot.on("ready", () => {
 });
 
 bot.on("disconnected", () => {
-
 	console.log("Disconnected!");
 	process.exit(1); //exit node.js with an error
 	
 });
 
 bot.on("serverNewMember", (server, user) => {
-	if(server.id == 77176186148499456) {
+    console.log("Join-Event s:" + server.name + " u:" + user.name);
+    if(config.get("announceJoin").indexOf(server.id)<0) return;
+	if(server.id == "77176186148499456") {
 		for(i in server.members) {
 			if(server.rolesOf(server.members[i]) != null) {
-				console.log(server.members[i] + " has a roll")
-				if("131303825448370177" in server.rolesOf(server.members[i])) {
+				if(server.rolesOf(server.rolesOf(server.members[i])).indexOf("131303825448370177")>-1) {
 					console.log("We told " + server.members[i] + "to hop to it.")
 					bot.sendMessage(server.members[i], "Hop to it, " + user.username + " Just joined " + server.name);
 					bot.sendMessage(server.members[i], "```Welcome **" + user.username + "**!```");
@@ -71,246 +77,239 @@ bot.on("userUpdate", (newUser, oldUser) => {
 	}
 });
 
-bot.on("message", (msg) => {
-	if(msg.author.id !== bot.user.id) {
-		if(msg.channel instanceof Discord.PMChannel) {
-			console.log('PM:' + msg.author.username + ' S:' + msg.content);
+bot.on("message", (m) => {
+	if(m.author.id == bot.user.id) return;
+    if(m.channel instanceof Discord.PMChannel) {
+		console.log('PM:' + m.author.username + ' S:' + m.content);
+	}
+	else
+	{
+		console.log('S:' + m.channel.server.name + ' C:' + m.channel.name +
+				' U:' + m.author.username + ' S:' + m.content);
+	}
+
+	if(m.isMentioned(bot.user) && m.content.toLowerCase().indexOf("help") > -1) {
+		bot.reply(m, '<@85257659694993408>, @whitehat97, ' + m.author.username +
+			' needs help.\n'
+			+ 'type !!help for a list of commands');
+	}
+	/*
+	if(m.content.indexOf("Rick Astley - Never Gonna Give You Up") > -1) {
+		bot.sendMessage(m.channel, "@QmusicBot n");
+	}
+	*/
+	if(m.content.indexOf(":p") > -1) {
+		if(m.channel.id !== "110373943822540800") {
+			bot.reply(m, ':P');
+		}
+	}
+
+	else if(m.content.toLowerCase().indexOf("how do i build a tardis") > -1 && m.content[0] !== '!'){
+		//display link to tardis site!
+		bot.reply(m, 'http\://eccentricdevotion.github.io/TARDIS/creating-a-tardis.html');
+	}
+
+	else if(m.isMentioned(bot.user) && m.content[0] !== '!') {
+		//bot.sendTyping(m.channel);
+		console.log('Clever activating.');
+		if(m.content.toLowerCase().indexOf("best")>-1 &&
+			m.content.toLowerCase().indexOf("server")>-1) {
+			bot.reply(m, "Probably http://pvpcraft.ca.");
+		} else {
+			Cleverbot.prepare(function(){
+				console.log('Sent to Clever:' + m.content.substr(m.content.indexOf(' ')+1));
+				cleverbot.write(m.content.substr(m.content.indexOf(' ')+1), function (response) {
+					bot.reply(m, response.message.replace("Cleverbot", bot.user.username));
+				});
+			});
+		}
+	}
+
+	//check if user sent command
+	if(m.content.indexOf('!!') !== 0) return;
+
+    //split command into sections based on spaces
+	var arguements = m.content.split(" ");
+	//!help
+	if( arguements[0].toLowerCase() == '!!help' || arguements[0].toLowerCase() == '!!address'){
+		//display server ip!
+		bot.reply(m, 'available commands:\n' +
+		'```!!help: get a list of commands\n' +
+		'!!creator: who made me?\n' +
+		'!!unflip: unflip flipped tables\n' +
+		'!!tardistutorial: get a link to the tardis tutorial\n' +
+		'!!youtube: get my master\'s youtube\n' +
+		'!!anu: prints comma seporated list of username chars\n' +
+		'!!flarebuilds: links to flare_eyes warframe builds.\n' +
+		'!!totheforums: link to the forums```'
+		);
+	}
+		if( arguements[0].toLowerCase() == '!!kappa'){
+		//display server ip!
+		if (Math.random() > 0.5) {
+			bot.sendFile(m.channel, "../KappaRoss.jpg")
 		}
 		else
 		{
-			console.log('S:' + msg.channel.server.name + ' C:' + msg.channel.name + 
-					' U:' + msg.author.username + ' S:' + msg.content);
+			bot.sendFile(m.channel, "../Kappa.png")
 		}
-		
-		if(msg.isMentioned(bot.user) && msg.content.toLowerCase().indexOf("help") > -1) {
-			bot.reply(msg, '<@85257659694993408>, @whitehat97, ' + msg.author.username + 
-				' needs help.\n'
-				+ 'type !!help for a list of commands');
+	}
+	if(arguements[0].toLowerCase() == "!!anu") {
+		comaUserName = '';
+		comaUserNameCodes = '';
+		for (x in m.mentions[0].username) {
+			comaUserName += m.mentions[0].username[x] + ',';
+			comaUserNameCodes += m.mentions[0].username.charCodeAt(x) + ',';
+			console.log('x: ' + x + 'ID:' + m.mentions[0].username.charCodeAt(x) + ' Char:' + m.mentions[0].username[x]);
 		}
-		/*
-		if(msg.content.indexOf("Rick Astley - Never Gonna Give You Up") > -1) {
-			bot.sendMessage(msg.channel, "@QmusicBot n");
-		}
-		*/
-		if(msg.content.indexOf(":p") > -1) {
-			if(msg.channel.id !== "110373943822540800") {
-				bot.reply(msg, ':P');
-			}
-		}
-		
-		else if(msg.content.toLowerCase().indexOf("how do i build a tardis") > -1 && msg.content[0] !== '!'){
-			//display link to tardis site!
-			bot.reply(msg, 'http\://eccentricdevotion.github.io/TARDIS/creating-a-tardis.html');
-		}
-		
-		else if(msg.isMentioned(bot.user) && msg.content[0] !== '!') {
-			//bot.sendTyping(msg.channel);
-			console.log('Clever activating.');
-			if(msg.content.toLowerCase().indexOf("best")>-1 &&
-				msg.content.toLowerCase().indexOf("server")>-1) {
-				bot.reply(msg, "Probably http://pvpcraft.ca.");
-			} else {
-				Cleverbot.prepare(function(){
-					console.log('Sent to Clever:' + msg.content.substr(msg.content.indexOf(' ')+1));
-					cleverbot.write(msg.content.substr(msg.content.indexOf(' ')+1), function (response) {
-						bot.reply(msg, response.message.replace("Cleverbot", bot.user.username));
-					});
+		bot.reply(m, comaUserName);
+		bot.reply(m, comaUserNameCodes);
+	}
+	if( arguements[0].toLowerCase() == '!!creator'){
+		//display author's name!
+		bot.reply(m, '```My creator is Macdja38\n' +
+				'with warframe integration by tcooc\n' +
+				'using Discord.js by hydrabolt```');
+	}
+	if( arguements[0].toLowerCase() ==  '!!youtube') {
+		bot.reply(m, 'https://www.youtube.com/user/macdja38');
+	}
+	if( arguements[0].toLowerCase() ==  '!!flarebuilds') {
+		bot.reply(m, '<https://flareeyes.imgur.com/>');
+	}
+	if( arguements[0].toLowerCase() ==  '!!status') {
+		bot.reply(m, '<https://deathsnacks.com/wf/status.html/>');
+	}
+	if( arguements[0].toLowerCase() == '!!totheforums' || arguements[0].toLowerCase() == '!!forums'){
+		//link to the forums!
+		bot.reply(m, 'The forums are probably a better place for this!\n' +
+			'http://pvpcraft.ca/forums'
+		);
+	}
+	if( arguements[0] == '!!tardistutorial'.toLowerCase() || arguements[0].toLowerCase() == '!!tardistut'){
+		//display link to tardis site!
+		bot.reply(m, 'http://eccentricdevotion.github.io/TARDIS/creating-a-tardis.html');
+	}
+
+	//!ip or !address commands
+	if( arguements[0].toLowerCase() == '!!ip' || arguements[0].toLowerCase() == '!!address'){
+		//display server ip!
+		bot.reply(m, 'http://pvpcraft.ca');
+	}
+
+	//!unflip command
+	if( arguements[0].toLowerCase() == '!!unflip') {
+        	bot.sendMessage(m.channel, '\┬\─\┬ \ノ\( \^\_\^\ノ\)');
+	}
+
+	//!invite command - broken
+	else if(arguements[0].toLowerCase() == '!!invite') {
+		if(m.content.indexOf('discord.gg') > -1) {
+			if(m.channel instanceof Discord.PMChannel) {
+				bot.joinServer(arguements[1], function(err, server) {
+					if(err) {
+						bot.reply(m, 'Something went wrong, please contact admins');
+					} else {
+						bot.reply(m, 'Successfully joined ' + server);
+					}
 				});
 			}
+			else {
+				bot.reply(m, 'Please *PM* me the invite');
+			}
 		}
-		
-		//check if user sent command
-		if(msg.content.indexOf('!!') > -1 && msg.content.indexOf('!!') < 2) {
-			
-			//split command into sections based on spaces
-			var arguements = msg.content.split(" ");
-			
-			//!help
-			if( arguements[0].toLowerCase() == '!!help' || arguements[0].toLowerCase() == '!!address'){
-				//display server ip!
-				bot.reply(msg, 'available commands:\n' +
-				'```!!help: get a list of commands\n' +
-				'!!creator: who made me?\n' +
-				'!!unflip: unflip flipped tables\n' +
-				'!!tardistutorial: get a link to the tardis tutorial\n' +
-				'!!youtube: get my master\'s youtube\n' +
-				'!!anu: prints comma seporated list of username chars\n' +
-				'!!flarebuilds: links to flare_eyes warframe builds.\n' +
-				'!!totheforums: link to the forums```'
-				);
+		else {
+			bot.reply(m, 'Please provide an invite link');
+		}
+	}
+
+	/*
+	//!ping
+	else if(arguements[0] == '!ping') {
+		if(m.content.indexOf('.') > -1) {
+			bot.reply(m, ping(arguements[1] + " people online."))
+		}
+		else {
+			bot.reply(m, 'Please provide a valid url');
+		}
+	}
+	*/
+
+	//get users id
+	else if(arguements[0].toLowerCase() == '!!myid') {
+			bot.reply(m, 'Your Discord ID is ```' + m.author.id + '```');
+	}
+
+	//get users roll
+	else if(arguements[0].toLowerCase() == '!!roles') {
+		if (m.channel.server === undefined) {
+			return;
 			}
-			
-			if( arguements[0].toLowerCase() == '!!kappa'){
-				//display server ip!
-				if (Math.random() > 0.5) {
-					bot.sendFile(msg.channel, "../KappaRoss.jpg")
+			for (var i in m.mentions) {
+			if (!m.mentions.hasOwnProperty(i)) {
+				continue;
+			}
+			var user = m.mentions[i],
+			roles = '',
+			userRoles = m.channel.server.rolesOf(user);
+			for (var j in userRoles) {
+				if (!userRoles.hasOwnProperty(j)) {
+					continue;
 				}
-				else 
-				{
-					bot.sendFile(msg.channel, "../Kappa.png")
+				roles += userRoles[j].id + ',';
 				}
+			bot.reply(m, '```' + user + ' has ' + roles + '```');
+		}
+	}
+
+    else if(arguements[0].toLowerCase() == '!!serverinfo') {
+        bot.reply(m,
+            "```fix\n" +
+            "Name:" + m.channel.server.name + "\n" +
+            "id:" + m.channel.server.id + "\n" +
+            "owner:" + m.channel.server.owner.name.replace(/`/g, String.fromCharCode(0) + "`") + "\n" +
+            "members:" + m.channel.server.members.length + "\n" +
+            "iconURL:" + m.channel.server.iconURL + "\n" +
+            "```"
+        );
+    }
+
+	/*
+		locked commands past this point
+	*/
+	if(AuthDetails.admins.indexOf(m.author.id)>-1) return;
+    if(arguements[0].toLowerCase() == '!!setname') {
+		if(arguements.length > 1) {
+			bot.setUsername(arguements[1]);
+			bot.reply(m, 'Name set to ' + arguements[1]);
 			}
-			
-			if(arguements[0].toLowerCase() == "!!anu") {
-				comaUserName = '';
-				comaUserNameCodes = '';
-				for (x in msg.mentions[0].username) {
-					comaUserName += msg.mentions[0].username[x] + ',';
-					comaUserNameCodes += msg.mentions[0].username.charCodeAt(x) + ',';
-					console.log('x: ' + x + 'ID:' + msg.mentions[0].username.charCodeAt(x) + ' Char:' + msg.mentions[0].username[x]);
+		else {
+			bot.reply(m, 'Please enter a valid name');
+		}
+	}
+
+	//change the bot's current game
+	if(arguements[0].toLowerCase() == '!!setgame') {
+		if(arguements.length > 1) {
+			bot.setStatus("online", arguements[1], function(err){
+				if(err) {
+					console.log('error setting game to ' + arguements[1])
+					console.log(err);
+				} else {
+					console.log("Game set to " + arguements[1])
 				}
-				bot.reply(msg, comaUserName);
-				bot.reply(msg, comaUserNameCodes);
-			}
-					
-			if( arguements[0].toLowerCase() == '!!creator'){
-				//display author's name!
-				bot.reply(msg, '```My creator is Macdja38\n' + 
-						'with warframe integration by tcooc\n' +
-						'using Discord.js by hydrabolt```');	
-			}
-			
-			if( arguements[0].toLowerCase() ==  '!!youtube') {
-				bot.reply(msg, 'https://www.youtube.com/user/macdja38');
-			}
-			
-			if( arguements[0].toLowerCase() ==  '!!flarebuilds') {
-				bot.reply(msg, '<https://flareeyes.imgur.com/>');
-			}
-			
-			if( arguements[0].toLowerCase() ==  '!!status') {
-				bot.reply(msg, '<https://deathsnacks.com/wf/status.html/>');
-			}
-			
-			if( arguements[0].toLowerCase() == '!!totheforums' || arguements[0].toLowerCase() == '!!forums'){
-				//link to the forums!
-				bot.reply(msg, 'The forums are probably a better place for this!\n' +
-						'http://pvpcraft.ca/forums'	
-				);	
-			}
-			
-			if( arguements[0] == '!!tardistutorial'.toLowerCase() || arguements[0].toLowerCase() == '!!tardistut'){
-				//display link to tardis site!
-				bot.reply(msg, 'http://eccentricdevotion.github.io/TARDIS/creating-a-tardis.html');
-			}
-			
-			//!ip or !address commands
-			if( arguements[0].toLowerCase() == '!!ip' || arguements[0].toLowerCase() == '!!address'){
-				//display server ip!
-				bot.reply(msg, 'http://pvpcraft.ca');
-			}
-			
-			//!unflip command
-			if( arguements[0].toLowerCase() == '!!unflip') {
-		        	bot.sendMessage(msg.channel, '\┬\─\┬ \ノ\( \^\_\^\ノ\)');
-			}
-			
-			//!invite command - broken
-			else if(arguements[0].toLowerCase() == '!!invite') {
-				if(msg.content.indexOf('discord.gg') > -1) {
-					if(msg.channel instanceof Discord.PMChannel) {
-						bot.joinServer(arguements[1], function(err, server) {
-							if(err) {
-								bot.reply(msg, 'Something went wrong, please contact admins');
-							} else {
-								bot.reply(msg, 'Successfully joined ' + server);
-							}
-						});
-					}
-					else {
-						bot.reply(msg, 'Please *PM* me the invite');
-					}
-				}
-				else {
-					bot.reply(msg, 'Please provide an invite link');
-				}
-			}
-			
-			/*
-			//!ping
-			else if(arguements[0] == '!ping') {
-				if(msg.content.indexOf('.') > -1) {
-					bot.reply(msg, ping(arguements[1] + " people online."))
-				}
-				else {
-					bot.reply(msg, 'Please provide a valid url');
-				}
-			}
-			*/
-			
-			//get users id
-			else if(arguements[0].toLowerCase() == '!!myid') {
-					bot.reply(msg, 'Your Discord ID is ```' + msg.author.id + '```');
-			}
-			
-			//get users roll
-			else if(arguements[0].toLowerCase() == '!!roles') {
-				if (msg.channel.server === undefined) {
-					return;
-					
-				}
-				
-				for (var i in msg.mentions) {
-					if (!msg.mentions.hasOwnProperty(i)) {
-						continue;
-						
-					}
-					var user = msg.mentions[i],
-					roles = '',
-					userRoles = msg.channel.server.rolesOf(user);
-					for (var j in userRoles) {
-						if (!userRoles.hasOwnProperty(j)) {
-							continue;
-							
-						}
-						roles += userRoles[j].id + ',';
-						
-					}
-					bot.reply(msg, '```' + user + ' has ' + roles + '```');
-				}
-			}
-			
-			/*
-				locked commands past this point
-			*/
-			else if(AuthDetails.admins.indexOf(msg.author.id)>-1) {
-				if(arguements[0].toLowerCase() == '!!setname') {
-					if(arguements.length > 1) {
-						bot.setUsername(arguements[1]);
-						bot.reply(msg, 'Name set to ' + arguements[1]);
-						
-					}
-					else {
-						bot.reply(msg, 'Please enter a valid name');
-					}
-				}
-				
-				//change the bot's current game
-				if(arguements[0].toLowerCase() == '!!setgame') {
-					if(arguements.length > 1) {
-						bot.setStatus("online", arguements[1], function(err){
-							if(err) {
-								console.log('error setting game to ' + arguements[1])
-								console.log(err);
-							} else {
-								console.log("Game set to " + arguements[1])
-							}
-						});
-					}
-					else {
-						bot.reply(msg, 'Please enter a valid name');
-					}
-				}
-				
-				if(arguements[0].toLowerCase() == '!!newpromotedcall') {
-					if(arguements.length > 1) {
-						bot.createServer(String.fromCharCode(0007) + arguements[1], "us-east");
-					}
-					else {
-						bot.reply(msg, 'Please enter a valid name');
-					}
-				}
-			}
+			});
+		}
+		else {
+			bot.reply(m, 'Please enter a valid name');
+		}
+	}
+	if(arguements[0].toLowerCase() == '!!newpromotedcall') {
+	    if(arguements.length > 1) {
+			bot.createServer(String.fromCharCode(0007) + arguements[1], "us-east");
+		}
+		else {
+			bot.reply(m, 'Please enter a valid name');
 		}
 	}
 });
