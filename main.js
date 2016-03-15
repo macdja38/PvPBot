@@ -8,7 +8,7 @@ var AuthDetails = require("../auth.json");
 
 var bot = new Discord.Client();
 
-var colors = require('colors/safe');
+var colors = require('colors');
 
 var Config = require("./lib/config");
 var config = new Config("config");
@@ -82,11 +82,11 @@ bot.on("message", (m) => {
     if (m.author.id == bot.user.id) return;
     if (m.channel instanceof Discord.PMChannel) {
         //console.log();
-        console.log(colors.red('PM:' + m.author.username + ' S:' + m.content));
+        console.log(('PM:' + m.author.username + ' S:' + m.content).rainbow);
     }
     else {
-        console.log('S:' + m.channel.server.name + ' C:' + m.channel.name +
-            ' U:' + m.author.username + ' S:' + m.content);
+        console.log('S:'.cyan + m.channel.server.name + ' C:'.cyan + m.channel.name +
+            ' U:'.cyan + m.author.username + ' S:'.cyan + m.content);
     }
 
     if (m.isMentioned(bot.user) && m.content.toLowerCase().indexOf("help") > -1) {
@@ -269,11 +269,27 @@ bot.on("message", (m) => {
             "```"
         );
     }
+    /** Warframe commands past this point
+     * Warframe Commands that access the worldstate api will be in the next section.
+     */
+
+    else if (arguements[0].toLowerCase() == '!!deals' || arguements[0].toLowerCase() == '!!darvo') {
+        console.log("T1".red);
+        worldState.get(function (state) {
+            bot.sendMessage(m.channel, "```ruby\n" + state.DailyDeals[0].StoreItem + "\n```");
+        });
+    }
+
+
+
+
+
 
     /*
      locked commands past this point
      */
-    if (AuthDetails.admins.indexOf(m.author.id) > -1) return;
+    if (AuthDetails.admins.indexOf(m.author.id) < -1) return;
+    console.log("Admin command:".red, m.content);
     if (arguements[0].toLowerCase() == '!!setname') {
         if (arguements.length > 1) {
             bot.setUsername(arguements[1]);
@@ -289,10 +305,10 @@ bot.on("message", (m) => {
         if (arguements.length > 1) {
             bot.setStatus("online", arguements[1], function (err) {
                 if (err) {
-                    console.log('error setting game to ' + arguements[1]);
-                    console.log(err);
+                    console.log(('error setting game to ' + arguements[1]).red);
+                    console.error(err);
                 } else {
-                    console.log("Game set to " + arguements[1])
+                    console.log("Game set to " + arguements[1].green)
                 }
             });
         }
@@ -311,8 +327,8 @@ bot.on("message", (m) => {
 });
 
 function error(e) {
-    console.log("FAILED DURING TEST");
-    console.log(e.stack);
+    console.error("FAILED DURING TEST");
+    console.error(e.stack);
     process.exit(1);
 }
 
