@@ -8,6 +8,8 @@ var AuthDetails = require("../auth.json");
 
 var bot = new Discord.Client();
 
+var colors = require('colors');
+
 var Config = require("./lib/config");
 var config = new Config("config");
 
@@ -79,7 +81,8 @@ bot.on("userUpdate", (newUser, oldUser) => {
 bot.on("message", (m) => {
     if (m.author.id == bot.user.id) return;
     if (m.channel instanceof Discord.PMChannel) {
-        console.log('PM:' + m.author.username + ' S:' + m.content);
+        //console.log();
+        console.log(colors.red('PM:' + m.author.username + ' S:' + m.content));
     }
     else {
         console.log('S:' + m.channel.server.name + ' C:' + m.channel.name +
@@ -192,7 +195,7 @@ bot.on("message", (m) => {
 
     //!unflip command
     if (arguements[0].toLowerCase() == '!!unflip') {
-        bot.sendMessage(m.channel, '\┬\─\┬ \ノ\( \^\_\^\ノ\)');
+        bot.sendMessage(m.channel, '┬─┬ ノ\( \^\_\^ノ\)');
     }
 
     //!invite command - broken
