@@ -27,7 +27,6 @@ bot.on("ready", () => {
 bot.on("disconnected", () => {
 	console.log("Disconnected!");
 	process.exit(1); //exit node.js with an error
-	
 });
 
 bot.on("serverNewMember", (server, user) => {
@@ -35,9 +34,9 @@ bot.on("serverNewMember", (server, user) => {
     if(config.get("announceJoin").indexOf(server.id)<0) return;
 	if(server.id == "77176186148499456") {
         var welcomers = server.usersWithRole("131303825448370177");
-		for(i in welcomers) {
+		for(var i in welcomers) {
             if(welcomers[i].status == "online") {
-                console.log("We told " + welcomers[i].username + "to hop to it.")
+                console.log("We told " + welcomers[i].username + "to hop to it.");
                 bot.sendMessage(welcomers[i], "Hop to it, " + user.username + " Just joined " + server.name);
                 bot.sendMessage(welcomers[i], "```Welcome **" + user.username + "**!```");
             }
@@ -62,8 +61,8 @@ bot.on("userUpdate", (newUser, oldUser) => {
 	if(newUser.username !== oldUser.username && newUser.id !== bot.user.id) {
 		console.log("oldUser" + oldUser.username + " ID " + oldUser.id);
 		console.log("newUser" + newUser.username + " ID " + newUser.id);
-		for (server in bot.servers) {
-			for (member in bot.servers[server].members) {
+		for (var server in bot.servers) {
+			for (var member in bot.servers[server].members) {
 				if(oldUser.id == bot.servers[server].members[member].id &&
 					bot.servers[server].id !== "110373943822540800" && 
 					bot.servers[server].id !== "88402934194257920"){
@@ -155,7 +154,7 @@ bot.on("message", (m) => {
 	if(arguements[0].toLowerCase() == "!!anu") {
 		comaUserName = '';
 		comaUserNameCodes = '';
-		for (x in m.mentions[0].username) {
+		for (var x in m.mentions[0].username) {
 			comaUserName += m.mentions[0].username[x] + ',';
 			comaUserNameCodes += m.mentions[0].username.charCodeAt(x) + ',';
 			console.log('x: ' + x + 'ID:' + m.mentions[0].username.charCodeAt(x) + ' Char:' + m.mentions[0].username[x]);
@@ -176,7 +175,7 @@ bot.on("message", (m) => {
 		bot.reply(m, '<https://flareeyes.imgur.com/>');
 	}
 	if( arguements[0].toLowerCase() ==  '!!status') {
-		bot.reply(m, '<https://deathsnacks.com/wf/status.html/>');
+		bot.reply(m, "<https://deathsnacks.com/wf/status.html/>");
 	}
 	if( arguements[0].toLowerCase() == '!!totheforums' || arguements[0].toLowerCase() == '!!forums'){
 		//link to the forums!
@@ -291,7 +290,7 @@ bot.on("message", (m) => {
 		if(arguements.length > 1) {
 			bot.setStatus("online", arguements[1], function(err){
 				if(err) {
-					console.log('error setting game to ' + arguements[1])
+					console.log('error setting game to ' + arguements[1]);
 					console.log(err);
 				} else {
 					console.log("Game set to " + arguements[1])
@@ -304,7 +303,7 @@ bot.on("message", (m) => {
 	}
 	if(arguements[0].toLowerCase() == '!!newpromotedcall') {
 	    if(arguements.length > 1) {
-			bot.createServer(String.fromCharCode(0007) + arguements[1], "us-east");
+			bot.createServer(String.fromCharCode(7) + arguements[1], "us-east");
 		}
 		else {
 			bot.reply(m, 'Please enter a valid name');
@@ -334,10 +333,11 @@ function nothing() {
 
 bot.login(AuthDetails.email, AuthDetails.password);
 
-function repeatChar(count, ch) {
+/*function repeatChar(count, ch) {
     var txt = "";
     for (var i = 0; i < count; i++) {
         txt += ch;
     }
     return txt;
 }
+*/
