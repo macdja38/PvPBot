@@ -34,16 +34,14 @@ bot.on("serverNewMember", (server, user) => {
     console.log("Join-Event s:" + server.name + " u:" + user.name);
     if(config.get("announceJoin").indexOf(server.id)<0) return;
 	if(server.id == "77176186148499456") {
-		for(i in server.members) {
-			if(server.rolesOf(server.members[i]) != null) {
-				if(server.rolesOf(server.rolesOf(server.members[i])).indexOf("131303825448370177")>-1) {
-					console.log("We told " + server.members[i] + "to hop to it.")
-					bot.sendMessage(server.members[i], "Hop to it, " + user.username + " Just joined " + server.name);
-					bot.sendMessage(server.members[i], "```Welcome **" + user.username + "**!```");
-				}
-			}
-		}
-		
+        var welcomers = server.usersWithRole("131303825448370177");
+		for(i in welcomers) {
+            if(welcomers[i].status == "online") {
+                console.log("We told " + welcomers[i].username + "to hop to it.")
+                bot.sendMessage(welcomers[i], "Hop to it, " + user.username + " Just joined " + server.name);
+                bot.sendMessage(welcomers[i], "```Welcome **" + user.username + "**!```");
+            }
+        }
 		setTimeout(function(){bot.sendMessage(server.defaultChannel, "Please welcome **" + user.username + "**")},10000);
 	}
 	else if(server.id !== "110373943822540800" && server.id !== "88402934194257920") {
