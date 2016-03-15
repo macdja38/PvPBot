@@ -274,7 +274,6 @@ bot.on("message", (m) => {
      */
 
     else if (arguements[0].toLowerCase() == '!!deals' || arguements[0].toLowerCase() == '!!darvo') {
-        console.log("T1".red);
         worldState.get(function (state) {
             bot.sendMessage(m.channel, "```ruby\n" + state.DailyDeals[0].StoreItem + "\n```");
         });
