@@ -8,7 +8,7 @@ var AuthDetails = require("../auth.json");
 
 var bot = new Discord.Client();
 
-var colors = require('colors');
+var colors = require('colors/safe');
 
 var Config = require("./lib/config");
 var config = new Config("config");

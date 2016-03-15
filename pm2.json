@@ -2,7 +2,8 @@
   "apps": [
     {
       "name": "PvPCraft",
-      "script": "main.js"
+      "script": "main.js",
+      "args": "--color"
     }
   ]
 }
