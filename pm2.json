@@ -1,6 +1,8 @@
 {
-  "apps" : [{
-    "name": "PvPCraft",
-    "script": "main.js"
-  }]
+  "apps": [
+    {
+      "name": "PvPCraft",
+      "script": "main.js"
+    }
+  ]
 }

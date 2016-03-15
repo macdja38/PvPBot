@@ -4,12 +4,21 @@
   "permissionTiers": [
     {
       "numericImportance": 1,
-      "members": ["66237334693085184", "131404567895080960"]
+      "members": [
+        "66237334693085184",
+        "131404567895080960"
+      ]
     },
     {
       "numericImportance": 2,
-      "members": ["98295630480314368", "Dysnomia Commander"]
+      "members": [
+        "98295630480314368",
+        "Dysnomia Commander"
+      ]
     }
   ],
-  "announceJoin": ["98295630480314368", "77176186148499456"]
+  "announceJoin": [
+    "98295630480314368",
+    "77176186148499456"
+  ]
 }
