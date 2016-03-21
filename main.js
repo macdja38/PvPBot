@@ -78,6 +78,35 @@ bot.on("userUpdate", (newUser, oldUser) => {
     }
 });
 
+bot.on("presence", (oldUser, newUser) => {
+    if(newUser.game == oldUser.game) return;
+    if(newUser.game == null) return;
+    var tracking = config.get("gameTrack");
+    for(var track of tracking) {
+        for (server of bot.servers) {
+            if (track.server == server.id) {
+                for(var user of server.members){
+                    if(user.id == newUser.id) {
+                        for(role of server.rolesOfUser(newUser)) {
+                            if(track.roles.indexOf(role.name)>-1) {
+                                if (oldUser.game !== null) {
+                                    console.log(colors.red(oldUser.game.name));
+                                }
+                                console.log(colors.blue(newUser.game.name));
+                                bot.sendMessage(server.channels.getAll("id", track.announce)[0], "**" + newUser.username + "** is now playing **" + newUser.game.name + "**", (error) => {
+                                    if(error) {
+                                        console.log(error);
+                                    }
+                                });
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+});
+
 bot.on("message", (m) => {
     if (m.author.id == bot.user.id) return;
     if (m.channel instanceof Discord.PMChannel) {
@@ -131,12 +160,12 @@ bot.on("message", (m) => {
     if (arguements[0].toLowerCase() == '!!help' || arguements[0].toLowerCase() == '!!address') {
         //display server ip!
         bot.reply(m, 'available commands:\n' +
-            '```!!help: get a list of commands\n' +
+            '```fix\n!!help: get a list of commands\n' +
             '!!creator: who made me?\n' +
             '!!unflip: unflip flipped tables\n' +
             '!!tardistutorial: get a link to the tardis tutorial\n' +
             '!!youtube: get my master\'s youtube\n' +
-            '!!anu: prints comma seporated list of username chars\n' +
+            '!!anu \<mention\>: prints comma seporated list of username chars\n' +
             '!!flarebuilds: links to flare_eyes warframe builds.\n' +
             '!!totheforums: link to the forums```'
         );
@@ -258,7 +287,19 @@ bot.on("message", (m) => {
         }
     }
 
-    else if (arguements[0].toLowerCase() == '!!serverinfo') {
+    else if (arguements[0].toLowerCase() == '!!serverinfo' || arguments[0].toLowerCase() == '!!server') {
+        bot.reply(m,
+            "```fix\n" +
+            "Name:" + m.channel.server.name + "\n" +
+            "id:" + m.channel.server.id + "\n" +
+            "owner:" + m.channel.server.owner.name.replace(/`/g, String.fromCharCode(0) + "`") + "\n" +
+            "members:" + m.channel.server.members.length + "\n" +
+            "iconURL:" + m.channel.server.iconURL + "\n" +
+            "```"
+        );
+    }
+
+    else if (arguements[0].toLowerCase() == '!!userinfo' || arguments[0].toLowerCase() == '!!user') {
         bot.reply(m,
             "```fix\n" +
             "Name:" + m.channel.server.name + "\n" +
