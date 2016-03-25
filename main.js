@@ -80,6 +80,7 @@ bot.on("userUpdate", (newUser, oldUser) => {
 
 bot.on("presence", (oldUser, newUser) => {
     if(newUser.game == oldUser.game) return;
+    if(oldUser.status == "idle" || oldUser.status == "offline") return;
     if(newUser.game == null) return;
     var tracking = config.get("gameTrack");
     for(var track of tracking) {
