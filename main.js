@@ -45,7 +45,7 @@ bot.on("serverNewMember", (server, user) => {
         }
         setTimeout(function () {
             bot.sendMessage(server.defaultChannel, "Please welcome **" + user.username + "**")
-        }, 10000);
+        }, 20000);
     }
     else if (server.id !== "110373943822540800" && server.id !== "88402934194257920") {
         bot.sendMessage(server.defaultChannel, "Please welcome **" + user.username + "**");
