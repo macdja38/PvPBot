@@ -45,7 +45,7 @@ bot.on("serverNewMember", (server, user) => {
         }
         setTimeout(function () {
             bot.sendMessage(server.defaultChannel, "Welcome **" + user.username + "** to the Warframe Discord! " +
-            "Please check out #about-this-server and <http://discord.info> for the rules, "+
+            "Please check out <#83603071170510848> and <http://discord.info> for the rules, "+
             "and don't forget to have fun!")
         }, 20000);
     }
