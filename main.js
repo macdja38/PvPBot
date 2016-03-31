@@ -44,7 +44,9 @@ bot.on("serverNewMember", (server, user) => {
             }
         }
         setTimeout(function () {
-            bot.sendMessage(server.defaultChannel, "Please welcome **" + user.username + "**")
+            bot.sendMessage(server.defaultChannel, "Welcome **" + user.username + "** to the Warframe Discord! " +
+            "Please check out #about-this-server and <http://discord.info> for the rules, "+
+            "and don't forget to have fun!")
         }, 20000);
     }
     else if (server.id !== "110373943822540800" && server.id !== "88402934194257920") {
