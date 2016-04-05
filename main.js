@@ -159,6 +159,8 @@ bot.on("message", (m) => {
 
     //split command into sections based on spaces
     var arguements = m.content.split(" ");
+
+    if(typeof(arguments[0]) != "string") return;
     //!help
     if (arguements[0].toLowerCase() == '!!help' || arguements[0].toLowerCase() == '!!address') {
         //display server ip!
