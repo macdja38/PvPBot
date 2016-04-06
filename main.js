@@ -127,12 +127,6 @@ bot.on("message", (m) => {
             + 'type !!help for a list of commands');
     }
 
-    if (m.content.indexOf(":p") > -1) {
-        if (m.channel.id !== "110373943822540800") {
-            bot.reply(m, ':P');
-        }
-    }
-
     else if (m.content.toLowerCase().indexOf("how do i build a tardis") > -1 && m.content[0] !== '!') {
         //display link to tardis site!
         bot.reply(m, 'http\://eccentricdevotion.github.io/TARDIS/creating-a-tardis.html');
@@ -184,7 +178,7 @@ bot.on("message", (m) => {
             '!!Youtube: get my master\'s youtube\n' +
             '!!Anu \<mention\>: prints comma seporated list of username chars\n' +
             '!!Flarebuilds: links to flare_eyes warframe builds.\n' +
-            '!!Totheforums: link to the forums```'
+            '!!Totheforums: link to the forums\n```'
         );
     }
     if (command == '!!kappa') {
