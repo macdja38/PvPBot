@@ -203,12 +203,12 @@ bot.on("message", (m) => {
     }
     if (command == '!!creator') {
         //display author's name!
-        bot.reply(m, '```My creator is Macdja38\n' +
-            'with warframe integration by tcooc\n' +
-            'using Discord.js by hydrabolt```');
+        bot.reply(m, '```xl\nmy creator is Macdja38\n' +
+            'with warframe integration by Tcooc\n' +
+            'using Discord.js by Hydrabolt\n```');
     }
     if (command == '!!youtube') {
-        bot.reply(m, 'https://www.youtube.com/user/macdja38');
+        bot.reply(m, '<https://www.youtube.com/user/macdja38>');
     }
     if (command == '!!flarebuilds') {
         bot.reply(m, '<https://flareeyes.imgur.com/>');
@@ -300,12 +300,12 @@ bot.on("message", (m) => {
 
     else if (command == '!!serverinfo' || command == '!!server') {
         bot.reply(m,
-            "```fix\n" +
+            "```xl\n" +
             "Name:" + m.channel.server.name + "\n" +
-            "id:" + m.channel.server.id + "\n" +
-            "owner:" + m.channel.server.owner.name.replace(/`/g, String.fromCharCode(0) + "`") + "\n" +
-            "members:" + m.channel.server.members.length + "\n" +
-            "iconURL:" + m.channel.server.iconURL + "\n" +
+            "Id:" + m.channel.server.id + "\n" +
+            "Owner:" + m.channel.server.owner.name.replace(/`/g, String.fromCharCode(0) + "`") + "\n" +
+            "Members:" + m.channel.server.members.length + "\n" +
+            "IconURL:\'" + m.channel.server.iconURL + "\'\n" +
             "```"
         );
     }
