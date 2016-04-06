@@ -171,11 +171,11 @@ bot.on("message", (m) => {
     if (command == '!!help' || command == '!!address') {
         //display server ip!
         bot.reply(m, 'available commands:\n' +
-            '```xl\n!!help: get a list of commands\n' +
+            '```xl\n!!Help: get a list of commands\n' +
             '!!Creator: who made me?\n' +
             '!!Unflip: unflip flipped tables\n' +
             '!!Tardistutorial: get a link to the tardis tutorial\n' +
-            '!!Youtube: get my master\'s youtube\n' +
+            '!!Youtube: get my master`s youtube\n' +
             '!!Anu \<mention\>: prints comma seporated list of username chars\n' +
             '!!Flarebuilds: links to flare_eyes warframe builds.\n' +
             '!!Totheforums: link to the forums\n```'
