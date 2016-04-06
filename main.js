@@ -39,7 +39,7 @@ bot.on("serverNewMember", (server, user) => {
         for (var i in welcomers) {
             if (welcomers[i].status == "online") {
                 console.log("We told " + welcomers[i].username + "to hop to it.");
-                bot.sendMessage(welcomers[i], "Hop to it, " + user.username + " Just joined " + server.name);
+                bot.sendMessage(welcomers[i], "Hop to it, " + user.username + " Just joined " + server.name + " announce it in <#77176186148499456>");
                 bot.sendMessage(welcomers[i], "```Welcome **" + user.username + "**!```");
             }
         }
@@ -177,14 +177,14 @@ bot.on("message", (m) => {
     if (command == '!!help' || command == '!!address') {
         //display server ip!
         bot.reply(m, 'available commands:\n' +
-            '```fix\n!!help: get a list of commands\n' +
-            '!!creator: who made me?\n' +
-            '!!unflip: unflip flipped tables\n' +
-            '!!tardistutorial: get a link to the tardis tutorial\n' +
-            '!!youtube: get my master\'s youtube\n' +
-            '!!anu \<mention\>: prints comma seporated list of username chars\n' +
-            '!!flarebuilds: links to flare_eyes warframe builds.\n' +
-            '!!totheforums: link to the forums```'
+            '```xl\n!!help: get a list of commands\n' +
+            '!!Creator: who made me?\n' +
+            '!!Unflip: unflip flipped tables\n' +
+            '!!Tardistutorial: get a link to the tardis tutorial\n' +
+            '!!Youtube: get my master\'s youtube\n' +
+            '!!Anu \<mention\>: prints comma seporated list of username chars\n' +
+            '!!Flarebuilds: links to flare_eyes warframe builds.\n' +
+            '!!Totheforums: link to the forums```'
         );
     }
     if (command == '!!kappa') {
