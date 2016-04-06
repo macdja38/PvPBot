@@ -158,11 +158,23 @@ bot.on("message", (m) => {
     if (m.content.indexOf('!!') !== 0) return;
 
     //split command into sections based on spaces
-    var arguements = m.content.split(" ");
-
-    if(typeof(arguments[0]) != "string") return;
+    try{
+        var args = m.content.split(" ");
+    } catch(err) {
+        console.error(err);
+        return;
+    }
+    //cach the command part of the string.
+    var command;
+    try{
+        console.log((args[0]).toLowerCase());
+        command = args[0].toLowerCase();
+    } catch(err) {
+        console.error(err);
+        return;
+    }
     //!help
-    if (arguements[0].toLowerCase() == '!!help' || arguements[0].toLowerCase() == '!!address') {
+    if (command == '!!help' || command == '!!address') {
         //display server ip!
         bot.reply(m, 'available commands:\n' +
             '```fix\n!!help: get a list of commands\n' +
@@ -175,7 +187,7 @@ bot.on("message", (m) => {
             '!!totheforums: link to the forums```'
         );
     }
-    if (arguements[0].toLowerCase() == '!!kappa') {
+    if (command == '!!kappa') {
         //display server ip!
         if (Math.random() > 0.5) {
             bot.sendFile(m.channel, "../KappaRoss.jpg")
@@ -184,7 +196,7 @@ bot.on("message", (m) => {
             bot.sendFile(m.channel, "../Kappa.png")
         }
     }
-    if (arguements[0].toLowerCase() == "!!anu") {
+    if (command == "!!anu") {
         comaUserName = '';
         comaUserNameCodes = '';
         for (var x in m.mentions[0].username) {
@@ -195,48 +207,48 @@ bot.on("message", (m) => {
         bot.reply(m, comaUserName);
         bot.reply(m, comaUserNameCodes);
     }
-    if (arguements[0].toLowerCase() == '!!creator') {
+    if (command == '!!creator') {
         //display author's name!
         bot.reply(m, '```My creator is Macdja38\n' +
             'with warframe integration by tcooc\n' +
             'using Discord.js by hydrabolt```');
     }
-    if (arguements[0].toLowerCase() == '!!youtube') {
+    if (command == '!!youtube') {
         bot.reply(m, 'https://www.youtube.com/user/macdja38');
     }
-    if (arguements[0].toLowerCase() == '!!flarebuilds') {
+    if (command == '!!flarebuilds') {
         bot.reply(m, '<https://flareeyes.imgur.com/>');
     }
-    if (arguements[0].toLowerCase() == '!!status') {
+    if (command == '!!status') {
         bot.reply(m, "<https://deathsnacks.com/wf/status.html/>");
     }
-    if (arguements[0].toLowerCase() == '!!totheforums' || arguements[0].toLowerCase() == '!!forums') {
+    if (command == '!!totheforums' || command == '!!forums') {
         //link to the forums!
         bot.reply(m, 'The forums are probably a better place for this!\n' +
             'http://pvpcraft.ca/forums'
         );
     }
-    if (arguements[0] == '!!tardistutorial'.toLowerCase() || arguements[0].toLowerCase() == '!!tardistut') {
+    if (args[0] == '!!tardistutorial'.toLowerCase() || command == '!!tardistut') {
         //display link to tardis site!
         bot.reply(m, 'http://eccentricdevotion.github.io/TARDIS/creating-a-tardis.html');
     }
 
     //!ip or !address commands
-    if (arguements[0].toLowerCase() == '!!ip' || arguements[0].toLowerCase() == '!!address') {
+    if (command == '!!ip' || command == '!!address') {
         //display server ip!
         bot.reply(m, 'http://pvpcraft.ca');
     }
 
     //!unflip command
-    if (arguements[0].toLowerCase() == '!!unflip') {
+    if (command == '!!unflip') {
         bot.sendMessage(m.channel, '┬─┬ ノ\( \^\_\^ノ\)');
     }
 
     //!invite command - broken
-    else if (arguements[0].toLowerCase() == '!!invite') {
+    else if (command == '!!invite') {
         if (m.content.indexOf('discord.gg') > -1) {
             if (m.channel instanceof Discord.PMChannel) {
-                bot.joinServer(arguements[1], function (err, server) {
+                bot.joinServer(args[1], function (err, server) {
                     if (err) {
                         bot.reply(m, 'Something went wrong, please contact admins');
                     } else {
@@ -255,9 +267,9 @@ bot.on("message", (m) => {
 
     /*
      //!ping
-     else if(arguements[0] == '!ping') {
+     else if(args[0] == '!ping') {
      if(m.content.indexOf('.') > -1) {
-     bot.reply(m, ping(arguements[1] + " people online."))
+     bot.reply(m, ping(args[1] + " people online."))
      }
      else {
      bot.reply(m, 'Please provide a valid url');
@@ -266,12 +278,12 @@ bot.on("message", (m) => {
      */
 
     //get users id
-    else if (arguements[0].toLowerCase() == '!!myid') {
+    else if (command == '!!myid') {
         bot.reply(m, 'Your Discord ID is ```' + m.author.id + '```');
     }
 
     //get users roll
-    else if (arguements[0].toLowerCase() == '!!roles') {
+    else if (command == '!!roles') {
         if (m.channel.server === undefined) {
             return;
         }
@@ -292,7 +304,7 @@ bot.on("message", (m) => {
         }
     }
 
-    else if (arguements[0].toLowerCase() == '!!serverinfo' || arguments[0].toLowerCase() == '!!server') {
+    else if (command == '!!serverinfo' || command == '!!server') {
         bot.reply(m,
             "```fix\n" +
             "Name:" + m.channel.server.name + "\n" +
@@ -304,7 +316,7 @@ bot.on("message", (m) => {
         );
     }
 
-    else if (arguements[0].toLowerCase() == '!!userinfo' || arguments[0].toLowerCase() == '!!user') {
+    else if (command == '!!userinfo' || command == '!!user') {
         bot.reply(m,
             "```fix\n" +
             "Name:" + m.channel.server.name + "\n" +
@@ -319,7 +331,7 @@ bot.on("message", (m) => {
      * Warframe Commands that access the worldstate api will be in the next section.
      */
 
-    else if (arguements[0].toLowerCase() == '!!deals' || arguements[0].toLowerCase() == '!!darvo') {
+    else if (command == '!!deals' || command == '!!darvo') {
         worldState.get(function (state) {
             bot.sendMessage(m.channel, "```ruby\n" + state.DailyDeals[0].StoreItem + "\n```");
         });
@@ -335,10 +347,10 @@ bot.on("message", (m) => {
      */
     if (AuthDetails.admins.indexOf(m.author.id) < -1) return;
     console.log("Admin command:".red, m.content);
-    if (arguements[0].toLowerCase() == '!!setname') {
-        if (arguements.length > 1) {
-            bot.setUsername(arguements[1]);
-            bot.reply(m, 'Name set to ' + arguements[1]);
+    if (command == '!!setname') {
+        if (args.length > 1) {
+            bot.setUsername(args[1]);
+            bot.reply(m, 'Name set to ' + args[1]);
         }
         else {
             bot.reply(m, 'Please enter a valid name');
@@ -346,14 +358,14 @@ bot.on("message", (m) => {
     }
 
     //change the bot's current game
-    if (arguements[0].toLowerCase() == '!!setgame') {
-        if (arguements.length > 1) {
-            bot.setStatus("online", arguements[1], function (err) {
+    if (command == '!!setgame') {
+        if (args.length > 1) {
+            bot.setStatus("online", args[1], function (err) {
                 if (err) {
-                    console.log(('error setting game to ' + arguements[1]).red);
+                    console.log(('error setting game to ' + args[1]).red);
                     console.error(err);
                 } else {
-                    console.log("Game set to " + arguements[1].green)
+                    console.log("Game set to " + args[1].green)
                 }
             });
         }
@@ -361,9 +373,9 @@ bot.on("message", (m) => {
             bot.reply(m, 'Please enter a valid name');
         }
     }
-    if (arguements[0].toLowerCase() == '!!newpromotedcall') {
-        if (arguements.length > 1) {
-            bot.createServer(String.fromCharCode(7) + arguements[1], "us-east");
+    if (command == '!!newpromotedcall') {
+        if (args.length > 1) {
+            bot.createServer(String.fromCharCode(7) + args[1], "us-east");
         }
         else {
             bot.reply(m, 'Please enter a valid name');
