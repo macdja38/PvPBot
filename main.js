@@ -39,9 +39,8 @@ bot.on("serverNewMember", (server, user) => {
         for (var i in welcomers) {
             if (welcomers[i].status == "online") {
                 console.log("We told " + welcomers[i].username + "to hop to it.");
-                bot.sendMessage(welcomers[i], "Hop to it, " + user.username + " Just joined " +
-                                server.name + " announce it in <#77176186148499456>" +
-                                "```\nWelcome **" + user.username + "**!\n```");
+                bot.sendMessage(welcomers[i], "Hop to it, " + user.username + " Just joined " + server.name + " announce it in <#77176186148499456>");
+                bot.sendMessage(welcomers[i], "```Welcome **" + user.username + "**!```");
             }
         }
         setTimeout(function () {
