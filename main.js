@@ -397,7 +397,7 @@ function nothing() {
  });
  }*/
 
-bot.loginWithTokin(AuthDetails.tokin);
+bot.loginWithToken(AuthDetails.tokin);
 
 /*function repeatChar(count, ch) {
  var txt = "";
