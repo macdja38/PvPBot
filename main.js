@@ -365,7 +365,7 @@ bot.on("message", (m) => {
         });
     }
 
-    else if (command == '!!trial' || command == '!!trials' || command == '!!trialstats') {
+    else if (command == '!!trial' || command == '!!trials' || command == '!!raid' || command == '!!trialstats') {
         bot.sendMessage(m.channel,
             "Hek: \<http://tinyurl.com/qb752oj\> Nightmare: \<http://tinyurl.com/p8og6xf\> Jordas: \<http://tinyurl.com/prpebzh\>");
     }
