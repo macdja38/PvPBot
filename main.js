@@ -436,25 +436,28 @@ bot.loginWithToken(AuthDetails.token);
 function secondsToTime(secs)
 {
     secs = Math.round(secs);
-    var hours = Math.floor(secs / (60 * 60));
+
+    var days = Math.floor(secs / (60 * 60 * 24));
+
+    var divisor_for_hours = secs % (24 * 60 * 60);
+    var hours = Math.floor(divisor_for_hours / (60 * 60));
+
     var divisor_for_minutes = secs % (60 * 60);
     var minutes = Math.floor(divisor_for_minutes / 60);
+
     var divisor_for_seconds = divisor_for_minutes % 60;
     var seconds = Math.ceil(divisor_for_seconds);
     var time = "";
-    if(hours>0) {
-        time += hours + " Hours";
-        if(minutes>0 || minutes <= 3 && hours==0) {
-            time += ", ";
-        }
+    if(days>0) {
+        time += days + " Days, " + hours + " Hours";
     }
-    if(minutes>0) {
-        time += minutes + " Minutes";
-        if(minutes <= 3 && hours==0) {
-            time += ", ";
-        }
+    else if(hours>0) {
+        time += hours + " Hours, " + minutes + " Minutes";
     }
-    if(minutes <= 3 && hours==0) {
+    else if(minutes>0) {
+        time += minutes + " Minutes, " + seconds + " Seconds";
+    }
+    else if(seconds) {
         time += seconds + " Seconds";
     }
     return time;
