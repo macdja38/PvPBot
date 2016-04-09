@@ -118,6 +118,11 @@ bot.on("message", (m) => {
     if (m.channel instanceof Discord.PMChannel) {
         //console.log();
         console.log(('PM:' + m.author.username + ' S:' + m.content).rainbow);
+        if (m.content.indexOf('help') > -1 || m.content.indexOf('hi') > -1 || m.content.indexOf('invite') > -1) {
+            m.reply("Hi, I'm a bot, you can invite me to your server using the OAuth2 url " +
+                "https://discordapp.com/oauth2/authorize?&client_id=168133784078647296&scope=bot&permissions=66321471 " +
+                "if you need to know a command simply type !!help")
+        }
     }
     else {
         console.log('S:'.cyan + m.channel.server.name + ' C:'.cyan + m.channel.name +
@@ -152,10 +157,12 @@ bot.on("message", (m) => {
     }
 
     //misc responses here
-    if (config.get("mscResponses").indexOf(m.channel.server.id) > -1) {
-        if(/^soon/i.test(m.content) && m.author.id != bot.id) {
-            bot.sendMessage(m.channel, 'Soon' + String.fromCharCode(8482));
-            return true;
+    if (!(m.channel instanceof Discord.PMChannel)) {
+        if (config.get("mscResponses").indexOf(m.channel.server.id) > -1) {
+            if (/^soon/i.test(m.content) && m.author.id != bot.id) {
+                bot.sendMessage(m.channel, 'Soon' + String.fromCharCode(8482));
+                return true;
+            }
         }
     }
 
@@ -180,7 +187,7 @@ bot.on("message", (m) => {
     }
 
     //!help
-    if (command == '!!help' || command == '!!address') {
+    if (command == '!!help' || command == '!!commands' || command == '!!command') {
         //display server ip!
         bot.reply(m, 'available commands:\n' +
             '```xl\n!!Help: get a list of commands\n' +
@@ -251,27 +258,6 @@ bot.on("message", (m) => {
     //!unflip command
     if (command == '!!unflip') {
         bot.sendMessage(m.channel, '┬─┬ ノ\( \^\_\^ノ\)');
-    }
-
-    //!invite command - broken
-    else if (command == '!!invite') {
-        if (m.content.indexOf('discord.gg') > -1) {
-            if (m.channel instanceof Discord.PMChannel) {
-                bot.joinServer(args[1], function (err, server) {
-                    if (err) {
-                        bot.reply(m, 'Something went wrong, please contact admins');
-                    } else {
-                        bot.reply(m, 'Successfully joined ' + server);
-                    }
-                });
-            }
-            else {
-                bot.reply(m, 'Please *PM* me the invite');
-            }
-        }
-        else {
-            bot.reply(m, 'Please provide an invite link');
-        }
     }
 
     /*
