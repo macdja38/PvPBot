@@ -182,7 +182,8 @@ bot.on("message", (m) => {
             '!!Anu \<mention\>: prints comma seporated list of username chars\n' +
             '!!Flarebuilds: links to flare_eyes warframe builds.\n' +
             '!!Totheforums: link to the forums' +
-            `!!Darvo: displays daily deals\n```
+            '!!Darvo: displays daily deals' +
+            '!!Trader: display the void traders gear\n```'
         );
     }
     if (command == '!!kappa') {
@@ -339,6 +340,18 @@ bot.on("message", (m) => {
                 "/" + state.DailyDeals[0].AmountTotal + " left, refreshing in " + secondsToTime(state.DailyDeals[0].Expiry.sec-state.Time) +
                 ")" +
                 "\n```");
+        });
+    }
+
+    else if (command == '!!trader' || command == '!!voidtrader' || command == '!!baro') {
+        worldState.get(function (state) {
+            var rep = "```xl\nDarvo will be at " + state.VoidTraders[0].Node + " for " +
+                secondsToTime(state.VoidTraders[0].Expiry.sec-state.Time) + "\n";
+            for(var item of state.VoidTraders[0].Manifest) {
+                rep += "item: " + parseState.getName(item.ItemType) + " - price:" + item.PrimePrice + " ducats " + item.RegularPrice + "cr\n";
+            }
+            rep += "```"
+            bot.sendMessage(m.channel, rep);
         });
     }
 
