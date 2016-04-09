@@ -341,7 +341,7 @@ bot.on("message", (m) => {
 
     else if (command == '!!trader' || command == '!!voidtrader' || command == '!!baro') {
         worldState.get(function (state) {
-            var rep = "```xl\nDarvo will be at " + state.VoidTraders[0].Node + " for " +
+            var rep = "```xl\nBaro leaving " + state.VoidTraders[0].Node + " in " +
                 secondsToTime(state.VoidTraders[0].Expiry.sec-state.Time) + "\n";
             for(var item of state.VoidTraders[0].Manifest) {
                 rep += "item: " + parseState.getName(item.ItemType) + " - price:" + item.PrimePrice + " ducats " + item.RegularPrice + "cr\n";
