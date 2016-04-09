@@ -151,6 +151,14 @@ bot.on("message", (m) => {
         }
     }
 
+    //misc responses here
+    if (config.get("mscResponses").indexOf(m.channel.server.id) > -1) {
+        if(/^soon/i.test(m.content) && m.author.id != bot.id) {
+            bot.sendMessage(m.channel, 'Soon' + String.fromCharCode(8482));
+            return true;
+        }
+    }
+
     //check if user sent command
     if (m.content.indexOf('!!') !== 0) return;
 
@@ -170,6 +178,7 @@ bot.on("message", (m) => {
         console.error(err);
         return;
     }
+
     //!help
     if (command == '!!help' || command == '!!address') {
         //display server ip!
@@ -181,8 +190,9 @@ bot.on("message", (m) => {
             '!!Youtube: get my master`s youtube\n' +
             '!!Anu \<mention\>: prints comma seporated list of username chars\n' +
             '!!Flarebuilds: links to flare_eyes warframe builds.\n' +
-            '!!Totheforums: link to the forums' +
-            '!!Darvo: displays daily deals' +
+            '!!Totheforums: link to the forums\n' +
+            'Soon: display soon' + String.fromCharCode(8482) + "\n" +
+            '!!Darvo: displays daily deals\n' +
             '!!Trader: display the void traders gear\n```'
         );
     }
@@ -353,6 +363,11 @@ bot.on("message", (m) => {
             rep += "```"
             bot.sendMessage(m.channel, rep);
         });
+    }
+
+    else if (command == '!!trial' || command == '!!trials' || command == '!!trialstats') {
+        bot.sendMessage(m.channel,
+            "Hek: \<http://tinyurl.com/qb752oj\> Nightmare: \<http://tinyurl.com/p8og6xf\> Jordas: \<http://tinyurl.com/prpebzh\>");
     }
 
 
