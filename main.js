@@ -16,6 +16,9 @@ var config = new Config("config");
 var CleverBot = require('./lib/cleverbot');
 var cleverBot = new CleverBot;
 
+var ParseState = require('./lib/parseState');
+var parseState = new ParseState;
+
 var StateGrabber = require("./lib/worldState.js");
 var worldState = new StateGrabber;
 
@@ -305,7 +308,7 @@ bot.on("message", (m) => {
             "Id:" + m.channel.server.id + "\n" +
             "Owner:" + m.channel.server.owner.name.replace(/`/g, String.fromCharCode(0) + "`") + "\n" +
             "Members:" + m.channel.server.members.length + "\n" +
-            "IconURL:\'" + m.channel.server.iconURL + "\'\n" +
+            "IconURL:\'" + m.channel.server.iconURL + "\' \n" +
             "```"
         );
     }
@@ -327,7 +330,14 @@ bot.on("message", (m) => {
 
     else if (command == '!!deals' || command == '!!darvo') {
         worldState.get(function (state) {
-            bot.sendMessage(m.channel, "```ruby\n" + state.DailyDeals[0].StoreItem + "\n```");
+            bot.sendMessage(m.channel, "```xl\n" + "Darvo is selling " +
+                parseState.getName(state.DailyDeals[0].StoreItem) +
+                " for " + state.DailyDeals[0].SalePrice +
+                " (" +
+                state.DailyDeals[0].Discount + "% off, " + (state.DailyDeals[0].AmountTotal-state.DailyDeals[0].AmountSold) +
+                "/" + state.DailyDeals[0].AmountTotal + " left, refreshing in " + secondsToTime(state.DailyDeals[0].Expiry.sec-state.Time) +
+                ")" +
+                "\n```");
         });
     }
 
@@ -397,7 +407,7 @@ function nothing() {
  });
  }*/
 
-bot.loginWithToken(AuthDetails.tokin);
+bot.loginWithToken(AuthDetails.token);
 
 /*function repeatChar(count, ch) {
  var txt = "";
@@ -407,3 +417,30 @@ bot.loginWithToken(AuthDetails.tokin);
  return txt;
  }
  */
+
+function secondsToTime(secs)
+{
+    secs = Math.round(secs);
+    var hours = Math.floor(secs / (60 * 60));
+    var divisor_for_minutes = secs % (60 * 60);
+    var minutes = Math.floor(divisor_for_minutes / 60);
+    var divisor_for_seconds = divisor_for_minutes % 60;
+    var seconds = Math.ceil(divisor_for_seconds);
+    var time = "";
+    if(hours>0) {
+        time += hours + " Hours";
+        if(minutes>0 || minutes <= 3 && hours==0) {
+            time += ", ";
+        }
+    }
+    if(minutes>0) {
+        time += minutes + " Minutes";
+        if(minutes <= 3 && hours==0) {
+            time += ", ";
+        }
+    }
+    if(minutes <= 3 && hours==0) {
+        time += seconds + " Seconds";
+    }
+    return time;
+}
