@@ -181,7 +181,8 @@ bot.on("message", (m) => {
             '!!Youtube: get my master`s youtube\n' +
             '!!Anu \<mention\>: prints comma seporated list of username chars\n' +
             '!!Flarebuilds: links to flare_eyes warframe builds.\n' +
-            '!!Totheforums: link to the forums\n```'
+            '!!Totheforums: link to the forums' +
+            `!!Darvo: displays daily deals\n```
         );
     }
     if (command == '!!kappa') {
