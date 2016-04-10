@@ -10,6 +10,10 @@ var bot = new Discord.Client();
 
 var colors = require('colors');
 
+var request = require('request');
+
+var _ = require('underscore');
+
 var Config = require("./lib/config");
 var config = new Config("config");
 
@@ -48,8 +52,8 @@ bot.on("serverNewMember", (server, user) => {
         }
         setTimeout(function () {
             bot.sendMessage(server.defaultChannel, "Welcome **" + user.username + "** to the Warframe Discord! " +
-            "Please check out <#83603071170510848> and <http://discord.info> for the rules, "+
-            "and don't forget to have fun!")
+                "Please check out <#83603071170510848> and <http://discord.info> for the rules, " +
+                "and don't forget to have fun!")
         }, 15000);
     }
     else if (server.id !== "110373943822540800" && server.id !== "88402934194257920") {
@@ -84,23 +88,23 @@ bot.on("userUpdate", (newUser, oldUser) => {
 });
 
 bot.on("presence", (oldUser, newUser) => {
-    if(newUser.game == oldUser.game) return;
-    if(oldUser.status == "idle" || oldUser.status == "offline") return;
-    if(newUser.game == null) return;
+    if (newUser.game == oldUser.game) return;
+    if (oldUser.status == "idle" || oldUser.status == "offline") return;
+    if (newUser.game == null) return;
     var tracking = config.get("gameTrack");
-    for(var track of tracking) {
+    for (var track of tracking) {
         for (server of bot.servers) {
             if (track.server == server.id) {
-                for(var user of server.members){
-                    if(user.id == newUser.id) {
-                        for(role of server.rolesOfUser(newUser)) {
-                            if(track.roles.indexOf(role.name)>-1) {
+                for (var user of server.members) {
+                    if (user.id == newUser.id) {
+                        for (role of server.rolesOfUser(newUser)) {
+                            if (track.roles.indexOf(role.name) > -1) {
                                 if (oldUser.game !== null) {
                                     console.log(colors.red(oldUser.game.name));
                                 }
                                 console.log(colors.blue(newUser.game.name));
                                 bot.sendMessage(server.channels.getAll("id", track.announce)[0], "**" + newUser.username + "** is now playing **" + newUser.game.name + "**", (error) => {
-                                    if(error) {
+                                    if (error) {
                                         console.log(error);
                                     }
                                 });
@@ -170,18 +174,18 @@ bot.on("message", (m) => {
     if (m.content.indexOf('!!') !== 0) return;
 
     //split command into sections based on spaces
-    try{
+    try {
         var args = m.content.split(" ");
-    } catch(err) {
+    } catch (err) {
         console.error(err);
         return;
     }
     //cach the command part of the string.
     var command;
-    try{
+    try {
         console.log((args[0]).toLowerCase());
         command = args[0].toLowerCase();
-    } catch(err) {
+    } catch (err) {
         console.error(err);
         return;
     }
@@ -198,6 +202,7 @@ bot.on("message", (m) => {
             '!!Anu \<mention\>: prints comma seporated list of username chars\n' +
             '!!Flarebuilds: links to flare_eyes warframe builds.\n' +
             '!!Totheforums: link to the forums\n' +
+            '!!Wiki: finds something on the wiki\n' +
             'Soon: display soon' + String.fromCharCode(8482) + "\n" +
             '!!Darvo: displays daily deals\n' +
             '!!Trader: display the void traders gear\n```'
@@ -332,8 +337,8 @@ bot.on("message", (m) => {
                 parseState.getName(state.DailyDeals[0].StoreItem) +
                 " for " + state.DailyDeals[0].SalePrice +
                 " (" +
-                state.DailyDeals[0].Discount + "% off, " + (state.DailyDeals[0].AmountTotal-state.DailyDeals[0].AmountSold) +
-                "/" + state.DailyDeals[0].AmountTotal + " left, refreshing in " + secondsToTime(state.DailyDeals[0].Expiry.sec-state.Time) +
+                state.DailyDeals[0].Discount + "% off, " + (state.DailyDeals[0].AmountTotal - state.DailyDeals[0].AmountSold) +
+                "/" + state.DailyDeals[0].AmountTotal + " left, refreshing in " + secondsToTime(state.DailyDeals[0].Expiry.sec - state.Time) +
                 ")" +
                 "\n```");
         });
@@ -342,8 +347,8 @@ bot.on("message", (m) => {
     else if (command == '!!trader' || command == '!!voidtrader' || command == '!!baro') {
         worldState.get(function (state) {
             var rep = "```xl\nBaro leaving " + state.VoidTraders[0].Node + " in " +
-                secondsToTime(state.VoidTraders[0].Expiry.sec-state.Time) + "\n";
-            for(var item of state.VoidTraders[0].Manifest) {
+                secondsToTime(state.VoidTraders[0].Expiry.sec - state.Time) + "\n";
+            for (var item of state.VoidTraders[0].Manifest) {
                 rep += "item: " + parseState.getName(item.ItemType) + " - price:" + item.PrimePrice + " ducats " + item.RegularPrice + "cr\n";
             }
             rep += "```"
@@ -356,9 +361,21 @@ bot.on("message", (m) => {
             "Hek: \<http://tinyurl.com/qb752oj\> Nightmare: \<http://tinyurl.com/p8og6xf\> Jordas: \<http://tinyurl.com/prpebzh\>");
     }
 
-
-
-
+    else if (command == '!!wiki' && args.length > 1) {
+        // check if page exists, kinda
+        var url = 'https://warframe.wikia.com/wiki/';
+        url += _.map(args.slice(1), function (n) {
+            return n[0].toUpperCase() + n.substring(1);
+        }).join('_');
+        request.head(url, function (error, response) {
+            if (error || response.statusCode !== 200) {
+                bot.sendMessage(m.channel, "could not find **" + args[1] + "**.");
+                return;
+            }
+            bot.sendMessage(m.channel, url);
+        });
+        return true;
+    }
 
 
     /*
@@ -433,8 +450,7 @@ bot.loginWithToken(AuthDetails.token);
  }
  */
 
-function secondsToTime(secs)
-{
+function secondsToTime(secs) {
     secs = Math.round(secs);
 
     var days = Math.floor(secs / (60 * 60 * 24));
@@ -447,18 +463,16 @@ function secondsToTime(secs)
 
     var divisor_for_seconds = divisor_for_minutes % 60;
     var seconds = Math.ceil(divisor_for_seconds);
-    var time = "";
-    if(days>0) {
-        time += days + " Days, " + hours + " Hours";
+    if (days > 0) {
+        return days + " Days, " + hours + " Hours";
     }
-    else if(hours>0) {
-        time += hours + " Hours, " + minutes + " Minutes";
+    else if (hours > 0) {
+        return hours + " Hours, " + minutes + " Minutes";
     }
-    else if(minutes>0) {
-        time += minutes + " Minutes, " + seconds + " Seconds";
+    else if (minutes > 0) {
+        return minutes + " Minutes, " + seconds + " Seconds";
     }
-    else if(seconds) {
-        time += seconds + " Seconds";
+    else if (seconds) {
+        return seconds + " Seconds";
     }
-    return time;
 }

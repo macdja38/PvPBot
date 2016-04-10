@@ -2,12 +2,12 @@
   "private": true,
   "dependencies": {
     "discord.js": "hydrabolt/discord.js#indev",
-    "request": "^2.65.0",
+    "request": "^2.7.0",
     "twitter": "^1.2.5",
     "underscore": "^1.8.3",
     "http": "*",
     "crypto": "*",
-    "colors": "^1.1.2"
+    "colors": "^1.1.2",
   },
   "devDependencies": {
     "grunt": "^0.4.5",
