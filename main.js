@@ -346,13 +346,20 @@ bot.on("message", (m) => {
 
     else if (command == '!!trader' || command == '!!voidtrader' || command == '!!baro') {
         worldState.get(function (state) {
-            var rep = "```xl\nBaro leaving " + state.VoidTraders[0].Node + " in " +
-                secondsToTime(state.VoidTraders[0].Expiry.sec - state.Time) + "\n";
-            for (var item of state.VoidTraders[0].Manifest) {
-                rep += "item: " + parseState.getName(item.ItemType) + " - price:" + item.PrimePrice + " ducats " + item.RegularPrice + "cr\n";
+            if(state.VoidTraders[0].Manifest) {
+                var rep = "```xl\nBaro leaving " + state.VoidTraders[0].Node + " in " +
+                    secondsToTime(state.VoidTraders[0].Expiry.sec - state.Time) + "\n";
+                for (var item of state.VoidTraders[0].Manifest) {
+                    rep += "item: " + parseState.getName(item.ItemType) + " - price:" + item.PrimePrice + " ducats " + item.RegularPrice + "cr\n";
+                }
+                rep += "```"
+                bot.sendMessage(m.channel, rep);
             }
-            rep += "```"
-            bot.sendMessage(m.channel, rep);
+            else
+            {
+                bot.sendMessage(m.channel, "```xl\nBaro appearing at " + state.VoidTraders[0].Node + " in " +
+                    secondsToTime(state.VoidTraders[0].Expiry.sec - state.Time) + "\n```");
+            }
         });
     }
 
