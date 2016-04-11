@@ -408,7 +408,7 @@ bot.on("message", (m) => {
         });
     }
 
-    else if (command == '!!farm') {
+    else if (command.indexOf('!!farm') == 0) {
             bot.sendMessage(m.channel, "You can probably find that resource here: \<https://steamcommunity.com/sharedfiles/filedetails/?id=181630751\>");
             return true;
     }
