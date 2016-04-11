@@ -203,6 +203,7 @@ bot.on("message", (m) => {
             '!!Flarebuilds: links to flare_eyes warframe builds.\n' +
             '!!Totheforums: link to the forums\n' +
             '!!Wiki: finds something on the wiki\n' +
+            '!!Farm: links a farming guide' +
             'Soon: display soon' + String.fromCharCode(8482) + "\n" +
             '!!Sortie: displays todays sorties' +
             '!!Darvo: displays daily deals\n' +
@@ -405,6 +406,11 @@ bot.on("message", (m) => {
             bot.sendMessage(m.channel, text);
             return true;
         });
+    }
+
+    else if (command == '!!farm') {
+            bot.sendMessage(m.channel, "You can probably find that resource here: \<https://steamcommunity.com/sharedfiles/filedetails/?id=181630751\>");
+            return true;
     }
 
 
