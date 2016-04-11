@@ -358,7 +358,7 @@ bot.on("message", (m) => {
             else
             {
                 bot.sendMessage(m.channel, "```xl\nBaro appearing at " + state.VoidTraders[0].Node + " in " +
-                    secondsToTime(state.VoidTraders[0].Expiry.sec - state.Time) + "\n```");
+                    secondsToTime(state.VoidTraders[0].Activation.sec - state.Time) + "\n```");
             }
         });
     }
@@ -382,6 +382,28 @@ bot.on("message", (m) => {
             bot.sendMessage(m.channel, url);
         });
         return true;
+    }
+
+    else if (command == '!!sortie') {
+        worldState.get(function (state) {
+            var boss = parseState.getBoss(state.Sorties[0].Variants[0].bossIndex);
+            var text = "```xl\n" + secondsToTime(state.Sorties[0].Expiry.sec - state.Time) + " left to defeat " +
+                boss.name + " of the " + boss.faction + "\n";
+            for(var Variant of state.Sorties[0].Variants) {
+                var Region = parseState.getRegion(Variant.regionIndex);
+                if(Region.missions[Variant.missionIndex] != "Assassination") {
+                    text += Region.missions[Variant.missionIndex] + " on " + Region.name + " with " +
+                        parseState.getModifiers(Variant.modifierIndex) + "\n";
+                }
+                else {
+                    text += "Assassinate " + boss.name + " on " + Region.name + " with " +
+                        parseState.getModifiers(Variant.modifierIndex) + "\n";
+                }
+            }
+            text += "```";
+            bot.sendMessage(m.channel, text);
+            return true;
+        });
     }
 
 
