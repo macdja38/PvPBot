@@ -204,6 +204,7 @@ bot.on("message", (m) => {
             '!!Totheforums: link to the forums\n' +
             '!!Wiki: finds something on the wiki\n' +
             'Soon: display soon' + String.fromCharCode(8482) + "\n" +
+            '!!Sortie: displays todays sorties' +
             '!!Darvo: displays daily deals\n' +
             '!!Trader: display the void traders gear\n```'
         );
