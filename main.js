@@ -354,7 +354,7 @@ bot.on("message", (m) => {
 
     else if (command == '!!trader' || command == '!!voidtrader' || command == '!!baro') {
         worldState.get(function (state) {
-            if(state.VoidTraders[0].Manifest) {
+            if (state.VoidTraders[0].Manifest) {
                 var rep = "```xl\nBaro leaving " + state.VoidTraders[0].Node + " in " +
                     secondsToTime(state.VoidTraders[0].Expiry.sec - state.Time) + "\n";
                 for (var item of state.VoidTraders[0].Manifest) {
@@ -363,8 +363,7 @@ bot.on("message", (m) => {
                 rep += "```"
                 bot.sendMessage(m.channel, rep);
             }
-            else
-            {
+            else {
                 bot.sendMessage(m.channel, "```xl\nBaro appearing at " + state.VoidTraders[0].Node + " in " +
                     secondsToTime(state.VoidTraders[0].Activation.sec - state.Time) + "\n```");
             }
@@ -397,9 +396,9 @@ bot.on("message", (m) => {
             var boss = parseState.getBoss(state.Sorties[0].Variants[0].bossIndex);
             var text = "```xl\n" + secondsToTime(state.Sorties[0].Expiry.sec - state.Time) + " left to defeat " +
                 boss.name + " of the " + boss.faction + "\n";
-            for(var Variant of state.Sorties[0].Variants) {
+            for (var Variant of state.Sorties[0].Variants) {
                 var Region = parseState.getRegion(Variant.regionIndex);
-                if(Region.missions[Variant.missionIndex] != "Assassination") {
+                if (Region.missions[Variant.missionIndex] != "Assassination") {
                     text += Region.missions[Variant.missionIndex] + " on " + Region.name + " with " +
                         parseState.getModifiers(Variant.modifierIndex) + "\n";
                 }
@@ -415,29 +414,30 @@ bot.on("message", (m) => {
     }
 
     else if (command.indexOf('!!farm') == 0) {
-            bot.sendMessage(m.channel, "You can probably find that resource here: \<https://steamcommunity.com/sharedfiles/filedetails/?id=181630751\>");
-            return true;
+        bot.sendMessage(m.channel, "You can probably find that resource here: \<https://steamcommunity.com/sharedfiles/filedetails/?id=181630751\>");
+        return true;
     }
 
-    else if (command === '!!primeaccess' ||command === '!!access') {
-        var text = "```xl\n";
+    else if (command === '!!primeaccess' || command === '!!access') {
         worldState.get(function (state) {
-            for(var event of state.Events) {
-                if(event.Messages[0].Message.toLowerCase().indexOf("access")>-1) {
+            var text = "```xl\n";
+            for (var event of state.Events) {
+                if (event.Messages[0].Message.toLowerCase().indexOf("access") > -1) {
                     text += event.Messages[0].Message.toUpperCase()
                         + " since " + secondsToTime(state.Time - event.Date.sec) + " ago\n";
                 }
             }
+            if (text != "```xl\n") {
+                bot.sendMessage(m.channel, text + "```")
+            }
         });
-        if(text != "```xl\n") {
-            bot.sendMessage(m.channel, text + "```")
-        }
     }
 
-    else if (command === '!!update' ||command === '!!updates') {
+    else if (command === '!!update' || command === '!!updates') {
         worldState.get(function (state) {
-            for(var event of state.Events) {
-                if(event.Messages[0].Message.toLowerCase().indexOf("update")>-1 || event.Messages[0].Message.toLowerCase().indexOf("hotfix")>-1) {
+            console.log(state.Events);
+            for (var event of state.Events) {
+                if (event.Messages[0].Message.toLowerCase().indexOf("update") > -1 || event.Messages[0].Message.toLowerCase().indexOf("hotfix") > -1) {
                     bot.sendMessage(m.channel, "```xl\n" + event.Messages[0].Message.toUpperCase()
                         + " since " + secondsToTime(state.Time - event.Date.sec) + " ago \n learn more here: " + event.Prop + "\n```");
                     return;
