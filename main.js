@@ -471,7 +471,7 @@ bot.on("message", (m) => {
             else{
                 var armor = parseInt(args[1]);
             }
-            text += "gives it " + armor / (armor + 300) * 100 + "% damage reduction\n";
+            text += armor / (armor + 300) * 100 + "% damage reduction\n";
             bot.sendMessage(m.channel, text + "```");
         })();
     }
