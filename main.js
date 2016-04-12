@@ -450,18 +450,18 @@ bot.on("message", (m) => {
         (function() {
             console.log(args.length);
             if(args.length < 2 || args.length == 3 || rgs.length > 4) {
-                bot.message(m.channel, "```xl/npossible uses include:\n +
+                bot.message(m.channel, "```xl\npossible uses include:\n" +
                     "!!armor (Base Armor) (Base Level) (Current Level) calculate armour and stats.\n" + 
                     "!!armor (Current Armor)\n```");
                 return;
             }
             var text = "```xl\n";
             if(args.length == 4) {
-                var armor = args[1] × (1 + ((args[2] − args[3])1.75 ÷ 200))
-                text += "at level " + args[2] + " your enemy would have " + armor + " Armor\n"
+                var armor = args[1] × (1 + ((args[2] − args[3])1.75 ÷ 200));
+                text += "at level " + args[2] + " your enemy would have " + armor + " Armor\n";
             }
-            text += "gives it " + armor / (armor + 300) * 100 + "% damage reduction\n"
-            bot.message(m.channel, text + ```");
+            text += "gives it " + armor / (armor + 300) * 100 + "% damage reduction\n";
+            bot.message(m.channel, text + "```");
         })();
     }
     
