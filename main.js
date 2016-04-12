@@ -211,7 +211,9 @@ bot.on("message", (m) => {
             'Soon: display soon' + String.fromCharCode(8482) + "\n" +
             '!!Sortie: displays todays sorties' +
             '!!Darvo: displays daily deals\n' +
-            '!!Trader: display the void traders gear\n```'
+            '!!Trader: display the void traders gear\n' +
+            '!!Updates: prints the current game version and link to changelog\n' +
+            '!!Access: prints the current prime Access and how long its been around\n```'
         );
     }
     if (command == '!!kappa') {
@@ -443,7 +445,7 @@ bot.on("message", (m) => {
             }
         });
     }
-    
+
     /*
      locked commands past this point
      */
