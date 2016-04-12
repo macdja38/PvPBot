@@ -34,7 +34,7 @@ bot.on("ready", () => {
 });
 
 bot.on("disconnected", () => {
-    console.log("Disconnected!");
+    console.error("Disconnected!");
     process.exit(1); //exit node.js with an error
 });
 
@@ -423,7 +423,7 @@ bot.on("message", (m) => {
         var text = "```xl\n";
         worldState.get(function (state) {
             for(var event of state.Events) {
-                if(event.Messages[0].Message.indexOf("Access")>-1) {
+                if(event.Messages[0].Message.toLowerCase().indexOf("access")>-1) {
                     text += event.Messages[0].Message.toUpperCase()
                         + " since " + secondsToTime(state.Time - event.Date.sec) + " ago\n";
                 }
@@ -439,7 +439,7 @@ bot.on("message", (m) => {
             for(var event of state.Events) {
                 if(event.Messages[0].Message.toLowerCase().indexOf("update")>-1 || event.Messages[0].Message.toLowerCase().indexOf("hotfix")>-1) {
                     bot.sendMessage(m.channel, "```xl\n" + event.Messages[0].Message.toUpperCase()
-                        + " since " + secondsToTime(state.Time - event.Date.sec) + " ago \n learn more here: " + event.Prop + "\n```")
+                        + " since " + secondsToTime(state.Time - event.Date.sec) + " ago \n learn more here: " + event.Prop + "\n```");
                     return;
                 }
             }
