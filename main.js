@@ -457,7 +457,7 @@ bot.on("message", (m) => {
             }
             var text = "```xl\n";
             if(args.length == 4) {
-                var armor = args[1] × (1 + ((args[2] − args[3])1.75 ÷ 200));
+                var armor = valueOf(args[1]) * (1 + (Math.pow((valueOf(args[2]) - valueOf(args[3])),1.75) / 200));
                 text += "at level " + args[2] + " your enemy would have " + armor + " Armor\n";
             }
             text += "gives it " + armor / (armor + 300) * 100 + "% damage reduction\n";
