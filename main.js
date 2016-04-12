@@ -190,6 +190,10 @@ bot.on("message", (m) => {
         return;
     }
 
+    if (command == '!!getchannelname') {
+        m.reply(bot.channels.get("id", args[1]).name);
+    }
+
     //!help
     if (command == '!!help' || command == '!!commands' || command == '!!command') {
         //display server ip!
@@ -413,7 +417,33 @@ bot.on("message", (m) => {
             return true;
     }
 
+    else if (command === '!!primeaccess' ||command === '!!access') {
+        var text = "```xl\n";
+        worldState.get(function (state) {
+            for(var event of state.Events) {
+                if(event.Messages[0].Message.indexOf("Access")>-1) {
+                    text += event.Messages[0].Message.toUpperCase()
+                        + " since " + secondsToTime(state.Time - event.Date.sec) + " ago\n";
+                }
+            }
+        });
+        if(text != "```xl\n") {
+            bot.sendMessage(m.channel, text + "```")
+        }
+    }
 
+    else if (command === '!!update' ||command === '!!updates') {
+        worldState.get(function (state) {
+            for(var event of state.Events) {
+                if(event.Messages[0].Message.toLowerCase().indexOf("update")>-1 || event.Messages[0].Message.toLowerCase().indexOf("hotfix")>-1) {
+                    bot.sendMessage(m.channel, "```xl\n" + event.Messages[0].Message.toUpperCase()
+                        + " since " + secondsToTime(state.Time - event.Date.sec) + " ago \n learn more here: " + event.Prop + "\n```")
+                    return;
+                }
+            }
+        });
+    }
+    
     /*
      locked commands past this point
      */
