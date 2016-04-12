@@ -450,7 +450,7 @@ bot.on("message", (m) => {
         (function() {
             console.log(args.length);
             if(args.length < 2 || args.length == 3 || rgs.length > 4) {
-                bot.message(m.channel, "```xl\npossible uses include:\n" +
+                bot.sendMessage(m.channel, "```xl\npossible uses include:\n" +
                     "!!armor (Base Armor) (Base Level) (Current Level) calculate armour and stats.\n" + 
                     "!!armor (Current Armor)\n```");
                 return;
@@ -461,7 +461,7 @@ bot.on("message", (m) => {
                 text += "at level " + args[2] + " your enemy would have " + armor + " Armor\n";
             }
             text += "gives it " + armor / (armor + 300) * 100 + "% damage reduction\n";
-            bot.message(m.channel, text + "```");
+            bot.sendMessage(m.channel, text + "```");
         })();
     }
     
