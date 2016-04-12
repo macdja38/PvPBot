@@ -207,13 +207,13 @@ bot.on("message", (m) => {
             '!!Flarebuilds: links to flare_eyes warframe builds.\n' +
             '!!Totheforums: link to the forums\n' +
             '!!Wiki: finds something on the wiki\n' +
-            '!!Farm: links a farming guide' +
+            '!!Farm: links a farming guide\n' +
             'Soon: display soon' + String.fromCharCode(8482) + "\n" +
-            '!!Sortie: displays todays sorties' +
+            '!!Sortie: displays todays sorties\n' +
             '!!Darvo: displays daily deals\n' +
             '!!Trader: display the void traders gear\n' +
             '!!Updates: prints the current game version and link to changelog\n' +
-            '!!Access: prints the current prime Access and how long its been around\n```'
+            '!!Access: prints the current prime access and how long its been around\n```'
         );
     }
     if (command == '!!kappa') {
@@ -239,7 +239,7 @@ bot.on("message", (m) => {
     if (command == '!!creator') {
         //display author's name!
         bot.reply(m, '```xl\nmy creator is Macdja38\n' +
-            'with warframe integration by Tcooc\n' +
+            'with special sauce from Void_Glitch\n' +
             'using Discord.js by Hydrabolt\n```');
     }
     if (command == '!!youtube') {
