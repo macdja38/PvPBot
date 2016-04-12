@@ -449,7 +449,8 @@ bot.on("message", (m) => {
     else if (command === '!!armorstats' || command === '!!armor') {
         (function() {
             console.log(args.length);
-            if(args.length < 2 || args.length == 3 || rgs.length > 4) {
+            console.log(args);
+            if(args.length < 2 || args.length == 3 || args.length > 4) {
                 bot.sendMessage(m.channel, "```xl\npossible uses include:\n" +
                     "!!armor (Base Armor) (Base Level) (Current Level) calculate armour and stats.\n" + 
                     "!!armor (Current Armor)\n```");
@@ -457,8 +458,18 @@ bot.on("message", (m) => {
             }
             var text = "```xl\n";
             if(args.length == 4) {
-                var armor = valueOf(args[1]) * (1 + (Math.pow((valueOf(args[2]) - valueOf(args[3])),1.75) / 200));
-                text += "at level " + args[2] + " your enemy would have " + armor + " Armor\n";
+                console.log(typeof(parseInt(args[1])));
+                console.log(parseInt(args[1]));
+                console.log(Math.pow((parseInt(args[3]) - parseInt(args[2])),1.75));
+                if((parseInt(args[3]) - parseInt(args[2])) <= 0) {
+                    bot.sendMessage(m.channel, "```xl\nPlease check your input values\n```");
+                    return;
+                }
+                var armor = parseInt(args[1]) * (1 + (Math.pow((parseInt(args[3]) - parseInt(args[2])),1.75) / 200));
+                text += "at level " + args[3] + " your enemy would have " + armor + " Armor\n";
+            }
+            else{
+                var armor = parseInt(args[1]);
             }
             text += "gives it " + armor / (armor + 300) * 100 + "% damage reduction\n";
             bot.sendMessage(m.channel, text + "```");
