@@ -452,7 +452,7 @@ bot.on("message", (m) => {
             console.log(args);
             if(args.length < 2 || args.length == 3 || args.length > 4) {
                 bot.sendMessage(m.channel, "```xl\npossible uses include:\n" +
-                    "!!armor (Base Armor) (Base Level) (Current Level) calculate armour and stats.\n" + 
+                    "!!armor (Base Armor) (Base Level) (Current Level) calculate armor and stats.\n" +
                     "!!armor (Current Armor)\n```");
                 return;
             }
