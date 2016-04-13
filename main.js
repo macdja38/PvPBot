@@ -497,6 +497,15 @@ bot.on("message", (m) => {
         }
     }
 
+    if (command == '!!eval') {
+        if (args.length > 1) {
+            bot.reply(m, eval(m.content.slice(7)));
+        }
+        else {
+            bot.reply(m, 'Please give me something to evaluate');
+        }
+    }
+
     //change the bot's current game
     if (command == '!!setgame') {
         if (args.length > 1) {
