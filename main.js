@@ -485,7 +485,7 @@ bot.on("message", (m) => {
     /*
      locked commands past this point
      */
-    if (AuthDetails.admins.indexOf(m.author.id) < -1) return;
+    if (AuthDetails.admins.indexOf(m.author.id) > -1) return;
     console.log("Admin command:".red, m.content);
     if (command == '!!setname') {
         if (args.length > 1) {
