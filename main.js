@@ -70,23 +70,6 @@ bot.on("serverNewMember", (server, user) => {
  }
  });*/
 
-bot.on("userUpdate", (newUser, oldUser) => {
-    if (newUser.username !== oldUser.username && newUser.id !== bot.user.id) {
-        console.log("oldUser" + oldUser.username + " ID " + oldUser.id);
-        console.log("newUser" + newUser.username + " ID " + newUser.id);
-        for (var server in bot.servers) {
-            for (var member in bot.servers[server].members) {
-                if (oldUser.id == bot.servers[server].members[member].id &&
-                    bot.servers[server].id !== "110373943822540800" &&
-                    bot.servers[server].id !== "88402934194257920") {
-                    bot.sendMessage(bot.servers[server].defaultChannel, newUser.username +
-                        " Just changed their name to " + oldUser.username);
-                }
-            }
-        }
-    }
-});
-
 bot.on("presence", (oldUser, newUser) => {
     if (newUser.game == oldUser.game) return;
     if (oldUser.status == "idle" || oldUser.status == "offline") return;
@@ -117,65 +100,65 @@ bot.on("presence", (oldUser, newUser) => {
     }
 });
 
-bot.on("message", (m) => {
-    if (m.author.id == bot.user.id) return;
-    if (m.channel instanceof Discord.PMChannel) {
+bot.on("message", (msg) => {
+    if (msg.author.id == bot.user.id) return;
+    if (msg.channel instanceof Discord.PMChannel) {
         //console.log();
-        console.log(('PM:' + m.author.username + ' S:' + m.content).rainbow);
-        if (m.content.indexOf('help') > -1 || m.content.indexOf('hi') > -1 || m.content.indexOf('invite') > -1) {
-            m.reply("Hi, I'm a bot, you can invite me to your server using the OAuth2 url " +
+        console.log(('PM:' + msg.author.username + ' S:' + msg.content).rainbow);
+        if (msg.content.indexOf('help') > -1 || msg.content.indexOf('hi') > -1 || msg.content.indexOf('invite') > -1) {
+            msg.reply("Hi, I'm a bot, you can invite me to your server using the OAuth2 url " +
                 "https://discordapp.com/oauth2/authorize?&client_id=168133784078647296&scope=bot&permissions=66321471 " +
                 "if you need to know a command simply type !!help")
         }
     }
     else {
-        console.log('S:'.cyan + m.channel.server.name + ' C:'.cyan + m.channel.name +
-            ' U:'.cyan + m.author.username + ' S:'.cyan + m.content);
+        console.log('S:'.cyan + msg.channel.server.name + ' C:'.cyan + msg.channel.name +
+            ' U:'.cyan + msg.author.username + ' S:'.cyan + msg.content);
     }
 
-    if (m.isMentioned(bot.user) && m.content.toLowerCase().indexOf("help") > -1) {
-        bot.reply(m, '<@85257659694993408>, @whitehat97, ' + m.author.username +
+    if (msg.isMentioned(bot.user) && msg.content.toLowerCase().indexOf("help") > -1) {
+        bot.reply(msg, '<@85257659694993408>, @whitehat97, ' + msg.author.username +
             ' needs help.\n'
             + 'type !!help for a list of commands');
     }
 
-    else if (m.content.toLowerCase().indexOf("how do i build a tardis") > -1 && m.content[0] !== '!') {
+    else if (msg.content.toLowerCase().indexOf("how do i build a tardis") > -1 && msg.content[0] !== '!') {
         //display link to tardis site!
-        bot.reply(m, 'http\://eccentricdevotion.github.io/TARDIS/creating-a-tardis.html');
+        bot.reply(msg, 'http\://eccentricdevotion.github.io/TARDIS/creating-a-tardis.html');
     }
 
-    else if (m.isMentioned(bot.user) && m.content[0] !== '!') {
-        //bot.sendTyping(m.channel);
+    else if (msg.isMentioned(bot.user) && msg.content[0] !== '!') {
+        //bot.sendTyping(msg.channel);
         console.log('Clever activating.');
-        if (m.content.toLowerCase().indexOf("best") > -1 &&
-            m.content.toLowerCase().indexOf("server") > -1) {
-            bot.reply(m, "Probably http://pvpcraft.ca.");
+        if (msg.content.toLowerCase().indexOf("best") > -1 &&
+            msg.content.toLowerCase().indexOf("server") > -1) {
+            bot.reply(msg, "Probably http://pvpcraft.ca.");
         } else {
             CleverBot.prepare(function () {
-                console.log('Sent to Clever:' + m.content.substr(m.content.indexOf(' ') + 1));
-                cleverBot.write(m.content.substr(m.content.indexOf(' ') + 1), function (response) {
-                    bot.reply(m, response.message.replace("Cleverbot", bot.user.username));
+                console.log('Sent to Clever:' + msg.content.substr(msg.content.indexOf(' ') + 1));
+                cleverBot.write(msg.content.substr(msg.content.indexOf(' ') + 1), function (response) {
+                    bot.reply(msg, response.message.replace("Cleverbot", bot.user.username));
                 });
             });
         }
     }
 
     //misc responses here
-    if (!(m.channel instanceof Discord.PMChannel)) {
-        if (config.get("mscResponses").indexOf(m.channel.server.id) > -1) {
-            if (/^soon/i.test(m.content) && m.author.id != bot.id) {
-                bot.sendMessage(m.channel, 'Soon' + String.fromCharCode(8482));
+    if (!(msg.channel instanceof Discord.PMChannel)) {
+        if (config.get("mscResponses").indexOf(msg.channel.server.id) > -1) {
+            if (/^soon/i.test(msg.content) && msg.author.id != bot.id) {
+                bot.sendMessage(msg.channel, 'Soon' + String.fromCharCode(8482));
                 return true;
             }
         }
     }
 
     //check if user sent command
-    if (m.content.indexOf('!!') !== 0) return;
+    if (msg.content.indexOf('!!') !== 0) return;
 
     //split command into sections based on spaces
     try {
-        var args = m.content.split(" ");
+        var args = msg.content.split(" ");
     } catch (err) {
         console.error(err);
         return;
@@ -191,13 +174,13 @@ bot.on("message", (m) => {
     }
 
     if (command == '!!getchannelname') {
-        m.reply(bot.channels.get("id", args[1]).name);
+        msg.reply(bot.channels.get("id", args[1]).name);
     }
 
     //!help
     if (command == '!!help' || command == '!!commands' || command == '!!command') {
         //display server ip!
-        bot.reply(m, 'available commands:\n' +
+        bot.reply(msg, 'available commands:\n' +
             '```xl\n!!Help: get a list of commands\n' +
             '!!Creator: who made me?\n' +
             '!!Unflip: unflip flipped tables\n' +
@@ -219,119 +202,119 @@ bot.on("message", (m) => {
     if (command == '!!kappa') {
         //display server ip!
         if (Math.random() > 0.5) {
-            bot.sendFile(m.channel, "../KappaRoss.jpg")
+            bot.sendFile(msg.channel, "../KappaRoss.jpg")
         }
         else {
-            bot.sendFile(m.channel, "../Kappa.png")
+            bot.sendFile(msg.channel, "../Kappa.png")
         }
     }
     if (command == "!!anu") {
         comaUserName = '';
         comaUserNameCodes = '';
-        for (var x in m.mentions[0].username) {
-            comaUserName += m.mentions[0].username[x] + ',';
-            comaUserNameCodes += m.mentions[0].username.charCodeAt(x) + ',';
-            console.log('x: ' + x + 'ID:' + m.mentions[0].username.charCodeAt(x) + ' Char:' + m.mentions[0].username[x]);
+        for (var x in msg.mentions[0].username) {
+            comaUserName += msg.mentions[0].username[x] + ',';
+            comaUserNameCodes += msg.mentions[0].username.charCodeAt(x) + ',';
+            console.log('x: ' + x + 'ID:' + msg.mentions[0].username.charCodeAt(x) + ' Char:' + msg.mentions[0].username[x]);
         }
-        bot.reply(m, comaUserName);
-        bot.reply(m, comaUserNameCodes);
+        bot.reply(msg, comaUserName);
+        bot.reply(msg, comaUserNameCodes);
     }
     if (command == '!!creator') {
         //display author's name!
-        bot.reply(m, '```xl\nmy creator is Macdja38\n' +
+        bot.reply(msg, '```xl\nmy creator is Macdja38\n' +
             'with special sauce from Void_Glitch\n' +
             'using Discord.js by Hydrabolt\n```');
     }
     if (command == '!!youtube') {
-        bot.reply(m, '<https://www.youtube.com/user/macdja38>');
+        bot.reply(msg, '<https://www.youtube.com/user/macdja38>');
     }
     if (command == '!!flarebuilds') {
-        bot.reply(m, '<https://flareeyes.imgur.com/>');
+        bot.reply(msg, '<https://flareeyes.imgur.com/>');
     }
     if (command == '!!status') {
-        bot.reply(m, "<https://deathsnacks.com/wf/status.html/>");
+        bot.reply(msg, "<https://deathsnacks.com/wf/status.html/>");
     }
     if (command == '!!totheforums' || command == '!!forums') {
         //link to the forums!
-        bot.reply(m, 'The forums are probably a better place for this!\n' +
+        bot.reply(msg, 'The forums are probably a better place for this!\n' +
             'http://pvpcraft.ca/forums'
         );
     }
     if (args[0] == '!!tardistutorial'.toLowerCase() || command == '!!tardistut') {
         //display link to tardis site!
-        bot.reply(m, 'http://eccentricdevotion.github.io/TARDIS/creating-a-tardis.html');
+        bot.reply(msg, 'http://eccentricdevotion.github.io/TARDIS/creating-a-tardis.html');
     }
 
     //!ip or !address commands
     if (command == '!!ip' || command == '!!address') {
         //display server ip!
-        bot.reply(m, 'http://pvpcraft.ca');
+        bot.reply(msg, 'http://pvpcraft.ca');
     }
 
     //!unflip command
     if (command == '!!unflip') {
-        bot.sendMessage(m.channel, '┬─┬ ノ\( \^\_\^ノ\)');
+        bot.sendMessage(msg.channel, '┬─┬ ノ\( \^\_\^ノ\)');
     }
 
     /*
      //!ping
      else if(args[0] == '!ping') {
-     if(m.content.indexOf('.') > -1) {
-     bot.reply(m, ping(args[1] + " people online."))
+     if(msg.content.indexOf('.') > -1) {
+     bot.reply(msg, ping(args[1] + " people online."))
      }
      else {
-     bot.reply(m, 'Please provide a valid url');
+     bot.reply(msg, 'Please provide a valid url');
      }
      }
      */
 
     //get users id
     else if (command == '!!myid') {
-        bot.reply(m, 'Your Discord ID is ```' + m.author.id + '```');
+        bot.reply(msg, 'Your Discord ID is ```' + msg.author.id + '```');
     }
 
     //get users roll
     else if (command == '!!roles') {
-        if (m.channel.server === undefined) {
+        if (msg.channel.server === undefined) {
             return;
         }
-        for (var i in m.mentions) {
-            if (!m.mentions.hasOwnProperty(i)) {
+        for (var i in msg.mentions) {
+            if (!msg.mentions.hasOwnProperty(i)) {
                 continue;
             }
-            var user = m.mentions[i],
+            var user = msg.mentions[i],
                 roles = '',
-                userRoles = m.channel.server.rolesOf(user);
+                userRoles = msg.channel.server.rolesOf(user);
             for (var j in userRoles) {
                 if (!userRoles.hasOwnProperty(j)) {
                     continue;
                 }
                 roles += userRoles[j].id + ',';
             }
-            bot.reply(m, '```' + user + ' has ' + roles + '```');
+            bot.reply(msg, '```' + user + ' has ' + roles + '```');
         }
     }
 
     else if (command == '!!serverinfo' || command == '!!server') {
-        bot.reply(m,
+        bot.reply(msg,
             "```xl\n" +
-            "Name:" + m.channel.server.name + "\n" +
-            "Id:" + m.channel.server.id + "\n" +
-            "Owner:" + m.channel.server.owner.name.replace(/`/g, String.fromCharCode(0) + "`") + "\n" +
-            "Members:" + m.channel.server.members.length + "\n" +
-            "IconURL:\'" + m.channel.server.iconURL + "\' \n" +
+            "Name:" + msg.channel.server.name + "\n" +
+            "Id:" + msg.channel.server.id + "\n" +
+            "Owner:" + msg.channel.server.owner.name.replace(/`/g, String.fromCharCode(0) + "`") + "\n" +
+            "Members:" + msg.channel.server.members.length + "\n" +
+            "IconURL:\'" + msg.channel.server.iconURL + "\' \n" +
             "```"
         );
     }
 
     else if (command == '!!userinfo' || command == '!!user') {
-        bot.reply(m,
+        bot.reply(msg,
             "```fix\n" +
-            "Name:" + m.channel.server.name + "\n" +
-            "id:" + m.channel.server.id + "\n" +
-            "owner:" + m.channel.server.owner.name.replace(/`/g, String.fromCharCode(0) + "`") + "\n" +
-            "members:" + m.channel.server.members.length + "\n" +
-            "iconURL:" + m.channel.server.iconURL + "\n" +
+            "Name:" + msg.channel.server.name + "\n" +
+            "id:" + msg.channel.server.id + "\n" +
+            "owner:" + msg.channel.server.owner.name.replace(/`/g, String.fromCharCode(0) + "`") + "\n" +
+            "members:" + msg.channel.server.members.length + "\n" +
+            "iconURL:" + msg.channel.server.iconURL + "\n" +
             "```"
         );
     }
@@ -341,7 +324,7 @@ bot.on("message", (m) => {
 
     else if (command == '!!deals' || command == '!!darvo') {
         worldState.get(function (state) {
-            bot.sendMessage(m.channel, "```xl\n" + "Darvo is selling " +
+            bot.sendMessage(msg.channel, "```xl\n" + "Darvo is selling " +
                 parseState.getName(state.DailyDeals[0].StoreItem) +
                 " for " + state.DailyDeals[0].SalePrice +
                 " (" +
@@ -358,20 +341,20 @@ bot.on("message", (m) => {
                 var rep = "```xl\nBaro leaving " + state.VoidTraders[0].Node + " in " +
                     secondsToTime(state.VoidTraders[0].Expiry.sec - state.Time) + "\n";
                 for (var item of state.VoidTraders[0].Manifest) {
-                    rep += "item: " + parseState.getName(item.ItemType) + " - price:" + item.PrimePrice + " ducats " + item.RegularPrice + "cr\n";
+                    rep += "item: " + parseState.getName(itemsg.ItemType) + " - price:" + itemsg.PrimePrice + " ducats " + itemsg.RegularPrice + "cr\n";
                 }
                 rep += "```"
-                bot.sendMessage(m.channel, rep);
+                bot.sendMessage(msg.channel, rep);
             }
             else {
-                bot.sendMessage(m.channel, "```xl\nBaro appearing at " + state.VoidTraders[0].Node + " in " +
+                bot.sendMessage(msg.channel, "```xl\nBaro appearing at " + state.VoidTraders[0].Node + " in " +
                     secondsToTime(state.VoidTraders[0].Activation.sec - state.Time) + "\n```");
             }
         });
     }
 
     else if (command == '!!trial' || command == '!!trials' || command == '!!raid' || command == '!!trialstats') {
-        bot.sendMessage(m.channel,
+        bot.sendMessage(msg.channel,
             "Hek: \<http://tinyurl.com/qb752oj\> Nightmare: \<http://tinyurl.com/p8og6xf\> Jordas: \<http://tinyurl.com/prpebzh\>");
     }
 
@@ -383,10 +366,10 @@ bot.on("message", (m) => {
         }).join('_');
         request.head(url, function (error, response) {
             if (error || response.statusCode !== 200) {
-                bot.sendMessage(m.channel, "could not find **" + args[1] + "**.");
+                bot.sendMessage(msg.channel, "could not find **" + args[1] + "**.");
                 return;
             }
-            bot.sendMessage(m.channel, url);
+            bot.sendMessage(msg.channel, url);
         });
         return true;
     }
@@ -408,13 +391,13 @@ bot.on("message", (m) => {
                 }
             }
             text += "```";
-            bot.sendMessage(m.channel, text);
+            bot.sendMessage(msg.channel, text);
             return true;
         });
     }
 
     else if (command.indexOf('!!farm') == 0) {
-        bot.sendMessage(m.channel, "You can probably find that resource here: \<https://steamcommunity.com/sharedfiles/filedetails/?id=181630751\>");
+        bot.sendMessage(msg.channel, "You can probably find that resource here: \<https://steamcommunity.com/sharedfiles/filedetails/?id=181630751\>");
         return true;
     }
 
@@ -428,7 +411,7 @@ bot.on("message", (m) => {
                 }
             }
             if (text != "```xl\n") {
-                bot.sendMessage(m.channel, text + "```")
+                bot.sendMessage(msg.channel, text + "```")
             }
         });
     }
@@ -436,12 +419,19 @@ bot.on("message", (m) => {
     else if (command === '!!update' || command === '!!updates') {
         worldState.get(function (state) {
             console.log(state.Events);
+            var String = "```xl\n";
+            var checks = ["update", "hotfix"];
             for (var event of state.Events) {
-                if (event.Messages[0].Message.toLowerCase().indexOf("update") > -1 || event.Messages[0].Message.toLowerCase().indexOf("hotfix") > -1) {
-                    bot.sendMessage(m.channel, "```xl\n" + event.Messages[0].Message.toUpperCase()
-                        + " since " + secondsToTime(state.Time - event.Date.sec) + " ago \n learn more here: " + event.Prop + "\n```");
-                    return;
+                for(var l of checks) {
+                    if (event.Messages[0].Message.toLowerCase().indexOf(l) > -1) {
+                        String += event.Messages[0].Message.toUpperCase() + " since " +
+                            secondsToTime(state.Time - event.Date.sec) + " ago \n learn more here: " + event.Prop + "\n";
+                        checks.slice(l);
+                    }
                 }
+            }
+            if(String !== "```xl\n") {
+                bot.sendMessage(msg.channel, String + "```");
             }
         });
     }
@@ -451,7 +441,7 @@ bot.on("message", (m) => {
             console.log(args.length);
             console.log(args);
             if(args.length < 2 || args.length == 3 || args.length > 4) {
-                bot.sendMessage(m.channel, "```xl\npossible uses include:\n" +
+                bot.sendMessage(msg.channel, "```xl\npossible uses include:\n" +
                     "!!armor (Base Armor) (Base Level) (Current Level) calculate armor and stats.\n" +
                     "!!armor (Current Armor)\n```");
                 return;
@@ -462,7 +452,7 @@ bot.on("message", (m) => {
                 console.log(parseInt(args[1]));
                 console.log(Math.pow((parseInt(args[3]) - parseInt(args[2])),1.75));
                 if((parseInt(args[3]) - parseInt(args[2])) <= 0) {
-                    bot.sendMessage(m.channel, "```xl\nPlease check your input values\n```");
+                    bot.sendMessage(msg.channel, "```xl\nPlease check your input values\n```");
                     return;
                 }
                 var armor = parseInt(args[1]) * (1 + (Math.pow((parseInt(args[3]) - parseInt(args[2])),1.75) / 200));
@@ -472,7 +462,7 @@ bot.on("message", (m) => {
                 var armor = parseInt(args[1]);
             }
             text += armor / (armor + 300) * 100 + "% damage reduction\n";
-            bot.sendMessage(m.channel, text + "```");
+            bot.sendMessage(msg.channel, text + "```");
         })();
     }
     
@@ -485,24 +475,41 @@ bot.on("message", (m) => {
     /*
      locked commands past this point
      */
-    if (AuthDetails.admins.indexOf(m.author.id) < 0) return;
-    console.log("Admin command:".red, m.content);
+    if (AuthDetails.admins.indexOf(msg.author.id) < 0) return;
+    console.log("Admin command:".red, msg.content);
     if (command == '!!setname') {
         if (args.length > 1) {
             bot.setUsername(args[1]);
-            bot.reply(m, 'Name set to ' + args[1]);
+            bot.reply(msg, 'Name set to ' + args[1]);
         }
         else {
-            bot.reply(m, 'Please enter a valid name');
+            bot.reply(msg, 'Please enter a valid name');
         }
     }
 
     if (command == '!!eval') {
-        if (args.length > 1) {
-            bot.reply(m, eval(m.content.slice(7)));
+        var code = msg.content.slice(5);
+        var t0 = now();
+        try {
+            var evaled = eval(code);
+            var t1 = now();
+            bot.sendMessage(msg.channel, "```xl\n" +
+                clean(code) +
+                "\n- - - - - - evaluates-to- - - - - - -\n" +
+                clean(evaled) +
+                "\n- - - - - - - - - - - - - - - - - - -\n" +
+                "In " + (t1 - t0) + " milliseconds!\n```");
+            console.log(evaled);
         }
-        else {
-            bot.reply(m, 'Please give me something to evaluate');
+        catch (error) {
+            var t1 = now();
+            bot.sendMessage(msg.channel, "```xl\n" +
+                clean(code) +
+                "\n- - - - - - - errors-in- - - - - - - \n" +
+                clean(error) +
+                "\n- - - - - - - - - - - - - - - - - - -\n" +
+                "In " + (t1 - t0) + " milliseconds!\n```");
+            console.error(error);
         }
     }
 
@@ -519,7 +526,7 @@ bot.on("message", (m) => {
             });
         }
         else {
-            bot.reply(m, 'Please enter a valid name');
+            bot.reply(msg, 'Please enter a valid name');
         }
     }
     if (command == '!!newpromotedcall') {
@@ -527,7 +534,7 @@ bot.on("message", (m) => {
             bot.createServer(String.fromCharCode(7) + args[1], "us-east");
         }
         else {
-            bot.reply(m, 'Please enter a valid name');
+            bot.reply(msg, 'Please enter a valid name');
         }
     }
 });
