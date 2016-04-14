@@ -12,6 +12,8 @@ var colors = require('colors');
 
 var request = require('request');
 
+var now = require("performance-now");
+
 var _ = require('underscore');
 
 var Config = require("./lib/config");
@@ -488,7 +490,7 @@ bot.on("message", (msg) => {
     }
 
     if (command == '!!eval') {
-        var code = msg.content.slice(5);
+        var code = msg.content.slice(7);
         var t0 = now();
         try {
             var evaled = eval(code);
@@ -584,15 +586,28 @@ function secondsToTime(secs) {
     var divisor_for_seconds = divisor_for_minutes % 60;
     var seconds = Math.ceil(divisor_for_seconds);
     if (days > 0) {
-        return days + " Days, " + hours + " Hours";
+        return days + " Day" + s(days) + " and " + hours + " Hour" + s(hours);
     }
     else if (hours > 0) {
-        return hours + " Hours, " + minutes + " Minutes";
+        return hours + " Hours" + s(hours) + " and " + minutes + " Minute" + s(minutes);
     }
     else if (minutes > 0) {
-        return minutes + " Minutes, " + seconds + " Seconds";
+        return minutes + " Minutes" + s(minutes) + " and " + seconds + " Second" + s(seconds);
     }
     else if (seconds) {
-        return seconds + " Seconds";
+        return seconds + " Seconds" + s(seconds);
+    }
+}
+
+function s(v) {
+    return (v > 1) ? "s" : ""
+}
+
+function clean(text) {
+    if (typeof(text) === "string") {
+        return text.replace("``", "`" + String.fromCharCode(8203) + "`");
+    }
+    else {
+        return text;
     }
 }
