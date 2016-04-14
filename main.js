@@ -329,7 +329,7 @@ bot.on("message", (msg) => {
             bot.sendMessage(msg.channel, "```xl\n" + "Darvo is selling " +
                 parseState.getName(state.DailyDeals[0].StoreItem) +
                 " for " + state.DailyDeals[0].SalePrice +
-                " (" +
+                "p (" +
                 state.DailyDeals[0].Discount + "% off, " + (state.DailyDeals[0].AmountTotal - state.DailyDeals[0].AmountSold) +
                 "/" + state.DailyDeals[0].AmountTotal + " left, refreshing in " + secondsToTime(state.DailyDeals[0].Expiry.sec - state.Time) +
                 ")" +
