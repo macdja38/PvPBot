@@ -589,13 +589,13 @@ function secondsToTime(secs) {
         return days + " Day" + s(days) + " and " + hours + " Hour" + s(hours);
     }
     else if (hours > 0) {
-        return hours + " Hours" + s(hours) + " and " + minutes + " Minute" + s(minutes);
+        return hours + " Hour" + s(hours) + " and " + minutes + " Minute" + s(minutes);
     }
     else if (minutes > 0) {
-        return minutes + " Minutes" + s(minutes) + " and " + seconds + " Second" + s(seconds);
+        return minutes + " Minute" + s(minutes) + " and " + seconds + " Second" + s(seconds);
     }
     else if (seconds) {
-        return seconds + " Seconds" + s(seconds);
+        return seconds + " Second" + s(seconds);
     }
 }
 
