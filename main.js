@@ -405,7 +405,7 @@ bot.on("message", (msg) => {
     }
 
     else if (command.indexOf('!!damage') == 0 || command.indexOf('!!elements') == 0) {
-        bot.sendMessage(msg.channel, "Damage 2.0: \<https://pvpcraft.ca/wfd2.png\> Thanks for image Telkhines");
+        bot.sendMessage(msg.channel, "```xl\nDamage 2.0: https://pvpcraft.ca/wfd2.png Thanks for image Telkhines\n```");
         return true;
     }
 
