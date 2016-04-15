@@ -198,7 +198,8 @@ bot.on("message", (msg) => {
             '!!Darvo: displays daily deals\n' +
             '!!Trader: display the void traders gear\n' +
             '!!Updates: prints the current game version and link to changelog\n' +
-            '!!Access: prints the current prime access and how long its been around\n```'
+            '!!Access: prints the current prime access and how long its been around\n```' +
+            '!!Damage: gives a helpfull damage table'
         );
     }
     if (command == '!!kappa') {
@@ -400,6 +401,11 @@ bot.on("message", (msg) => {
 
     else if (command.indexOf('!!farm') == 0) {
         bot.sendMessage(msg.channel, "You can probably find that resource here: \<https://steamcommunity.com/sharedfiles/filedetails/?id=181630751\>");
+        return true;
+    }
+
+    else if (command.indexOf('!!damage') == 0 || command.indexOf('!!elements') == 0) {
+        bot.sendMessage(msg.channel, "Damage 2.0: \<https://pvpcraft.ca/wfd2.png\> Thanks for image Telkhines");
         return true;
     }
 
