@@ -443,7 +443,7 @@ bot.on("message", (msg) => {
         });
     }
     
-    else if (command === '!!armorstats' || command === '!!armor') {
+    else if (command === '!!armorstats' || command === '!!armor' || ommand === '!!armour' || ommand === '!!armourstats') {
         (function() {
             console.log(args.length);
             console.log(args);
