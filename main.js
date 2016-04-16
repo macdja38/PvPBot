@@ -214,13 +214,12 @@ bot.on("message", (msg) => {
     if (command == "!!anu") {
         comaUserName = '';
         comaUserNameCodes = '';
-        for (var x in msg.mentions[0].username) {
-            comaUserName += msg.mentions[0].username[x] + ',';
-            comaUserNameCodes += msg.mentions[0].username.charCodeAt(x) + ',';
-            console.log('x: ' + x + 'ID:' + msg.mentions[0].username.charCodeAt(x) + ' Char:' + msg.mentions[0].username[x]);
+        for (var char of msg.mentions[0].username) {
+            comaUserName += char + ', ';
+            comaUserNameCodes += char.charCodeAt(0) + ',';
+            console.log('ID:' + char.charCodeAt(0) + ' Char:' + char);
         }
-        bot.reply(msg, comaUserName);
-        bot.reply(msg, comaUserNameCodes);
+        bot.reply(msg, "```xl\n" + comaUserName + "\n" + comaUserNameCodes + "\n```");
     }
     if (command == '!!creator') {
         //display author's name!
