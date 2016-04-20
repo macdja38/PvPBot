@@ -22,9 +22,6 @@ var config = new Config("config");
 var CleverBot = require('./lib/cleverbot');
 var cleverBot = new CleverBot;
 
-var ParseState = require('./lib/parseState');
-var parseState = new ParseState;
-
 var StateGrabber = require("./lib/worldState.js");
 var worldState = new StateGrabber;
 
@@ -137,8 +134,15 @@ bot.on("message", (msg) => {
             bot.reply(msg, "Probably http://pvpcraft.ca.");
         } else {
             CleverBot.prepare(function () {
-                console.log('Sent to Clever:' + msg.content.substr(msg.content.indexOf(' ') + 1));
-                cleverBot.write(msg.content.substr(msg.content.indexOf(' ') + 1), function (response) {
+                var querry;
+                if(msg.content.startsWith("<@" + bot.user.id + ">")) {
+                    querry = msg.content.substr(bot.user.id.length + 4).replace("<@" + bot.user.id + ">", "CleverBot")
+                }
+                else {
+                    querry = msg.content.replace("<@" + bot.user.id + ">", "CleverBot")
+                }
+                console.log('Sent to Clever:' + querry);
+                cleverBot.write(querry, function (response) {
                     bot.reply(msg, response.message.replace("Cleverbot", bot.user.username));
                 });
             });
@@ -291,7 +295,7 @@ bot.on("message", (msg) => {
                 if (!userRoles.hasOwnProperty(j)) {
                     continue;
                 }
-                roles += userRoles[j].id + ',';
+                roles += userRoles[j].name + " " + userRoles[j].id + ',';
             }
             bot.reply(msg, '```' + user + ' has ' + roles + '```');
         }
@@ -616,3 +620,12 @@ function clean(text) {
         return text;
     }
 }
+
+process.on('SIGINT', ()=> {
+    setTimeout(() => {process.exit(1)}, 5000);
+    console.log("Logging out.");
+    bot.logout(()=> {
+        console.log("Bye");
+        process.exit(0);
+    });
+});
