@@ -25,6 +25,9 @@ var cleverBot = new CleverBot;
 var StateGrabber = require("./lib/worldState.js");
 var worldState = new StateGrabber;
 
+var ParseState = require("./lib/parseState");
+var parseState = new ParseState();
+
 var comaUserName = '';
 var comaUserNameCodes = '';
 
