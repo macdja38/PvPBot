@@ -350,7 +350,7 @@ bot.on("message", (msg) => {
                 var rep = "```xl\nBaro leaving " + state.VoidTraders[0].Node + " in " +
                     secondsToTime(state.VoidTraders[0].Expiry.sec - state.Time) + "\n";
                 for (var item of state.VoidTraders[0].Manifest) {
-                    rep += "item: " + parseState.getName(itemsg.ItemType) + " - price:" + itemsg.PrimePrice + " ducats " + itemsg.RegularPrice + "cr\n";
+                    rep += "item: " + parseState.getName(item.ItemType) + " - price:" + item.PrimePrice + " ducats " + item.RegularPrice + "cr\n";
                 }
                 rep += "```"
                 bot.sendMessage(msg.channel, rep);
