@@ -6,7 +6,7 @@ var Discord = require("discord.js");
 
 var AuthDetails = require("../auth.json");
 
-var bot = new Discord.Client();
+var bot = new Discord.Client({autoReconnect: true});
 
 var colors = require('colors');
 
@@ -33,11 +33,6 @@ var comaUserNameCodes = '';
 
 bot.on("ready", () => {
     console.log("Ready to begin! Serving in " + bot.channels.length + " channels");
-});
-
-bot.on("disconnected", () => {
-    console.error("Disconnected!");
-    process.exit(1); //exit node.js with an error
 });
 
 bot.on("serverNewMember", (server, user) => {
