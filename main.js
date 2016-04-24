@@ -312,16 +312,33 @@ bot.on("message", (msg) => {
     }
 
     else if (command == '!!userinfo' || command == '!!user') {
-        bot.reply(msg,
-            "```fix\n" +
-            "Name:" + msg.channel.server.name + "\n" +
-            "id:" + msg.channel.server.id + "\n" +
-            "owner:" + msg.channel.server.owner.name.replace(/`/g, String.fromCharCode(0) + "`") + "\n" +
-            "members:" + msg.channel.server.members.length + "\n" +
-            "iconURL:" + msg.channel.server.iconURL + "\n" +
-            "```"
-        );
+        comaUserName = '';
+        comaUserNameCodes = '';
+        if(msg.mentions[0]) {
+            for (var ment of msg.mentions) {
+                bot.reply(msg,
+                    "```fix\n" +
+                    "Name:" + ment.username.replace(/`/g, String.fromCharCode(0) + "`") + "\n" +
+                    "id:" + ment.id + "\n" +
+                    "descrim:" + ment.discriminator + "\n" +
+                    "iconURL:" + ment.avatarURL + "\n" +
+                    "```"
+                );
+            }
+        } else {
+            bot.reply(msg,
+                "```fix\n" +
+                "Name:" + msg.author.username.replace(/`/g, String.fromCharCode(0) + "`") + "\n" +
+                "id:" + msg.author.id + "\n" +
+                "descrim:" + msg.author.discriminator + "\n" +
+                "iconURL:" + msg.author.avatarURL + "\n" +
+                "```"
+            );
+        }
     }
+
+
+
     /** Warframe commands past this point
      * Warframe Commands that access the worldstate api will be in the next section.
      */
