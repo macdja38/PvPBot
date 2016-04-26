@@ -200,8 +200,8 @@ bot.on("message", (msg) => {
             '!!Darvo: displays daily deals\n' +
             '!!Trader: display the void traders gear\n' +
             '!!Updates: prints the current game version and link to changelog\n' +
-            '!!Access: prints the current prime access and how long its been around\n```' +
-            '!!Damage: gives a helpfull damage table'
+            '!!Access: prints the current prime access and how long its been around' +
+            '!!Damage: gives a helpfull damage table\n```'
         );
     }
     if (command == '!!kappa') {
