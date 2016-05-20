@@ -138,7 +138,7 @@ bot.on("message", (msg) => {
         //display server ip!
         bot.reply(msg, 'available commands:\n' +
             '```diff' +
-            '-All !! comands are being depreciated in favor of // comands, please use //help for more info'
+            '-All !! comands are being depreciated in favor of // comands, please use //help for more info' +
             '\n!!Help: get a list of commands\n' +
             '!!Creator: who made me?\n' +
             '!!Unflip: unflip flipped tables\n' +
