@@ -113,50 +113,6 @@ bot.on("message", (msg) => {
             ' U:'.cyan + msg.author.username + ' S:'.cyan + msg.content);
     }
 
-    if (msg.isMentioned(bot.user) && msg.content.toLowerCase().indexOf("help") > -1) {
-        bot.reply(msg, '<@85257659694993408>, @whitehat97, ' + msg.author.username +
-            ' needs help.\n'
-            + 'type !!help for a list of commands');
-    }
-
-    else if (msg.content.toLowerCase().indexOf("how do i build a tardis") > -1 && msg.content[0] !== '!') {
-        //display link to tardis site!
-        bot.reply(msg, 'http\://eccentricdevotion.github.io/TARDIS/creating-a-tardis.html');
-    }
-
-    else if (msg.isMentioned(bot.user) && msg.content[0] !== '!') {
-        //bot.sendTyping(msg.channel);
-        console.log('Clever activating.');
-        if (msg.content.toLowerCase().indexOf("best") > -1 &&
-            msg.content.toLowerCase().indexOf("server") > -1) {
-            bot.reply(msg, "Probably http://pvpcraft.ca.");
-        } else {
-            CleverBot.prepare(function () {
-                var querry;
-                if(msg.content.startsWith("<@" + bot.user.id + ">")) {
-                    querry = msg.content.substr(bot.user.id.length + 4).replace("<@" + bot.user.id + ">", "CleverBot")
-                }
-                else {
-                    querry = msg.content.replace("<@" + bot.user.id + ">", "CleverBot")
-                }
-                console.log('Sent to Clever:' + querry);
-                cleverBot.write(querry, function (response) {
-                    bot.reply(msg, response.message.replace("Cleverbot", bot.user.username));
-                });
-            });
-        }
-    }
-
-    //misc responses here
-    if (!(msg.channel instanceof Discord.PMChannel)) {
-        if (config.get("mscResponses").indexOf(msg.channel.server.id) > -1) {
-            if (/^soon/i.test(msg.content) && msg.author.id != bot.id) {
-                bot.sendMessage(msg.channel, 'Soon' + String.fromCharCode(8482));
-                return true;
-            }
-        }
-    }
-
     //check if user sent command
     if (msg.content.indexOf('!!') !== 0) return;
 
@@ -177,15 +133,13 @@ bot.on("message", (msg) => {
         return;
     }
 
-    if (command == '!!getchannelname') {
-        msg.reply(bot.channels.get("id", args[1]).name);
-    }
-
     //!help
     if (command == '!!help' || command == '!!commands' || command == '!!command') {
         //display server ip!
         bot.reply(msg, 'available commands:\n' +
-            '```xl\n!!Help: get a list of commands\n' +
+            '```diff' +
+            '-All !! comands are being depreciated in favor of // comands, please use //help for more info'
+            '\n!!Help: get a list of commands\n' +
             '!!Creator: who made me?\n' +
             '!!Unflip: unflip flipped tables\n' +
             '!!Tardistutorial: get a link to the tardis tutorial\n' +
